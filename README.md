@@ -37,12 +37,35 @@
 ## 🕵️‍♀️ 어떤 기술이 사용되었나요?
 
 ### Front
+TypeScript
+React-Native
+React-hooks
+Redux
+GSAP
 
 ### Back
+TypeScript
+Nodejs
+Express
+TypeORM
+MySQL
+
+![image](https://user-images.githubusercontent.com/73332608/143533803-66ba9f45-7c58-4de4-8245-906c74621c18.png)
 
 ## 🔨 Architecture
 
 ## 우리를 소개합니다.
+이승연
+🏁 Full Stack
+
+이현호
+🏁 Full Stack
+
+이홍경
+🏁 Full Stack
+
+정재원
+🏁 Full Stack
 
 ## For project details
 
