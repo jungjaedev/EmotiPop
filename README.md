@@ -38,16 +38,24 @@
 
 ### Front
 TypeScript
+
 React-Native
+
 React-hooks
+
 Redux
+
 GSAP
 
 ### Back
 TypeScript
+
 Nodejs
+
 Express
+
 TypeORM
+
 MySQL
 
 ![image](https://user-images.githubusercontent.com/73332608/143533803-66ba9f45-7c58-4de4-8245-906c74621c18.png)
