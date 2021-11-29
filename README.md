@@ -3,22 +3,17 @@
 미정
 ----
 
-## 💡 EmotiPop은 어떤 서비스인가요?
+# 💡 EmotiPop은 어떤 서비스인가요?
 
- 사람들은 누구나 어떠한 감정을 하루에도 수십번씩 느끼게 될텐데, 하룻동안 있던 모든 감정들을 일기장 한 장에 채우기 애매하지 않았나요? 
+ 지금 느끼는 감정을 `콩주머니` 에 담아 `긍정이`와 `부정이` 를 향해 던져보세요.
+
+당신의 모든 순간의 감정들을 기록해주고, 일주일에 한번씩 박이 터져 어떤 감정이 극대화 되었는지 보여주는 `긍정이` 와 `부정이`
+
+달력을 통해 언제 어떤 감정을 왜 느꼈는지 떠올릴 수 있는 `마이캘린더`
+
+하루에 느끼는 감정들을 모두 담아줄 당신만의 "감정 박", `긍정이`와 `부정이`를 담은 앱, **EmotiPop**입니다.
  
- 
- 그렇다면 EmotiPop이 당신의 고민을 해결해줄거예요.
- 
- 당신이 지금 당장 느끼는 그 감정, 긍정적인 감정이든 부정적인 감정이든 콩주머니를 EmotiPop의 "감정박"을 향해 던져보세요.
- 
- 감정박에는 당신이 그 때 어느 상황에, 어떤 감정을 느꼈는지 모두 기록해줍니다.
- 
- 일주일에 한번씩 박이 터지면, 당신은 금주에 겪었던 모든 긍정적인 일들에 대해서는 다시금 즐거움을 느낄수도 있고, 부정적인 일들에 대해서는 그 감정은 최대한 빨리 잊어버리되 그런일이 다시는 일어나지 않게 노력할 수 있어요.
- 
- 또한 달력을 통해 어떤 날에 어떤 감정들을 느꼈는지 다시 찾아볼 수 있어요.
- 
-## 🗞  이 서비스를 기획하게 된 계기는 무엇인가요?
+# 🗞  이 서비스를 기획하게 된 계기는 무엇인가요?
 
 웹툰 원작인 드라마 유미의 세포들을 보면, 다음과 같은 장면이 나옵니다. 
 
@@ -34,46 +29,48 @@
 
 [이미지 출처: 웹툰 유미의 세포들]
 
-## 🕵️‍♀️ 어떤 기술이 사용되었나요?
+# 🕵️‍♀️ 어떤 기술이 사용되었나요?
 
-### Front
-TypeScript
+## Front
+![image](https://img.shields.io/badge/FRONT-JavaScript-%23F7DF1E?style=for-the-badge&logo=JavaScript)
 
-React-Native
+![image](https://img.shields.io/badge/FRONT-React_Native-%2361DAFB?style=for-the-badge&logo=React)
 
-React-hooks
+![image](https://img.shields.io/badge/FRONT-React_Hooks-%2361DAFB?style=for-the-badge&logo=React)
 
-Redux
+![image](https://img.shields.io/badge/FRONT-Redux-%23764ABC?style=for-the-badge&logo=Redux)
 
-GSAP
+![image](https://img.shields.io/badge/FRONT-GreenSock-%2388CE02?style=for-the-badge&logo=GreenSock)
 
-### Back
-TypeScript
+![image](https://img.shields.io/badge/FRONT-Adobe%20Illustrator-%23FF9A00?style=for-the-badge&logo=Adobe%20Illustrator)
 
-Nodejs
+![image](https://img.shields.io/badge/FRONT-After%20Effects-%239999FF?style=for-the-badge&logo=Adobe%20After%20Effects)
 
-Express
+## Back
+![image](https://img.shields.io/badge/BACK-JavaScript-%23F7DF1E?style=for-the-badge&logo=JavaScript)
 
-TypeORM
+![image](https://img.shields.io/badge/BACK-Node.js-%23339933?style=for-the-badge&logo=Node.js)
 
-MySQL
+![image](https://img.shields.io/badge/BACK-EXPRESS-%23000000?style=for-the-badge&logo=Express)
 
-![image](https://user-images.githubusercontent.com/73332608/143533803-66ba9f45-7c58-4de4-8245-906c74621c18.png)
+![image](https://img.shields.io/badge/BACK-Sequelize-%2352B0E7?style=for-the-badge&logo=Sequelize)
 
-## 🔨 Architecture
+![image](https://img.shields.io/badge/BACK-MySQL-%234479A1?style=for-the-badge&logo=MySQL)
 
-## 우리를 소개합니다.
-이승연
-🏁 Full Stack
 
-이현호
-🏁 Full Stack
+![image](https://user-images.githubusercontent.com/73332608/143913555-127c09cc-e3bd-4eea-a991-ffe1723b5c33.png)
 
-이홍경
-🏁 Full Stack
+# 🔨 Architecture
 
-정재원
-🏁 Full Stack
+
+# 📢 우리를 소개합니다.
+|Name|Position|
+|------|---|
+|이승연|🏁 Full Stack|
+|이현호|🏁 Full Stack|
+|이홍경|🏁 Full Stack|
+|정재원|🏁 Full Stack|
+
 
 ## For project details
 
