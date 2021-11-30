@@ -67,9 +67,9 @@
 |Name|Position|
 |------|---|
 |이승연|🏁 Full Stack|
-|이현호|🏁 Full Stack|
+|이현호|🖥 Front End|
 |이홍경|🏁 Full Stack|
-|정재원|🏁 Full Stack|
+|정재원|⚙️ Back End|
 
 
 ## For project details
