@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const Blue = styled.View`
+const Blue = Styled.View`
   width: 200px;
   height: 300px;
   border: 1px solid;
@@ -39,7 +39,7 @@ const Blue = styled.View`
   transform-origin: right;
   transition: all 2s;
 `
-const Red = styled.View`
+const Red = Styled.View`
   width: 200px;
   height: 300px;
   border: 1px solid;
