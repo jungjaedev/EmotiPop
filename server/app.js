@@ -1,10 +1,13 @@
 const express = require('express');
 const dotEnv = require('dotenv');
 const cors = require('cors');
+const usersRouter = require('./router/users.js');
 
 dotEnv.config();
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use(
   cors({
@@ -13,6 +16,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use('/users', usersRouter);
 
 app.get('/', (req, res, next) => {
   res.send('Hello from API Server');

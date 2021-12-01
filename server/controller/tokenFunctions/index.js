@@ -1,6 +1,5 @@
 require('dotenv').config();
 const { sign, verify } = require('jsonwebtoken');
-
 module.exports = {
     generateAccessToken: data => {
         // Access token으로 sign합니다.
@@ -16,8 +15,6 @@ module.exports = {
             secure: true,
             sameSite: 'none',
         })
-        .json({ message: 'ok', accessToken})
-        .end();
     },
     isAuthorized: req => {
         const authorization = req.headers['authorization'];
