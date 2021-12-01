@@ -2,6 +2,7 @@ const express = require('express');
 const dotEnv = require('dotenv');
 const cors = require('cors');
 const usersRouter = require('./router/users.js');
+const mypageRouter = require('./router/mypage.js');
 
 dotEnv.config();
 
@@ -18,6 +19,7 @@ app.use(
 );
 
 app.use('/users', usersRouter);
+app.use('/mypage', mypageRouter);
 
 app.get('/', (req, res, next) => {
   res.send('Hello from API Server');
