@@ -4,6 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const beansRouter = require('./router/beans.js');
 const usersRouter = require('./router/users.js');
+const oauthRouter = require('./router/oauth.js');
 const mypageRouter = require('./router/mypage.js');
 
 dotEnv.config();
@@ -22,7 +23,7 @@ app.use(
 app.use(cookieParser());
 
 app.use('/beans', beansRouter);
-
+app.use('/oauth', oauthRouter);
 app.use('/users', usersRouter);
 app.use('/mypage', mypageRouter);
 
