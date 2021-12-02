@@ -1,4 +1,5 @@
 module.exports = {
     usersController: require('./Users'),
-    mypageController: require('./Mypage')
+    mypageController: require('./Mypage'),
+    beansController: require('./beans')
 };

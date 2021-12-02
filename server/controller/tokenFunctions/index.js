@@ -24,11 +24,10 @@ module.exports = {
         }
         const token =  authorization.split(' ')[1];
         // console.log(token);
-
-        try {
-            return verify(token, process.env.ACCESS_SECRET);
-        } catch (err) {
-        return null
-        }
+    try {
+      return verify(token, process.env.ACCESS_SECRET);
+    } catch (err) {
+      return null;
     }
+  },
 };
