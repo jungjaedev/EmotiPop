@@ -19,7 +19,7 @@ function Router() {
 
   useEffect(async() => {
     try{
-      const lists = await axios.get('http://localhost:80/posts')
+      const lists = await axios.get('')
       setList(list.concat(lists.data.data))
     } catch(e) {
       throw new Error(e);

@@ -11,7 +11,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
 import Btn from './Button';
-import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import AsyncStorage from '@react-native-async-storage/async-storage/src'; 
 import axios from 'axios';
 import reqSignIn from '../../modules/user';
 

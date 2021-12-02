@@ -9,10 +9,10 @@ function ChooseRoom () {
   return (
     <View style={styles.container}>
       <Blue>
-        <Link to='/Positive'/>
+        <Link to='/listofmypositivebeans'/>
       </Blue>
       <Red>
-        <Link to='/Negative'/>
+        <Link to='/listofmynegativebeans'/>
       </Red>
     </View>
   )

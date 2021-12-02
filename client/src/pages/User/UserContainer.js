@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, StyleSheet, TextInput } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import { Link } from "react-router-dom";
 import Styled from 'styled-component';
 import { signOutUser, signinUser, registUser, actionUser } from '../../modules/user';
@@ -35,7 +35,7 @@ function UserContainer (userInfo) {
 
   function submitForm(e) {
     e.preventDefault()
-    axios.patch('http://localhost:80/mypage/me', {
+    axios.patch('', {
       email, username, password
     }, { headers: {
       'ContentType': 'application/json',
