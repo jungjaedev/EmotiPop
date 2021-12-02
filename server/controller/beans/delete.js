@@ -2,7 +2,7 @@ const { Users, Beans } = require('../../models');
 const { isAuthorized } = require('../tokenFunctions');
 
 module.exports = {
-  post: async (req, res) => {
+  delete: async (req, res) => {
     if (!req.headers['authorization']) {
       return res.status(401).send({
         message: 'invalid access token',
@@ -24,19 +24,24 @@ module.exports = {
         message: 'Forbidden',
       });
     }
-    // console.log(req.body);
-    const { emotions, emotion_level, contents, gourdkinds } = req.body;
-    const data = {
-      emotions,
-      emotion_level,
-      contents,
-      gourdKinds: gourdkinds,
-      users_id: accessTokenData.id,
-    };
-    // console.log(data);
 
-    await Beans.create({ ...data });
+    const beansInfo = await Beans.findOne({
+      where: {
+        id: req.params.beans_id,
+      },
+    });
+    if (!beansInfo) {
+      res.status(404).send({
+        message: 'not found',
+      });
+    }
+    // console.log(beansInfo.dataValues);
+    await Beans.destroy({
+      where: { id: req.params.beans_id },
+    });
 
-    res.json({ ...data });
+    res.send({
+      message: 'delete completed',
+    });
   },
 };
