@@ -1,5 +1,7 @@
 const { Users } = require('../../models');
 const { generateAccessToken, sendAccessToken } = require('../tokenFunctions');
+const bcrypt = require('bcrypt');
+const config = require('../../config/config.js');
 
 module.exports = {
     post: async (req, res) => {
@@ -11,19 +13,21 @@ module.exports = {
         if (!email || !password || !username) {
             return res.status(422).json({ message: "insufficient parameters supplied" })
         } else { 
-            const [userInfo, created] = await Users.findOrCreate({
-                where: { email },
-                defaults: { email, password, username }
-            });
+            const found = await Users.findOne({ where: { email } });
 
             // 이메일 중복시 409 error
-            if (!created) {
+            if (found) {
                 return res.status(409).json({ message: `${email} already exists` });
             } else {
-                const { id, username, email } = userInfo.dataValues;
-                // 비밀번호 삭제후 accessToken 생성
-                delete userInfo.dataValues.password;
-                
+                // 비밀번호 삭제하지 말고 bcrypt 이용하여 암호화 시켜주자.
+
+                const hashed = await bcrypt.hash(password, config.bcrypt.saltRounds);
+                const userInfo = await Users.create({
+                    email,
+                    password: hashed,
+                    username
+                })
+                console.log(userInfo);
                 // accessToken 생성
                 // console.log(userInfo.dataValues)
                 const accessToken = generateAccessToken(userInfo.dataValues);
@@ -32,11 +36,8 @@ module.exports = {
                 
                 return res.status(201).json({
                     message: 'Signup Completed',
-                    userInfo: {
-                        id,
-                        username,
-                        email,
-                        accessToken
+                    userinfo: {
+                        ...userInfo.dataValues
                     }
                 })
             }
