@@ -39,8 +39,6 @@
 
 ![image](https://img.shields.io/badge/FRONT-Adobe%20Illustrator-%23FF9A00?style=for-the-badge&logo=Adobe%20Illustrator)
 
-![image](https://img.shields.io/badge/FRONT-Adobe%20After%20Effects-%239999FF?style=for-the-badge&logo=Adobe%20After%20Effects)
-
 ## Back
 ![image](https://img.shields.io/badge/BACK-JavaScript-%23F7DF1E?style=for-the-badge&logo=JavaScript)
 
