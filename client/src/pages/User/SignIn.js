@@ -16,7 +16,7 @@ import {reqSignIn} from '../../modules/user'
 // import { test } from '../../../../server/config/config';
 
 
-export default function SignIn() {
+export default function SignIn({navigation}) {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState({
@@ -124,6 +124,7 @@ const Header = styled.Text`
   font-weight: bold;
   margin: auto;
   margin-top: 100px;
+  margin-bottom: 150px;
   `
 const Input = styled.TextInput`
   background-color: #fff;
