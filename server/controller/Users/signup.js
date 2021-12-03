@@ -37,6 +37,7 @@ module.exports = {
                 return res.status(201).json({
                     message: 'Signup Completed',
                     userinfo: {
+                        accessToken,
                         ...userInfo.dataValues
                     }
                 })

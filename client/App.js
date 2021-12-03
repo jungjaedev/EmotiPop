@@ -10,14 +10,17 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import SignIn from './src/pages/User/SignIn'
 import SignUp from './src/pages/User/SignUp'
 
+
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)))
 
 export default function App() {
+  
+
   return (
     <Provider store={store}>
-      <StatusBar style='dark' />
-        <SignIn />
-        {/* <SignUp /> */}
+        <StatusBar style='dark' />
+          {/* <SignIn /> */}
+          <SignUp />
     </Provider>
   );
 }

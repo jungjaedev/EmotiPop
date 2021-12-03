@@ -28,6 +28,7 @@ module.exports = {
             return res.status(201).json({
                 message: 'Login Completed',
                 userinfo: {
+                    accessToken,
                     ...user.dataValues
                 }
             })
