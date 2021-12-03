@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   StyleSheet, 
   Text, 
@@ -27,15 +27,18 @@ export default function SignUp() {
     notSame: false
   })
   const { email, password, rePassword, username, notSame } = userInfo;
+  const [form, setForm] = useState(true)
 
-  const emailInput = useCallback((e) => {
+  const emailVal = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g
+
+  const emailInput = (e) => {
     const email = e.nativeEvent.text;
     setUserInfo({
       ...userInfo,
       email
     })
     // console.log(userInfo)
-  }, [])
+  }
 
   const passInput = (e) => {
     const password = e.nativeEvent.text;
@@ -78,9 +81,13 @@ export default function SignUp() {
   }
   console.log(userInfo)
   const onSubmit = async () => {
+    if(email === '' | password === '' | username === '') {
+      setForm(false)
+      return
+    }
     // console.log('Clicked')
     try {
-      const req = await axios.post('http://localhost:8080/users/signup', 
+      const req = await axios.post('http://localhost:80/users/signup', 
       { email, password, username }, {
         headers: {
           'Content-Type': 'application/json',
@@ -93,7 +100,7 @@ export default function SignUp() {
         //!  로그인 페이지로 라우팅
       }
     } catch(err) {
-      // throw new Error(err)
+      throw new Error(err)
       console.log(err, 'ㅋㅋㅋ')
     } 
   }
@@ -130,6 +137,9 @@ export default function SignUp() {
         onChange={nameInput}
         value={username}
         />
+        {
+          !form ? <Warn>모든 입력은 필수 입니다.</Warn> : null
+        }
         <Btn name='가입하기' onPress={onSubmit}/>
         {/* <Btn title='Log In' onPress={onSubmit} color="#f194ff"/> */}
       </SignUpForm>
@@ -148,8 +158,8 @@ const Container = styled.View`
 const Header = styled.Text`
   font-size: 40px;
   font-weight: bold;
-  margin: auto
-  /* margin-top: -300px; */
+  margin: auto;
+  margin-top: 100px;
   `
 const Input = styled.TextInput`
   background-color: #fff;
@@ -177,6 +187,10 @@ const MiddleText = styled.Text`
 `
 const NotSame = styled.Text`
   color: red;
+`
+const Warn = styled.Text`
+  color: red;
+  margin-top: 10px;
 `
 /* const Btn = styled.Button`
   margin-top: 5px;

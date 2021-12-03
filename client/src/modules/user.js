@@ -1,4 +1,6 @@
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
+
 
 const SIGN_IN = 'user/SIGN_IN';
 const SIGN_IN_SUCCESS = 'user/SIGN_IN_SUCCESS';
@@ -6,29 +8,22 @@ const SIGN_IN_ERROR = 'user/SIGN_IN_ERROR';
 const SIGN_OUT = 'user/SIGN_OUT';
 const SIGN_OUT_SUCCESS = 'user/SIGN_OUT_SUCCESS';
 const SIGN_OUT_ERROR = 'user/SIGN_OUT_ERROR';
-
+const URL = 'http://localhost:80/'
 
 
 export const reqSignIn = (info) => async dispatch => {
   // 요청이 시작됨.
-  // dispatch({ type: SIGN_IN });
-
-  // // api 호출
-  // try {
-  //   const user = await axios('http://localhost:8080/users/signin', info, { headers: {'Content-Type': 'application/json'}, withCredentials: true});
-  //   dispatch({ type: SIGN_IN_SUCCESS, user })
-  //   return user;
-  // } catch(err) {
-  //   dispatch({ type: SIGN_IN_ERROR, error: err})
-  // }
-  dispatch({ type: 'user/SIGN_IN' })
-  console.log(info)
-  //! Test
+  dispatch({ type: SIGN_IN });
+  // api 호출
   try {
-    const dummy = await axios('https://koreanjson.com/users/1')
-    dispatch({ type: 'user/SIGN_IN_SUCCESS', dummy})
+    const { data } = await axios.post(`${URL}users/signin`, info, { headers: {'Content-Type': 'application/json'}, withCredentials: true});
+    const userData = data.userinfo;
+    const {id, email, username, accessToken} = userData;
+    await AsyncStorage.setItem('AccessToken', accessToken)
+    const user = { id, email, username }
+    dispatch({ type: SIGN_IN_SUCCESS, user})
   } catch(err) {
-    dispatch({ type: 'user/SIGN_IN_ERROR', error: err })
+    dispatch({ type: SIGN_IN_ERROR, error: err})
   }
 }
 
@@ -51,9 +46,9 @@ const initialState = {
   signIn: {
     loading: false,
     user: null,
-    error: null
-  }
-    
+    error: null,
+    isLogin: false
+  },  
 }
 
 export default function signIn(state = initialState, action) {
@@ -64,7 +59,8 @@ export default function signIn(state = initialState, action) {
         signIn: {
           loading: true,
           user: null,
-          error: null
+          error: null,
+          isLogin: false
         }
       }
     case SIGN_IN_SUCCESS:
@@ -73,7 +69,8 @@ export default function signIn(state = initialState, action) {
         signIn: {
           loading: false,
           user: action.user,
-          error: null
+          error: null,
+          isLogin: true,
         }
       }
     case SIGN_IN_ERROR:
@@ -82,7 +79,8 @@ export default function signIn(state = initialState, action) {
         signIn: {
           loading: false,
           user: null,
-          error: action.err
+          error: action.err,
+          isLogin: false
         }
       }
     default:
@@ -105,12 +103,12 @@ export default function signIn(state = initialState, action) {
 
 
 
-/* 
 
-const START = 'user/START';
-const SIGN_IN = 'user/SIGN_IN';
-const ERROR = 'user/ERROR';
+/*
+export const SIGN_IN = 'user/SIGN_IN';
 const SIGN_OUT = 'user/SIGN_OUT';
+const START = 'user/START';
+const ERROR = 'user/ERROR';
 
 // const reqLogin = async (payload) => {
 //   try{
@@ -126,12 +124,10 @@ const SIGN_OUT = 'user/SIGN_OUT';
 //   }
 // }
 
-export const logIn = (payload) => {
-  return {
+export const logIn = (payload) => ({
     type: SIGN_IN,
     payload
-  }
-}
+})
 
 export function logOut() {
   return {
@@ -152,7 +148,7 @@ export function validate() {
 // }
 
 const initialState = {
-  user: [],
+  user: {},
   isSignin: false,
   authorization: false,
   // accessToken: ''
@@ -174,12 +170,12 @@ export default function user(state = initialState, action) {
       return {
         ...state,
         isSignin: true,
-        user: state.user.concat(action.payload)
+        user: {...action.payload}
       }
     case SIGN_OUT:
       return {
         ...state,
-        user: []
+        user: {}
       }
     default:
       return state;
