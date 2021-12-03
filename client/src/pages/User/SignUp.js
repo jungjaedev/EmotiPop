@@ -15,7 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 
-export default function SignUp() {
+export default function SignUp({navigation}) {
   const dispatch = useDispatch();
   const inputRef = useRef();
   // console.log(user)
@@ -141,7 +141,7 @@ export default function SignUp() {
           !form ? <Warn>모든 입력은 필수 입니다.</Warn> : null
         }
         <Btn name='가입하기' onPress={onSubmit}/>
-        {/* <Btn title='Log In' onPress={onSubmit} color="#f194ff"/> */}
+        <Btn name='Go Back' onPress={() => navigation.goBack()}/>
       </SignUpForm>
     </Container>
   );
@@ -160,6 +160,7 @@ const Header = styled.Text`
   font-weight: bold;
   margin: auto;
   margin-top: 100px;
+  margin-bottom: 100px
   `
 const Input = styled.TextInput`
   background-color: #fff;

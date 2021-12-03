@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { Link } from "react-router-dom";
-import Styled from 'styled-component';
 
 function ListOfMyNegativeBeans () {
   return (

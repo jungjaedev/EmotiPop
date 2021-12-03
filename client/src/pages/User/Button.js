@@ -16,7 +16,6 @@ export default function Button({name, onPress}) {
 }
 
 const Btn = styled.TouchableOpacity`
-  /* flex: 1; */
   align-items: center;
   justify-content: center;
   background-color: violet;

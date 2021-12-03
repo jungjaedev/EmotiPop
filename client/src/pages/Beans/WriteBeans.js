@@ -6,7 +6,7 @@ import Styled from 'styled-component';
 import Modal from "react-native-simple-modal";
 
 function WriteBeans () {
-  [modalState, setModalState] = useState({
+  const [modalState, setModalState] = useState({
     modalState = {open: false}
   })
   

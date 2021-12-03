@@ -1,18 +1,28 @@
 import React from 'react';
 import Styled from 'styled-components/native';
 import { Link, NativeRouter } from 'react-router-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Btn from '../User/Button';
 import { View, Text, StyleSheet, Button, Animated, TouchableOpacity } from 'react-native';
 
-function ChooseRoom() {
+function ChooseRoom({ navigation }) {
+
   return (
     <NativeRouter>
       <View style={styles.container}>
-        <TouchableOpacity style={door.container1}>
-          <Link to='/listofmypositivebeans'><Text>긍정이 방</Text></Link>
-        </TouchableOpacity>
-        <TouchableOpacity style={door.container2}>
-          <Link to='/listofmynegativebeans'><Text>부정이 방</Text></Link>
-        </TouchableOpacity>
+        <TouchableOpacity
+        style={door.container1}
+        name='ListOfMyPositiveBeans'
+        title="ListOfMyPositiveBeans"
+        onPress={() => navigation.navigate('ListOfMyPositiveBeans')}
+        />
+        <TouchableOpacity
+        style={door.container2}
+        name='ListOfMyNegativeBeans'
+        title="ListOfMyNegativeBeans"
+        onPress={() => navigation.navigate('ListOfMyNegativeBeans')}
+        />
       </View>
     </NativeRouter>
   );
