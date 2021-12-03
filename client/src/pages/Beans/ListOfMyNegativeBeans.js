@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import { Link } from "react-router-dom";
 import Styled from 'styled-component';
 
-function Negative () {
+function ListOfMyNegativeBeans () {
   return (
     <View style={styles.container}>
       <Text>
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Negative;
+export default ListOfMyNegativeBeans;

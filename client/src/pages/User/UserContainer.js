@@ -1,19 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { Link } from "react-router-dom";
-import Styled from 'styled-component';
+import Styled from 'styled-components';
 import { signOutUser, signinUser, registUser, actionUser } from '../../modules/user';
 import { useNavigate } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 function UserContainer (userInfo) {
-  const navigate = useNavigate();
   const dispatch = useDispatch()
 
   function signOutHandler() {
     dispatch(signOutUser())
-    navigate('/')
   }
 
   const token = useSelector(state => state.user.accessToken)
@@ -44,7 +42,6 @@ function UserContainer (userInfo) {
     }).then(data => {
       console.log(data)
       if(data.status === 200) {
-        navigate('/usercontainer')
       }
     })
 
