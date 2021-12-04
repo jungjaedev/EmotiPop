@@ -8,16 +8,18 @@ const SIGN_IN_ERROR = 'user/SIGN_IN_ERROR';
 const SIGN_OUT = 'user/SIGN_OUT';
 const SIGN_OUT_SUCCESS = 'user/SIGN_OUT_SUCCESS';
 const SIGN_OUT_ERROR = 'user/SIGN_OUT_ERROR';
-const URL = 'http://localhost:80/'
+// export const URL = 'http://localhost:80/'
+export const URL = 'http://10.0.2.2:80/'
 
 
 export const reqSignIn = (info) => async dispatch => {
-  // 요청이 시작됨.
+  // 요청이 시작됨.a
   dispatch({ type: SIGN_IN });
   // api 호출
   try {
     const { data } = await axios.post(`${URL}users/signin`, info, { headers: {'Content-Type': 'application/json'}, withCredentials: true});
     const userData = data.userinfo;
+    console.log(userData)
     const {id, email, username, accessToken} = userData;
     await AsyncStorage.setItem('AccessToken', accessToken)
     const user = { id, email, username }
@@ -32,15 +34,35 @@ export const reqSignOut = (token) => async dispatch => {
   // token
   // api
   try {
-    const req = await axios.post('http://localhost:8080/users/signout',
+    const req = await axios.post(`${URL}users/signout`,
     { headers: { authorization: `Bearer ${token}` }, withCredentials: true })
-    if(req.message === 'successfully signed out!') {
+    if(req.data.message === 'successfully signed out!') {
+      AsyncStorage.clear()
       dispatch({ type: SIGN_OUT_SUCCESS })
     }
   } catch(err) {
     dispatch({ type: SIGN_OUT_ERROR, error: err })
   }
 }
+
+export const reSignIn = (token) => async dispatch => {
+    if(!token) {
+      return
+    }
+    try{
+      const res = await axios.get(`${URL}users/me`, { headers: { authorization: `Bearer ${token}` }, withCredentials: true })
+      if(res.data.message !== 'get your information completed') {
+        return
+      }
+      const { id, email, username } = res.data.userinfo;
+      const userData = { id, email, username}
+      // const dummy = { email: userData.email, password: 'qwer1234'}
+      dispatch({ type: SIGN_IN_SUCCESS, userData})
+    } catch(err) {
+      dispatch({ type: SIGN_IN_ERROR })
+    }
+}
+
 
 const initialState = {
   signIn: {

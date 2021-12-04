@@ -4,6 +4,7 @@
 // 구글 로그인
 module.exports = {
   post: async (req, res) => {
+    console.log(req.body)
     // let token = req.body.token;
     // // console.log(token);
     // async function verify() {
@@ -21,6 +22,7 @@ module.exports = {
     //   res.send('success');
     // })
     // .catch(console.error);
+    res.send('ok!')
   },
 };
 // npm install google-auth-library --save

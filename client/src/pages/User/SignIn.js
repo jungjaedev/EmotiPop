@@ -13,6 +13,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
 import Btn from './Button';
 import {reqSignIn} from '../../modules/user'
+// import Expo from "expo"
+import * as Google from 'expo-google-app-auth';
+import axios from 'axios'
 // import { test } from '../../../../server/config/config';
 
 
@@ -59,14 +62,25 @@ export default function SignIn({navigation}) {
       return
     }
     dispatch(reqSignIn(userInfo))
+    setTimeout(() => {
+      navigation.navigate('EmotiHome')
+    },1000)
   }
   
   // const user = useSelector(state => state.user)
-  console.log(user.signIn.isLogin)
+  // console.log(user.signIn.isLogin)
   if(user.signIn.isLogin) {
     console.log('Login Success!!')
   }
-
+  const googleOauth = async () => {
+    const { type, accessToken, user } = await Google.logInAsync({
+      androidClientId: `122121037503-0asfns1mbs2759mv1jij9ppfk2k474hp.apps.googleusercontent.com
+    `,
+    });
+    console.log(type, accessToken, user)    
+  }
+  
+  
   return (
     <Container>
         {
@@ -78,7 +92,7 @@ export default function SignIn({navigation}) {
                 placeholder="email" 
                 value={email}
                 name='email'
-                keyboardType='email-adress'
+                // keyboardType=''
                 onChange={changeEmail}
                 onFocus={del}
               />
@@ -92,11 +106,12 @@ export default function SignIn({navigation}) {
               onFocus={del}
               />
               <MiddleContainer>
-                <TouchableOpacity onPress={onSubmit}>
-                  <MiddleText>계정이 없으신가요?</MiddleText>
+                <TouchableOpacity>
+                  <MiddleText onPress={() => navigation.navigate('SignUp')}>계정이 없으신가요?</MiddleText>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <MiddleText>GOOGLE로 로그인 하기</MiddleText>
+                  <MiddleText onPress={googleOauth}>GOOGLE로 로그인 하기</MiddleText>
+                  
                 </TouchableOpacity>
               </MiddleContainer>
               {
@@ -134,7 +149,7 @@ const Input = styled.TextInput`
   font-size: 18px;
   padding-left: 10px;
   margin-top: 10px;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   /* border: none; */
   `
 const LoginForm = styled.View`
@@ -159,6 +174,9 @@ const Warn = styled.Text`
 const Loading = styled.ActivityIndicator`
   margin-top: 200px;
 `
+// const Web = styled.WebView`
+//   color: black;
+// `
 
 /* const Btn = styled.Button`
   margin-top: 5px;

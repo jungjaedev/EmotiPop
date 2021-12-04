@@ -10,16 +10,18 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import 'react-native-gesture-handler';
 import NavContainer from './src/pages/Home/NavContainer'
 import RouterPrac from './src/pages/RouterPrac'
+import kakaoLogin from './src/pages/Home/KakaoLogin';
+import { WebView } from 'react-native-webview';
+
 
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)))
 
 export default function App() {
+
   return (
     <Provider store={store}>
       <StatusBar style='dark' />
-      {/* <RouterPrac /> */}
-
       <NavContainer />
     </Provider>
   );
