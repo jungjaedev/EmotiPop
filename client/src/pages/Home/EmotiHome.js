@@ -55,6 +55,11 @@ export default function EmotiHome({ navigation }) {
           onPress={() => navigation.navigate('SignUp')}
         />
         <Btn name='Chart' onPress={() => navigation.navigate('ChartContainer')}/>
+        <Btn
+          name='ChooseRoom'
+          title="ChooseRoom"
+          onPress={() => navigation.navigate('ChooseRoom')}
+        />
       </View>
       
       {/* <Btn 
