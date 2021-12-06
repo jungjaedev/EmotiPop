@@ -8,17 +8,14 @@ import {
   TouchableOpacity, 
   Alert 
   } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
 import Btn from './Button';
-import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import { URL } from '../../modules/user'
 import axios from 'axios';
 
 
-export default function SignUp() {
-  const dispatch = useDispatch();
+export default function SignUp({navigation}) {
   const inputRef = useRef();
-  // console.log(user)
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
@@ -33,11 +30,15 @@ export default function SignUp() {
 
   const emailInput = (e) => {
     const email = e.nativeEvent.text;
+    console.log(e.isPropagationStopped())
     setUserInfo({
       ...userInfo,
       email
     })
     // console.log(userInfo)
+  }
+  const chkEmail = () => {
+    console.log(emailVal.test(userInfo.email))
   }
 
   const passInput = (e) => {
@@ -79,7 +80,7 @@ export default function SignUp() {
     })
     // console.log(userInfo)
   }
-  console.log(userInfo)
+  // console.log(userInfo) 
   const onSubmit = async () => {
     if(email === '' | password === '' | username === '') {
       setForm(false)
@@ -87,21 +88,21 @@ export default function SignUp() {
     }
     // console.log('Clicked')
     try {
-      const req = await axios.post('http://localhost:80/users/signup', 
+      const req = await axios.post(`${URL}users/signup`, 
       { email, password, username }, {
         headers: {
           'Content-Type': 'application/json',
         }, withCredentials: true
       })
-      if(!req.message === 'Signup Completed') {
+      if(!req.data.message === 'Signup Completed') {
         Alert.alert('Email or password is not correct!')
         throw new Error('Something went wrong')
-      } else if(req.message === 'Signup Completed' && req.userinfo) {
+      } else if(req.data.message === 'Signup Completed' && req.data.userinfo) {
         //!  로그인 페이지로 라우팅
+        navigation.navigate('SignIn')
       }
     } catch(err) {
       throw new Error(err)
-      console.log(err, 'ㅋㅋㅋ')
     } 
   }
   
@@ -114,6 +115,7 @@ export default function SignUp() {
           value={email}
           keyboardType='email-adress'
           onChange={emailInput}
+          onSelectionChange={chkEmail}
         />
         <Input 
         placeholder="password"
@@ -121,6 +123,9 @@ export default function SignUp() {
         onChange={passInput}
         value={password}
         />
+        {
+          userInfo.password.length && userInfo.password <= 6 ? <Text>비밀번호는 6자 이상입니다</Text> : null
+        }
         <Input 
         placeholder="password"
         secureTextEntry
@@ -141,7 +146,7 @@ export default function SignUp() {
           !form ? <Warn>모든 입력은 필수 입니다.</Warn> : null
         }
         <Btn name='가입하기' onPress={onSubmit}/>
-        {/* <Btn title='Log In' onPress={onSubmit} color="#f194ff"/> */}
+        <Btn name='Go Back' onPress={() => navigation.goBack()}/>
       </SignUpForm>
     </Container>
   );
@@ -160,6 +165,7 @@ const Header = styled.Text`
   font-weight: bold;
   margin: auto;
   margin-top: 100px;
+  margin-bottom: 100px
   `
 const Input = styled.TextInput`
   background-color: #fff;
@@ -169,7 +175,7 @@ const Input = styled.TextInput`
   font-size: 18px;
   padding-left: 10px;
   margin-top: 10px;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   /* border: none; */
   `
 const SignUpForm = styled.View`

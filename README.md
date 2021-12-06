@@ -1,6 +1,6 @@
 # 🎊 EmotiPop
 ## Logo
-미정
+![image](https://user-images.githubusercontent.com/73332608/144789846-911a9ee8-55cb-490c-bb8a-7a69ac718c81.png)
 ----
 
 # 💡 EmotiPop은 어떤 서비스인가요?
