@@ -6,6 +6,7 @@ const beansRouter = require('./router/beans.js');
 const usersRouter = require('./router/users.js');
 const oauthRouter = require('./router/oauth.js');
 const mypageRouter = require('./router/mypage.js');
+const statsRouter = require('./router/stats.js');
 
 dotEnv.config();
 
@@ -15,7 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(
   cors({
-    origin: ['http://localhost:19006', 'http://emotipop.com'],
+    origin: ['http://localhost:19000', 'http://emotipop.com'],
     methods: ['GET', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
   })
@@ -26,6 +27,7 @@ app.use('/beans', beansRouter);
 app.use('/oauth', oauthRouter);
 app.use('/users', usersRouter);
 app.use('/mypage', mypageRouter);
+app.use('/stats', statsRouter);
 
 app.get('/', (req, res, next) => {
   res.send('Hello from API Server');
