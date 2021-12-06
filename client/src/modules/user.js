@@ -32,7 +32,7 @@ export const reqSignOut = (token) => async dispatch => {
   // token
   // api
   try {
-    const req = await axios.post('http://localhost:8080/users/signout',
+    const req = await axios.post('http://localhost:80/users/signout',
     { headers: { authorization: `Bearer ${token}` }, withCredentials: true })
     if(req.message === 'successfully signed out!') {
       dispatch({ type: SIGN_OUT_SUCCESS })

@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 function BeansContainer(data) {
-  axios.get('',
+  axios.get('http://localhost:80/beans',
   {data: {
     beans : data.beansInfo
   }, withCredentials : true})

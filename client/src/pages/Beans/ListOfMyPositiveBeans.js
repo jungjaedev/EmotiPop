@@ -1,43 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
 function ListOfMyPositiveBeans () {
-  const [beansInfo, setBeansInfo] = useState({
-    created_at: '',
-    emotions: '',
-    emotion_level: ''
-  })
-  const { emotions, emotion_level, created_at } = beansInfo;
+  const stateStore = useSelector(state => state.user)
+  const { user, accessToken} = stateStore;
+  const [ list, setList ] = useState([]);
 
-  const changeCreatedAt = (e) => {
-    const created_at = e.nativeEvent.text;
-    setBeansInfo({
-      ...beansInfo,
-      created_at
+  useEffect(async() => {
+    await axios.get('http://localhost:8080/beans/:beans_id', {
+        headers: {
+        authorization: `Bearer ${accessToken}`,
+        'Content-Type':'application/json'
+      }, withCredentials: true}
+    ).then(beans => {
+      setList(list.concat(data.contents))
     })
-  }
-  const changeEmotions = (e) => {
-    const emotions = e.nativeEvent.text;
-    setBeansInfo({
-      ...beansInfo,
-      emotions
-    })
-  }
-  const changeEmotionLevel = (e) => {
-    const emotion_level = e.nativeEvent.text;
-    setBeansInfo({
-      ...beansInfo,
-      emotion_level
-    })
-  }
-
+    .catch(err => (console.log(err)))
+  }, [])
+  
+  
   return (
     <View style={styles.container}>
-      <Text>
-        {beansInfo}
-      </Text>
+      {
+        list.map(beans => (
+          <Link to={`/beanscontent/${beans.id}`} key={beans.id}>
+            <Text style={{'backgroundImage':`url(${beans.contents})`}}></Text>
+          </Link>
+        ))
+      }
     </View>
   )
 }

@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 function BeansContent(data) {
-  axios.get('',
+  axios.get('http://localhost:80/beans',
   {data : {
     beans : data.beansInfo
   },withCredentials: true
@@ -17,7 +17,7 @@ function BeansContent(data) {
   return (
     <View style={styles.container}>
       <img srd=''>콩주머니</img>
-      <Text>{beans.created_At}</Text>
+      <Text>{beans.created_at}</Text>
       <View>
         <Text>{beans.detail}</Text>
       </View>
