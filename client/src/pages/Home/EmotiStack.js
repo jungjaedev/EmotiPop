@@ -6,7 +6,7 @@ import SignIn from '../User/SignIn';
 import SignUp from '../User/SignUp';
 import ChooseRoom from '../Beans/ChooseRoom'
 import ListOfMyPositiveBeans from '../Beans/ListOfMyPositiveBeans'
-import kakaoLogin from './KakaoLogin';
+import ChartContainer from '../chart/ChartContainer'
 
 export default function EmotiStack() {
   const Stack = createStackNavigator(); 
@@ -58,8 +58,8 @@ export default function EmotiStack() {
         }}
       />
       <Stack.Screen 
-        name='kakaoLogin' 
-        component={kakaoLogin}
+        name='ChartContainer' 
+        component={ChartContainer}
         options={{
           headerShown: false,
         }}

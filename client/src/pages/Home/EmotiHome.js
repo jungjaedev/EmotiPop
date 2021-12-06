@@ -12,6 +12,7 @@ import { Fontisto } from '@expo/vector-icons'
 
 export default function EmotiHome({ navigation }) {
   const user = useSelector(state => state.user.signIn)
+  console.log(user)
   const dispatch = useDispatch();
 
 
@@ -53,6 +54,7 @@ export default function EmotiHome({ navigation }) {
           title="SignUp"
           onPress={() => navigation.navigate('SignUp')}
         />
+        <Btn name='Chart' onPress={() => navigation.navigate('ChartContainer')}/>
       </View>
       
       {/* <Btn 

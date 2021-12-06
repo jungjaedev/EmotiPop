@@ -12,7 +12,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
 import Btn from './Button';
-import {reqSignIn} from '../../modules/user'
+import { reqSignIn, googleSignIn } from '../../modules/user'
 // import Expo from "expo"
 import * as Google from 'expo-google-app-auth';
 import axios from 'axios'
@@ -49,35 +49,28 @@ export default function SignIn({navigation}) {
     })
   }
 
-  // 
+  // 유효성 검사 후 오류 메시지 초기화 
   const del = () => {
     // setMail(emailVal.test(email))
     setWrongInfo(true)
   }
 
-  
+  // 로그인 버튼 클릭과 동시에 유효성 검사 & 로그인 요청
   const onSubmit = () => {
-    if(email ==='' && password === '') {
+    if( (email === '' && password === '') | (email === '' | password === '')) {
       setWrongInfo(false)
       return
     }
     dispatch(reqSignIn(userInfo))
     setTimeout(() => {
       navigation.navigate('EmotiHome')
-    },1000)
+    }, 1000)
   }
-  
-  // const user = useSelector(state => state.user)
-  // console.log(user.signIn.isLogin)
-  if(user.signIn.isLogin) {
-    console.log('Login Success!!')
-  }
-  const googleOauth = async () => {
-    const { type, accessToken, user } = await Google.logInAsync({
-      androidClientId: `122121037503-0asfns1mbs2759mv1jij9ppfk2k474hp.apps.googleusercontent.com
-    `,
-    });
-    console.log(type, accessToken, user)    
+
+
+  // 구글 로그인 
+  const googleOauth = () => {
+    dispatch(googleSignIn())  
   }
   
   
@@ -111,11 +104,10 @@ export default function SignIn({navigation}) {
                 </TouchableOpacity>
                 <TouchableOpacity>
                   <MiddleText onPress={googleOauth}>GOOGLE로 로그인 하기</MiddleText>
-                  
                 </TouchableOpacity>
               </MiddleContainer>
               {
-                !wrongInfo ? <Warn>아이디와 비밀번호를 확인해 주세요</Warn> : null 
+                !wrongInfo ? <Warn>이메일 혹은 비밀번호를 정확히 입력했는지 확인해 주세요</Warn> : null 
               }
               <Btn name='Log In' onPress={onSubmit}/>
             </LoginForm>

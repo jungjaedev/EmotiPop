@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 // import { Update } from "expo-updates";
 import * as Update from "expo-updates";
+import axios from 'axios';
 
 
 
@@ -20,12 +21,20 @@ function Feed() {
 }
 function MyPage() {
   const dispatch = useDispatch() 
-
+  // const getToken = async() => {
+  //   const token = await AsyncStorage.getItem('AccessToken');
+  //   console.log(token)
+  // }
+  // getToken()
+  // const getBeans = async () => {
+  //   const res = await axios('http://10.0.2.2:80/')
+  // }
   const logOutHandler = async () => {
     console.log('ads')
     AsyncStorage.clear()
     const res = await AsyncStorage.getAllKeys()
     // location.reload()
+    Update.reloadAsync()
     console.log(res)
   }
   return (

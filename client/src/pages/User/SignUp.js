@@ -103,7 +103,6 @@ export default function SignUp({navigation}) {
       }
     } catch(err) {
       throw new Error(err)
-      console.log(err, 'ㅋㅋㅋ')
     } 
   }
   
