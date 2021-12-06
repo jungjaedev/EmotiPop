@@ -6,6 +6,7 @@ const beansRouter = require('./router/beans.js');
 const usersRouter = require('./router/users.js');
 const oauthRouter = require('./router/oauth.js');
 const mypageRouter = require('./router/mypage.js');
+const statsRouter = require('./router/stats.js');
 
 dotEnv.config();
 
@@ -26,6 +27,7 @@ app.use('/beans', beansRouter);
 app.use('/oauth', oauthRouter);
 app.use('/users', usersRouter);
 app.use('/mypage', mypageRouter);
+app.use('/stats', statsRouter);
 
 app.get('/', (req, res, next) => {
   res.send('Hello from API Server');

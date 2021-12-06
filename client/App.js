@@ -9,19 +9,19 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import 'react-native-gesture-handler';
 import NavContainer from './src/pages/Home/NavContainer'
-import RouterPrac from './src/pages/RouterPrac'
-import ChooseRoom from './src/pages/Beans/ChooseRoom';
-import EmotiHome from './src/pages/Home/EmotiHome';
+import FlowHome from './src/pages/Home/FlowHome';
+import { WebView } from 'react-native-webview';
+
 
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)))
 
 export default function App() {
+
   return (
     <Provider store={store}>
       <StatusBar style='dark' />
-      {/* <RouterPrac /> */}
-
+      {/* <FlowHome /> */}
       <NavContainer />
     </Provider>
   );

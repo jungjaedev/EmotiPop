@@ -12,7 +12,10 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
 import Btn from './Button';
-import {reqSignIn} from '../../modules/user'
+import { reqSignIn, googleSignIn } from '../../modules/user'
+// import Expo from "expo"
+import * as Google from 'expo-google-app-auth';
+import axios from 'axios'
 // import { test } from '../../../../server/config/config';
 
 
@@ -46,27 +49,31 @@ export default function SignIn({navigation}) {
     })
   }
 
-  // 
+  // 유효성 검사 후 오류 메시지 초기화 
   const del = () => {
     // setMail(emailVal.test(email))
     setWrongInfo(true)
   }
 
-  
+  // 로그인 버튼 클릭과 동시에 유효성 검사 & 로그인 요청
   const onSubmit = () => {
-    if(email ==='' && password === '') {
+    if( (email === '' && password === '') | (email === '' | password === '')) {
       setWrongInfo(false)
       return
     }
     dispatch(reqSignIn(userInfo))
-  }
-  
-  // const user = useSelector(state => state.user)
-  console.log(user.signIn.isLogin)
-  if(user.signIn.isLogin) {
-    console.log('Login Success!!')
+    setTimeout(() => {
+      navigation.navigate('EmotiHome')
+    }, 1000)
   }
 
+
+  // 구글 로그인 
+  const googleOauth = () => {
+    dispatch(googleSignIn())  
+  }
+  
+  
   return (
     <Container>
         {
@@ -78,7 +85,7 @@ export default function SignIn({navigation}) {
                 placeholder="email" 
                 value={email}
                 name='email'
-                keyboardType='email-adress'
+                // keyboardType=''
                 onChange={changeEmail}
                 onFocus={del}
               />
@@ -92,15 +99,15 @@ export default function SignIn({navigation}) {
               onFocus={del}
               />
               <MiddleContainer>
-                <TouchableOpacity onPress={onSubmit}>
-                  <MiddleText>계정이 없으신가요?</MiddleText>
+                <TouchableOpacity>
+                  <MiddleText onPress={() => navigation.navigate('SignUp')}>계정이 없으신가요?</MiddleText>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <MiddleText>GOOGLE로 로그인 하기</MiddleText>
+                  <MiddleText onPress={googleOauth}>GOOGLE로 로그인 하기</MiddleText>
                 </TouchableOpacity>
               </MiddleContainer>
               {
-                !wrongInfo ? <Warn>아이디와 비밀번호를 확인해 주세요</Warn> : null 
+                !wrongInfo ? <Warn>이메일 혹은 비밀번호를 정확히 입력했는지 확인해 주세요</Warn> : null 
               }
               <Btn name='Log In' onPress={onSubmit}/>
             </LoginForm>
@@ -134,7 +141,7 @@ const Input = styled.TextInput`
   font-size: 18px;
   padding-left: 10px;
   margin-top: 10px;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   /* border: none; */
   `
 const LoginForm = styled.View`
@@ -159,6 +166,9 @@ const Warn = styled.Text`
 const Loading = styled.ActivityIndicator`
   margin-top: 200px;
 `
+// const Web = styled.WebView`
+//   color: black;
+// `
 
 /* const Btn = styled.Button`
   margin-top: 5px;

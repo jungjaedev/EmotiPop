@@ -3,4 +3,5 @@ module.exports = {
   usersController: require('./Users'),
   oauthController: require('./oauth'),
   mypageController: require('./Mypage'),
+  statsController: require('./stats'),
 };

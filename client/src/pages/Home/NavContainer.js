@@ -7,14 +7,18 @@ import 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components/native'
 import EmotiStack from './EmotiStack';
+import TestStack from './TestStack'
 
 
 export default function Home() {
   const user = useSelector(state => state.user.signIn)
-
+  // console.log(user)
   return (
     <NavigationContainer>
-      <EmotiStack />
+      {
+        user.isLogin ? <TestStack/> : <EmotiStack />
+      }
+      {/* <EmotiStack /> */}
     </NavigationContainer>
   );
 }

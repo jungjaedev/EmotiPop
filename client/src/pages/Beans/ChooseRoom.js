@@ -1,60 +1,60 @@
 import React from 'react';
 import Styled from 'styled-components/native';
-import { Link, NativeRouter } from 'react-router-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Btn from '../User/Button';
-import { View, Text, StyleSheet, Button, Animated, TouchableOpacity } from 'react-native';
+// import { Link } from 'react-router-dom';
+import Btn from '../User/Button'
+import { View, Text, StyleSheet, Button } from 'react-native';
 
-function ChooseRoom({ navigation }) {
+function ChooseRoom ({ navigation }) {
+  
 
   return (
-    <NativeRouter>
-      <View style={styles.container}>
-        <TouchableOpacity
-        style={door.container1}
-        name='ListOfMyPositiveBeans'
-        title="ListOfMyPositiveBeans"
-        onPress={() => navigation.navigate('ListOfMyPositiveBeans')}
+    <Container >
+      <Blue>
+        {/* <Link to='/Positive'/> */}
+        <Btn 
+          name ='Positive'
+          onPress={() => navigation.navigate('ListOfMyPositiveBeans')}
         />
-        <TouchableOpacity
-        style={door.container2}
-        name='ListOfMyNegativeBeans'
-        title="ListOfMyNegativeBeans"
-        onPress={() => navigation.navigate('ListOfMyNegativeBeans')}
-        />
-      </View>
-    </NativeRouter>
-  );
+      </Blue>
+      <Red>
+        {/* <Link to='/Negative'/> */}
+        <Btn name ='Negagive'/>
+      </Red>
+    </Container>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#DBF4F4',
-  },
-});
+const Container = Styled.View`
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+`
 
-const door = StyleSheet.create({
-  container1: {
-    margin: 50,
-    width: 350,
-    height: 500,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#0C8BA6'
-  },
-  container2: {
-    margin: 50,
-    width: 350,
-    height: 500,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#EC638D'
-  }
-})
+const Blue = Styled.View`
+  width: 50px;
+  height: 50px;
+  /* border: 1px solid; */
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  background-color: blue;
+  transform-style: preserve-3d;
+  transform-origin: right;
+  transition: all 2s; */
+`
+const Red = Styled.View`
+  width: 50px;
+  height: 50px;
+  /* border: 1px solid; */
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  background-color: red;
+  transform-style: preserve-3d;
+  transform-origin: right;
+  transition: all 2s; */
+`
 
-export default ChooseRoom;
+export default ChooseRoom
