@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(
   cors({
-    origin: ['http://localhost:19000', 'http://emotipop.com'],
+    origin: ['http://localhost:19003', 'http://emotipop.com'],
     methods: ['GET', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
   })
@@ -33,7 +33,7 @@ app.get('/', (req, res, next) => {
   res.send('Hello from API Server');
 });
 
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);

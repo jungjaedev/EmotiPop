@@ -6,16 +6,19 @@ import {
   TextInput, 
   Button, 
   TouchableOpacity, 
-  Alert 
+  Alert,
+  Dimensions
   } from 'react-native';
 import styled from 'styled-components/native';
-import Btn from './Button';
+import Btn from '../User/Button';
 import { URL } from '../../modules/user'
 import axios from 'axios';
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 
 export default function SignUp({navigation}) {
   const inputRef = useRef();
+  const passRef = useRef();
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
@@ -25,9 +28,11 @@ export default function SignUp({navigation}) {
   })
   const { email, password, rePassword, username, notSame } = userInfo;
   const [form, setForm] = useState(true)
+  const [pass, setPass] = useState(true)
 
   const emailVal = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g
 
+  // email 값 추출
   const emailInput = (e) => {
     const email = e.nativeEvent.text;
     console.log(e.isPropagationStopped())
@@ -37,10 +42,12 @@ export default function SignUp({navigation}) {
     })
     // console.log(userInfo)
   }
+  // email vaildation
   const chkEmail = () => {
     console.log(emailVal.test(userInfo.email))
   }
 
+  // pass값 추출
   const passInput = (e) => {
     const password = e.nativeEvent.text;
     setUserInfo({
@@ -49,6 +56,7 @@ export default function SignUp({navigation}) {
     })
     // console.log(userInfo)
   }
+  // repass값 추출
   const rePassInput = (e) => {
     const rePassword = e.nativeEvent.text;
     setUserInfo({
@@ -64,6 +72,18 @@ export default function SignUp({navigation}) {
     }
     // console.log(userInfo)
   }
+  // pass 6자 이상
+  const firstPassChk = () => {
+    if(password && password.length < 6) {
+      console.log('hi?')
+      setPass(false)
+      passRef.current.focus()
+    } else if(password.length >= 6) {
+      setPass(true)
+    }
+  }
+
+  // pass & repass 일치 여부 체크
   const passChk = () => {
     if(password !== rePassword) {
       console.log('hi?')
@@ -107,7 +127,7 @@ export default function SignUp({navigation}) {
   }
   
   return (
-    <Container>
+    <Container style={{width: SCREEN_WIDTH}}>
       <SignUpForm>
         <Header>회원가입</Header>
         <Input 
@@ -121,10 +141,12 @@ export default function SignUp({navigation}) {
         placeholder="password"
         secureTextEntry
         onChange={passInput}
+        onEndEditing={() => firstPassChk}
         value={password}
+        ref={passRef}
         />
         {
-          userInfo.password.length && userInfo.password <= 6 ? <Text>비밀번호는 6자 이상입니다</Text> : null
+          !pass ? <Text>비밀번호는 6자 이상입니다</Text> : null
         }
         <Input 
         placeholder="password"
@@ -141,6 +163,7 @@ export default function SignUp({navigation}) {
         onFocus={passChk}
         onChange={nameInput}
         value={username}
+        keyboardType='phone-pad'
         />
         {
           !form ? <Warn>모든 입력은 필수 입니다.</Warn> : null
@@ -156,7 +179,7 @@ const Container = styled.View`
   /* justify-content: center; */
   align-items: center;
   height: 100%;
-  width: 100%;
+  /* width: 100%; */
   /* flex: 1; */
   background-color: #ddd
 `

@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React, { useEffect } from 'react';
 import { 
   StyleSheet, 
   Text, 
@@ -8,7 +8,8 @@ import {
   TouchableOpacity, 
   Alert,
   ActivityIndicator,
-  SafeAreaView
+  SafeAreaView,
+  Dimensions
   } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
@@ -16,16 +17,31 @@ import Btn from '../User/Button';
 import Chart from './Chart'
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import { getChartData } from '../../modules/chart';
+
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 
 
-export default function ChartContainer({navigation}) {
-  const beanInfo = async () => {
+export default function ChartContainer() {
+  const dispatch = useDispatch();
+  const emotionState = useSelector(state => state.chart)
+
+  const getToken = async () => {
     const token = await AsyncStorage.getItem('AccessToken')
-    console.log(token)
-    // const res = await axios('http://10.0.2.2:80/calendar')
-    // console.log(res)
+    return token;
   }
+
+  useEffect(async() => {
+    try {
+      const token = await getToken();
+      console.log(token, 'flowflowflowflow1');
+      dispatch(getChartData(token))
+    } catch(err) {
+      throw new Error(err)
+    }
+  }, [])
+
   const beans = [
     {
       id: 1,
@@ -97,13 +113,13 @@ export default function ChartContainer({navigation}) {
     return beans;
   }
   const bean = makeAvg(emotions)
-  console.log(bean)
-  beanInfo()
+  // console.log(bean)
+  // getToken()
   
   return (
-    <Container>
-      <Header>Chart</Header>
-      <Chart beans={bean}/>
+    <Container style={{width: SCREEN_WIDTH}}>
+      <Header >Chart</Header>
+      <Chart beans={bean} />
     </Container>
   );
 }
@@ -112,10 +128,10 @@ const Container = styled.SafeAreaView`
   /* justify-content: center; */
   align-items: center;
   justify-content: center;
-  height: 80%; 
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 10%;
+  flex: 9 ;
+  /* width: 80%; */
+  /* margin-left: 10%; */
+  /* margin-top: 10%; */
   /* border-radius: 10; */
   /* flex: 1; */
   background-color: #333;
@@ -124,11 +140,100 @@ const Header = styled.Text`
   font-size: 40px;
   font-weight: bold;
   margin: auto;
-  margin-top: 100px;
-  margin-bottom: 20px;
+  /* margin-top: 100px; */
+  /* margin-bottom: 20px; */
   color: #fff;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
   `
 
 
 
+
+
+
+
+
+
+/*
+import React, { useEffect } from 'react';
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from "react-native-chart-kit";
+
+import {
+  Text,
+  TextInput,
+  View,
+  SafeAreaView,
+  ScrollView,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native'
+
+const chartConfig = {
+  backgroundGradientFrom: "#1E2923",
+  backgroundGradientFromOpacity: 0,
+  backgroundGradientTo: "#08130D",
+  backgroundGradientToOpacity: 0.5,
+  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+  strokeWidth: 2, // optional, default 3
+  barPercentage: 0.5,
+  useShadowColorFromDataset: false // optional
+};
+
+export default function ChartTest({navigation}) {
+  return(
+    <View>
+      <Text>Bezier Line Chart</Text>
+      <LineChart
+        data={{
+          labels: ["January", "February", "March", "April", "May", "June"],
+          datasets: [
+            {
+              data: [
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100
+              ]
+            }
+          ]
+        }}
+        width={Dimensions.get("window").width} // from react-native
+        height={220}
+        yAxisLabel="$"
+        yAxisSuffix="k"
+        yAxisInterval={1} // optional, defaults to 1
+        chartConfig={{
+          backgroundColor: "#e26a00",
+          backgroundGradientFrom: "#fb8c00",
+          backgroundGradientTo: "#ffa726",
+          decimalPlaces: 2, // optional, defaults to 2dp
+          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          style: {
+            borderRadius: 16
+          },
+          propsForDots: {
+            r: "6",
+            strokeWidth: "2",
+            stroke: "#ffa726"
+          }
+        }}
+        bezier
+        style={{
+          marginVertical: 8,
+          borderRadius: 16
+        }}
+      />
+    </View>
+  )
+}
+*/
