@@ -113,7 +113,7 @@ export default function SignUp({navigation}) {
         <Input 
           placeholder="email" 
           value={email}
-          keyboardType='email-adress'
+          // keyboardType='email-adress'
           onChange={emailInput}
           onSelectionChange={chkEmail}
         />

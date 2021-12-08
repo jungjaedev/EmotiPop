@@ -37,6 +37,13 @@ module.exports = {
       where: { users_id },
     });
     // console.log(allBeans);
+    //
+    // ToDO : 게시글 조회안되면
+    if (Object.keys(allBeans).length < 1) {
+      return res.status(400).send({
+        message: 'no data',
+      });
+    }
 
     const allEmotions = [];
     allBeans.map(bean => {
