@@ -27,9 +27,10 @@ export default function PosThrow() {
     <>
       <Container style={{ width: SCREEN_WIDTH }}>
         <ImageBackgrounds source={require('../../../img/throwtopositive.gif')} resizemode="cover"></ImageBackgrounds>
+        {/* <ImageBackgrounds source={require('../../../img/test111.gif')} resizemode="cover"></ImageBackgrounds> */}
         {isPressed ? <ShowContentModal data={data} /> : null}
-        <TouchableOpacity onPress={showModal}>
-          <Text>화면을 터치해주세요</Text>
+        <TouchableOpacity style={{ marginLeft: 'auto', marginRight: 'auto', marginBottom: 20 }} onPress={showModal}>
+          <Text>여기를 터치해주세요</Text>
         </TouchableOpacity>
       </Container>
     </>
@@ -52,3 +53,9 @@ const ImageBackgrounds = styled.ImageBackground`
   /* margin-right: auto; */
   margin-left: -100px;
 `;
+
+// const ImageBackgrounds = styled.ImageBackground`
+//   /* flex: 1; */
+//   height: 100%;
+//   width: 100%;
+// `;

@@ -33,11 +33,12 @@ export default function ShowContentModal({ data }) {
   const [isClose, setIsClose] = useState(true);
   const goMain = () => {
     setIsClose(false);
+    // TODO: 모달창꺼지고 메인페이지로 이동
   };
 
   return (
     <NativeBaseProvider>
-      <Modal isOpen={true}>
+      <Modal isOpen={isClose} onClose={goMain}>
         <Modal.Content maxWidth="400px">
           <Modal.CloseButton />
           <Modal.Header>
