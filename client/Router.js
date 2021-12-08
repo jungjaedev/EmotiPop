@@ -10,6 +10,7 @@ import ListOfPositiveBeans from './pages/Beans/ListOfPositiveBeans';
 import WriteBeans from './pages/Beans/WriteBeans';
 import UserContainer from './pages/User/UserContainer';
 import Resign from './pages/User/Resign';
+import CalendarContainer from './pages/Calendar/CalendarContainer';
 import axios from 'axios'
 
 
@@ -42,6 +43,7 @@ function Router() {
         <Route path='/listofmynegativebeans' element={<ListOfNegativeBeans />}/>
         <Route path='/listofmypositivebeans' element={<ListOfPositiveBeans />}/> 
         <Route path='/resign' element={<Resign />}/> 
+        <Route path='/caledarcontainer' element={<CalendarContainer />}/>
       </Routes>
     </>
   );

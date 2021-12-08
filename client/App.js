@@ -11,6 +11,7 @@ import 'react-native-gesture-handler';
 import NavContainer from './src/pages/Home/NavContainer'
 import FlowHome from './src/pages/Home/FlowHome';
 import { WebView } from 'react-native-webview';
+import CalendarContainer from './src/pages/Calendar/CalendarContainer';
 
 
 
@@ -22,7 +23,8 @@ export default function App() {
     <Provider store={store}>
       <StatusBar style='dark' />
       {/* <FlowHome /> */}
-      <NavContainer />
+      {/* <NavContainer /> */}
+      <CalendarContainer />
     </Provider>
   );
 }
