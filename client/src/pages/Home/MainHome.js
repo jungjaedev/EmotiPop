@@ -11,10 +11,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
 import Nav from './Nav'
-import CalendarContiner from '../Calendar/CalendarContainer'
+import CalendarContiner from '../Calendar/CalendarTest'
+import CalendarTest from '../Calendar/CalendarTest'
 import ChartContainer from '../chart/ChartContainer';
 import MyPage from '../User/MyPage';
 import Home from './Home'
+import Main from '../Main/Main'
 
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -39,8 +41,9 @@ export default function MainHome({ navigation }) {
       height: SCREEN_HEIGHT
     }}>
       <StatusBar style='dark'/>
-      { pageState.pages.home ? <Home /> : null }
-      { pageState.pages.cal ? <CalendarContiner/> : null }
+      { pageState.pages.home ? <Main /> : null }
+      {/* { pageState.pages.cal ? <CalendarContiner/> : null } */}
+      { pageState.pages.cal ? <CalendarTest/> : null }
       { pageState.pages.chart ? <ChartContainer />: null }
       { pageState.pages.mypage ? <MyPage />: null}
       <Nav navigation={navigation}/>
