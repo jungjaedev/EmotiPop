@@ -20,7 +20,7 @@ module.exports = {
     });
     // console.log(userInfo);
     if (!userInfo) {
-      res.status(403).send({
+      return res.status(403).send({
         message: 'Forbidden',
       });
     }
@@ -40,7 +40,7 @@ module.exports = {
     const newContent = await Beans.findOne({
       where: { emotions, emotion_level, contents, gourdKinds: gourdkinds, users_id: accessTokenData.id },
     });
-    console.log(newContent);
-    res.json({ data: newContent, message: 'ok' });
+
+    res.send({ data: newContent.dataValues, message: 'ok' });
   },
 };
