@@ -12,7 +12,7 @@ import { Fontisto } from '@expo/vector-icons'
 
 export default function EmotiHome({ navigation }) {
   const user = useSelector(state => state.user.signIn)
-  console.log(user)
+  // console.log(user)
   const dispatch = useDispatch();
 
 

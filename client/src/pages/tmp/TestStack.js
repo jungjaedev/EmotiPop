@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 // import { Update } from "expo-updates";
 import * as Update from "expo-updates";
+import ChartContainer from '../chart/ChartContainer';
 import axios from 'axios';
 
 
@@ -30,17 +31,18 @@ function MyPage() {
   //   const res = await axios('http://10.0.2.2:80/')
   // }
   const logOutHandler = async () => {
-    console.log('ads')
+    // console.log('ads')
     AsyncStorage.clear()
     const res = await AsyncStorage.getAllKeys()
     // location.reload()
     Update.reloadAsync()
-    console.log(res)
+    // console.log(res)
   }
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>MyPage!</Text>
       <Btn name='LogOut' onPress={logOutHandler}/>
+      {/* <Btn name='Chart' onPress={() => navigation.navigate('ChartContainer')}/> */}
     </View>
   );
 }
@@ -93,6 +95,7 @@ export default function Tabs() {
           ),
         }}
       />
+
     </Tab.Navigator>
   );
 }

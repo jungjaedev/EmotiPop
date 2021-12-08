@@ -8,8 +8,9 @@ import rootReducer from './src/modules'
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import 'react-native-gesture-handler';
-import NavContainer from './src/pages/Home/NavContainer'
-import FlowHome from './src/pages/Home/FlowHome';
+// import NavContainer from './src/pages/Home/NavContainer'
+// import TutorialHome from './src/pages/Tutorial/TutorialHome';
+import ChangeStack from './src/pages/Tutorial/ChangeStack'
 import { WebView } from 'react-native-webview';
 
 
@@ -21,17 +22,10 @@ export default function App() {
   return (
     <Provider store={store}>
       <StatusBar style='dark' />
-      {/* <FlowHome /> */}
-      <NavContainer />
+      <ChangeStack />
+      {/* <TutorialHome /> */}
+      {/* <NavContainer /> */}
     </Provider>
   );
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });

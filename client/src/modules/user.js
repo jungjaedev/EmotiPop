@@ -11,8 +11,8 @@ const SIGN_OUT = 'user/SIGN_OUT';
 const SIGN_OUT_SUCCESS = 'user/SIGN_OUT_SUCCESS';
 const SIGN_OUT_ERROR = 'user/SIGN_OUT_ERROR';
 // export const URL = 'http://localhost:80/'
-export const URL = 'http://10.0.2.2:80/'
-
+// export const URL = 'http://10.0.2.2:80/'
+export const URL = 'http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/'
 
 
 // Thunk 생성 함수
@@ -21,15 +21,15 @@ export const reqSignIn = (info) => async dispatch => {
   dispatch({ type: SIGN_IN });
   // api 호출
   try {
-    const { data } = await axios.post(`${URL}users/signin`, info, { headers: {'Content-Type': 'application/json'}, withCredentials: true});
+    const { data } = await axios.post(`${URL}users/signin`, info, { headers: {'Content-Type': 'application/json'}, withCredentials: true });
     const userData = data.userinfo;
-    console.log(userData)
+    // console.log(userData)
     const {email, username, accessToken} = userData;
     await AsyncStorage.setItem('AccessToken', accessToken)
     const user = { email, username }
-    dispatch({ type: SIGN_IN_SUCCESS, user})
+    dispatch({ type: SIGN_IN_SUCCESS, user })
   } catch(err) {
-    dispatch({ type: SIGN_IN_ERROR, error: err})
+    dispatch({ type: SIGN_IN_ERROR, error: err })
   }
 }
 
@@ -54,9 +54,10 @@ export const reSignIn = (token) => async dispatch => {
       return
     }
     try{
+      // console.log(token)
       const res = await axios.get(`${URL}users/me`, { headers: { authorization: `Bearer ${token}` }, withCredentials: true })
       if(res.data.message !== 'get your information completed') {
-        return
+        return;
       }
       const { id, email, username } = res.data.userinfo;
       const userData = { email, username}

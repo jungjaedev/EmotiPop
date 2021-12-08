@@ -18,7 +18,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 
 export default function Chart({ beans }) {
-  console.log(beans)
+  // console.log(beans)
   
   return (
     <ScrollView style={{width: '100%'}} showsVerticalScrollIndicator={false} >
