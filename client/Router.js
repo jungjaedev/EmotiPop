@@ -19,7 +19,7 @@ function Router() {
 
   useEffect(async() => {
     try{
-      const lists = await axios.get('http://localhost:80/posts')
+      const lists = await axios.get('')
       setList(list.concat(lists.data.data))
     } catch(e) {
       throw new Error(e);
@@ -38,7 +38,6 @@ function Router() {
         <Route path='/beanscontainer' element={<BeansContainer />}/> 
         <Route path='/beanscontent' element={<BeansContent/>}/> 
         <Route path='/chooseroom' element={<ChooseRoom />}/> 
-        <Route path='/post/:userid' element={<PostItemContainer />}/> 
         <Route path='/usercontainer/:userid' element={<UserContainer />}/> 
         <Route path='/listofmynegativebeans' element={<ListOfNegativeBeans />}/>
         <Route path='/listofmypositivebeans' element={<ListOfPositiveBeans />}/> 
