@@ -26,6 +26,7 @@ module.exports = {
     }
     // console.log(req.body);
     const { emotions, emotion_level, contents, gourdkinds } = req.body;
+    // console.log(data);
     const data = {
       emotions,
       emotion_level,
@@ -33,10 +34,13 @@ module.exports = {
       gourdKinds: gourdkinds,
       users_id: accessTokenData.id,
     };
-    // console.log(data);
 
     await Beans.create({ ...data });
 
-    res.json({ data: { ...data }, message: 'ok' });
+    const newContent = await Beans.findOne({
+      where: { emotions, emotion_level, contents, gourdKinds: gourdkinds, users_id: accessTokenData.id },
+    });
+    console.log(newContent);
+    res.json({ data: newContent, message: 'ok' });
   },
 };
