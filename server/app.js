@@ -7,6 +7,7 @@ const usersRouter = require('./router/users.js');
 const oauthRouter = require('./router/oauth.js');
 const mypageRouter = require('./router/mypage.js');
 const statsRouter = require('./router/stats.js');
+const calendarRouter = require('./router/calendar.js')
 
 dotEnv.config();
 
@@ -16,11 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(
   cors({
-<<<<<<< HEAD
     origin: ['http://localhost:19003', 'http://emotipop.com'],
-=======
-    origin: ['http://localhost:19006', 'http://emotipop.com'],
->>>>>>> 836d5a1a43e8992e6f5a8cca751e1be58d7446f7
     methods: ['GET', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
   })
@@ -32,6 +29,7 @@ app.use('/oauth', oauthRouter);
 app.use('/users', usersRouter);
 app.use('/mypage', mypageRouter);
 app.use('/stats', statsRouter);
+app.use('/calendar', calendarRouter);
 
 app.get('/', (req, res, next) => {
   res.send('Hello from API Server');

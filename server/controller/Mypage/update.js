@@ -4,6 +4,7 @@ const { isAuthorized } = require('../tokenFunctions');
 module.exports = {
     patch: async (req, res) => {
         const accessTokenData = isAuthorized(req);
+        console.log(accessTokenData);
 
         if (!accessTokenData) {
             return res.status(401).json({ message: 'invalid access token' });
