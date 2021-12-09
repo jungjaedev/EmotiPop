@@ -5,4 +5,5 @@ module.exports = {
   mypageController: require('./Mypage'),
   statsController: require('./stats'),
   calendarController: require('./Calendar'),
+  popsController: require('./pop'),
 };
