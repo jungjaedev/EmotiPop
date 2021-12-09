@@ -3,7 +3,7 @@ import { Dimensions, TouchableOpacity, Text, TextInput, StyleSheet, Image, View,
 import styled from 'styled-components/native';
 import ShowContentModal from '../ShowContentModal';
 
-export default function PosThrow() {
+export default function PosThrow({navigation}) {
   const { width: SCREEN_WIDTH } = Dimensions.get('window');
   const [isPressed, setIsPressed] = useState(false);
 

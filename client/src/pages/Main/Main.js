@@ -83,7 +83,7 @@ export default function Main({ navigation }) {
   };
 
   const getToken = async () => {
-    // const token = await AsyncStorage.getItem('AccessToken');
+    const token = await AsyncStorage.getItem('AccessToken');
     if (emotion === '' || selectedLevel === '' || text === '') {
       return Alert.alert('모든 입력은 필수입니다.');
     }
@@ -92,16 +92,22 @@ export default function Main({ navigation }) {
       { emotion_level: selectedLevel, emotions: emotion, contents: text, gourdkinds },
       {
         headers: {
-          // authorization: `Bearer ${token}`,
-          authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjYsImVtYWlsIjoidGVzdDExMUB0ZXN0LmNvbSIsInBhc3N3b3JkIjoiJDJiJDEyJFBaUUthOWUxbXZPS1pQbnh2UTE2Vk9LUGFZVmUvUWxFV3BwZUV3cE42TlRXeGh1V0JkTkhPIiwidXNlcm5hbWUiOiJ0ZXN0MTExIiwiY3JlYXRlZEF0IjoiMjAyMS0xMi0wMlQwNjoxNzowMC4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMS0xMi0wMlQwNjoxNzowMC4wMDBaIiwiaWF0IjoxNjM4ODc3NTYyLCJleHAiOjE2NDE0Njk1NjJ9.zIU4ylJOIl5y87IZVD4iuzGlHzA7sAulkPXptjqIvMg`,
+          authorization: `Bearer ${token}`,
+          // authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjYsImVtYWlsIjoidGVzdDExMUB0ZXN0LmNvbSIsInBhc3N3b3JkIjoiJDJiJDEyJFBaUUthOWUxbXZPS1pQbnh2UTE2Vk9LUGFZVmUvUWxFV3BwZUV3cE42TlRXeGh1V0JkTkhPIiwidXNlcm5hbWUiOiJ0ZXN0MTExIiwiY3JlYXRlZEF0IjoiMjAyMS0xMi0wMlQwNjoxNzowMC4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMS0xMi0wMlQwNjoxNzowMC4wMDBaIiwiaWF0IjoxNjM4ODc3NTYyLCJleHAiOjE2NDE0Njk1NjJ9.zIU4ylJOIl5y87IZVD4iuzGlHzA7sAulkPXptjqIvMg`,
         },
         withCredentials: true,
       }
     );
-    console.log(newData.data.data);
+    console.log(newData.data.message);
 
-    if (newData.data.data.message === 'ok') {
+    if (newData.data.message === 'ok') {
       deleteAll();
+      if(gourdkinds === 1) {
+        navigation.navigate('PosThrow')
+      } else {
+        navigation.navigate('NegThrow')
+      }
+      console.log('Here!!')
     }
 
     // .then(() => {
