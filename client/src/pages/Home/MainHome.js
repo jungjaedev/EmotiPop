@@ -44,7 +44,6 @@ export default function MainHome({ navigation }) {
       <StatusBar style='dark'/>
       { pageState.pages.home ? <Main navigation={navigation}/> : null }
       { pageState.pages.cal ? <CalendarContiner/> : null }
-      {/* { pageState.pages.chart ? <ChartContainer />: null } */}
       { pageState.pages.chart ? <ChartContainer />: null }
       { pageState.pages.mypage ? <MyPage />: null}
       <Nav navigation={navigation}/>

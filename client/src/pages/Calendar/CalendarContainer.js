@@ -40,21 +40,11 @@ export default function CalenderContainer({ navigation }) {
       let week = firstWeek;
       for ( week; week <= lastWeek; week++) {
         result = result.concat(
-          <View key={week} style={{ flexDirection: 'row' }}>
           <Cal key={week} style={{ flexDirection: 'row' }}>
             {
               Array(7).fill(0).map((data, index) => {
                 let days = today.clone().startOf('year').week(week).startOf('week').add(index, 'day'); //d로해도되지만 직관성
 
-                if(moment().format('YYYYMMDD') === days.format('YYYYMMDD')){
-                  return(
-                      <View key={index} style={{backgroundColor:'red'}} >
-                        <Text>{days.format('D')}</Text>
-                      </View>
-                  );
-                }else if(days.format('MM') !== today.format('MM')){
-                  return(
-                      <View key={index} style={{backgroundColor:'gray', opacity: .3}} >
                 if(days.format('MM') !== today.format('MM')){
                   return(
                       <View key={index} style={{backgroundColor:'lightgray', opacity: .3}} >
@@ -70,7 +60,6 @@ export default function CalenderContainer({ navigation }) {
                 }
               })
             }
-          </View>
           </Cal>
         );
       }
@@ -109,35 +98,19 @@ export default function CalenderContainer({ navigation }) {
           <Text>금</Text>
           <Text>토</Text>
         </Yoil>
-        <View>
-          <View>
-            {calendarArr()}
-          </View>
-        </View>
-      </CalContainer>
         <Days>
           <View>
             {calendarArr()}
           </View>
         </Days>
       </CalContainer>
-      <Nav />
     </View>
   );
 }
 
 const CalContainer = styled.View`
 `
-const CalMenu = styled.View`
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-`
-const Yoil = styled.View`
-  flex-direction: row;
-  background-color: skyblue;
-  height: 60%;
-`
+
 const CalMenu = styled.View`
   flex: auto;
   flex-direction: row;
