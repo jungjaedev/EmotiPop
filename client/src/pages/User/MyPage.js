@@ -37,9 +37,6 @@ export default function MyPage({navigation}) {
       <TouchableOpacity style={{flex: 4}} onPress={logOutHandler}>
         <Text>SignOut</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={{flex: 4}} onPress={() => navigation.navigate('chartTest')}>
-        <Text>Chart??</Text>
-      </TouchableOpacity>
       {/* <Nav /> */}
     </View>
   );

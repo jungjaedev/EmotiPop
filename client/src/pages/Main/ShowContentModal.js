@@ -77,6 +77,10 @@ export default function ShowContentModal({ data }) {
     </NativeBaseProvider>
   );
 }
+const Title = styled.Text`
+  font-size: 30px;
+  font-weight: bold;
+`;
 
 const Content = styled.Text`
   font-size: 18px;

@@ -6,6 +6,8 @@ import MainHome from '../Home/MainHome';
 import MyPage from '../User/MyPage'
 import Nav from './Nav'
 import ChartTest from '../chart/ChartTest'
+import NegThrow from '../Main/Components/NegThrow';
+import PosThrow from '../Main/Components/PosThrow';
 
 
 export default function MainStack() {
@@ -53,6 +55,20 @@ export default function MainStack() {
       <Stack.Screen 
         name='ChartTest' 
         component={ChartTest}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen 
+        name='NegThrow' 
+        component={NegThrow}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen 
+        name='PosThrow' 
+        component={PosThrow}
         options={{
           headerShown: false,
         }}
