@@ -11,6 +11,7 @@ import {
   FlatList,
   Pressable,
   Alert,
+  Dimensions
 } from 'react-native';
 import styled from 'styled-components/native';
 // import WriteBeans from './WriteBeans';
@@ -37,6 +38,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
+const { width: screenWidth } = Dimensions.get('window')
 
 export default function Main({ navigation }) {
   const [writing, setWriting] = useState(false);
@@ -125,7 +127,7 @@ export default function Main({ navigation }) {
       <MainView style={{ flex: 1 }}>
         <ImageBackgrounds source={require('../../img/pinkback.gif')} resizemode="cover">
           <TouchableOpacity onPress={() => setWriting(true)}>
-            <Grourds source={require('../../img/gourds.png')} resizemode="contain" style={{ resizeMode: 'contain' }} />
+            <Grourds source={require('../../img/gourds.png')} resizemode="contain" style={{ resizeMode: 'contain', width: screenWidth }} />
             {/* 박을 누르면 콩주머니 작성 모달띄워줌*/}
             {writing ? (
               <NativeBaseProvider>
@@ -262,8 +264,8 @@ const styles = StyleSheet.create({
 
 const Bean = styled.ImageBackground`
   /* flex: 1; */
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   opacity: 0.8;
 `;
 
@@ -281,11 +283,11 @@ const MainView = styled.View`
 const Grourds = styled.Image`
   margin-left: 40px;
   height: 400px;
-  width: 100%;
+  /* width: 400px; */
 `;
 
 const Girl = styled.Image`
   margin-top: 20px;
   height: 30%;
-  width: 30%;
+  /* width: 30%; */
 `;

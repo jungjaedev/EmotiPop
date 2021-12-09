@@ -18,7 +18,7 @@ function ChooseRoom ({ navigation }) {
       </Blue>
       <Red>
         {/* <Link to='/Negative'/> */}
-        <Btn name ='Negagive'/>
+        <Btn name ='Negative' onPress={() => navigation.navigate('ListOfMyNegativeBeans')}/>
       </Red>
     </Container>
   )
