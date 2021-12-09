@@ -12,6 +12,7 @@ import 'react-native-gesture-handler';
 // import TutorialHome from './src/pages/Tutorial/TutorialHome';
 import ChangeStack from './src/pages/Tutorial/ChangeStack'
 import { WebView } from 'react-native-webview';
+import CalendarContainer from './src/pages/Calendar/CalendarContainer';
 
 
 
@@ -22,9 +23,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <StatusBar style='dark' />
-      <ChangeStack />
-      {/* <TutorialHome /> */}
+      {/* <FlowHome /> */}
       {/* <NavContainer /> */}
+      <CalendarContainer />
     </Provider>
   );
 }
