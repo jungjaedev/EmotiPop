@@ -1,38 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import {
-  TouchableOpacity,
-  Text,
-  TextInput,
-  StyleSheet,
-  Image,
-  View,
-  ImageBackground,
-  Touchable,
-  FlatList,
-  Pressable,
-  Alert,
-} from 'react-native';
+import { TouchableOpacity, Text, TextInput, StyleSheet, Image, View, ImageBackground } from 'react-native';
 import styled from 'styled-components/native';
-import {
-  Button,
-  Modal,
-  FormControl,
-  Input,
-  Center,
-  NativeBaseProvider,
-  CheckIcon,
-  Select,
-  Menu,
-  Divider,
-  HamburgerIcon,
-} from 'native-base';
+import { Button, Modal, FormControl, NativeBaseProvider } from 'native-base';
 import { SSRProvider } from '@react-aria/ssr';
-import Btn from '../User/Button';
 
 export default function ShowContentModal({ data }) {
   const [isClose, setIsClose] = useState(true);
   const emotionpro = ['기쁨', '행복', '만족', '뿌듯', '설렘'];
   const emotionneg = ['슬픔', '우울', '걱정', '분노', '실망'];
+  const texts = [
+    '수고했어 오늘도, 아무도 너의 슬픔에 관심없대도 난 늘 응원해. 수고했어.수고했어',
+    '이미 충분히 노력하고 있으니까 힘내라고 말할 수는 없어. 그렇지만, 매일매일 응원하고 있을게',
+    '당신의 맑은 미소가 행복을 주는 오늘입니다',
+  ];
+  const random = Math.floor(Math.random() * texts.length);
 
   const goMain = () => {
     setIsClose(false);
@@ -47,28 +28,9 @@ export default function ShowContentModal({ data }) {
           <Modal.Header>콩주머니 내용</Modal.Header>
           <Modal.Body>
             <FormControl>
-              <FormControl.Label>감정</FormControl.Label>
-              {emotionpro.includes(data.emotions) ? (
-                <Bean source={require('../../img/redNo.png')}>
-                  <View style={{ alignItems: 'center', marginTop: 'auto', marginBottom: 'auto' }}>
-                    <Text>{data.emotions}</Text>
-                  </View>
-                </Bean>
-              ) : (
-                <Bean source={require('../../img/blueNo.png')}>
-                  <View style={{ alignItems: 'center', marginTop: 'auto', marginBottom: 'auto' }}>
-                    <Text>{data.emotions}</Text>
-                  </View>
-                </Bean>
-              )}
-            </FormControl>
-            <FormControl style={{ marginTop: 20 }}>
-              <FormControl.Label>레벨</FormControl.Label>
-              <Text style={{ fontSize: 18 }}>{data.emotion_level}</Text>
-            </FormControl>
-            <FormControl style={{ marginTop: 20 }}>
-              <FormControl.Label>상황설명</FormControl.Label>
-              <Content>{data.contents}</Content>
+              <FormControl.Label style={{ padding: 20 }}>
+                <Text>{texts[random]}</Text>
+              </FormControl.Label>
             </FormControl>
           </Modal.Body>
           <Modal.Footer></Modal.Footer>
@@ -77,10 +39,6 @@ export default function ShowContentModal({ data }) {
     </NativeBaseProvider>
   );
 }
-const Title = styled.Text`
-  font-size: 30px;
-  font-weight: bold;
-`;
 
 const Content = styled.Text`
   font-size: 18px;

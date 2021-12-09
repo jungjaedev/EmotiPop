@@ -4,4 +4,6 @@ module.exports = {
   oauthController: require('./oauth'),
   mypageController: require('./Mypage'),
   statsController: require('./stats'),
+  calendarController: require('./Calendar'),
+  popsController: require('./pop'),
 };

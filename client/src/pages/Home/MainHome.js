@@ -12,7 +12,6 @@ import styled from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
 import Nav from './Nav'
 import CalendarContiner from '../Calendar/CalendarContainer'
-import CalendarContainer from '../Calendar/CalendarContainer'
 import ChartContainer from '../chart/ChartContainer';
 // import ChartTest from '../chart/ChartTest';
 // import ChartTest2 from '../chart/ChartTest2'

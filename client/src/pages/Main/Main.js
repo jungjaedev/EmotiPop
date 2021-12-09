@@ -131,7 +131,7 @@ export default function Main({ navigation }) {
   return (
     <SSRProvider>
       <MainView style={{ flex: 1 }}>
-        <ImageBackgrounds source={require('../../img/pinkback.gif')} resizemode="cover">
+        <ImageBackgrounds source={require('../../img/background.jpeg')} resizemode="cover">
           <TouchableOpacity onPress={() => setWriting(true)}>
             <Grourds source={require('../../img/gourds.png')} resizemode="contain" style={{ resizeMode: 'contain', width: screenWidth }} />
             {/* 박을 누르면 콩주머니 작성 모달띄워줌*/}
