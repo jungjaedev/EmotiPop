@@ -92,7 +92,7 @@ export default function Main({ navigation }) {
       { emotion_level: selectedLevel, emotions: emotion, contents: text, gourdkinds },
       {
         headers: {
-          // authorization: `Bearer ${token}`,
+          // authorization: `Bearer ${token}`},
           authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjYsImVtYWlsIjoidGVzdDExMUB0ZXN0LmNvbSIsInBhc3N3b3JkIjoiJDJiJDEyJFBaUUthOWUxbXZPS1pQbnh2UTE2Vk9LUGFZVmUvUWxFV3BwZUV3cE42TlRXeGh1V0JkTkhPIiwidXNlcm5hbWUiOiJ0ZXN0MTExIiwiY3JlYXRlZEF0IjoiMjAyMS0xMi0wMlQwNjoxNzowMC4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMS0xMi0wMlQwNjoxNzowMC4wMDBaIiwiaWF0IjoxNjM4ODc3NTYyLCJleHAiOjE2NDE0Njk1NjJ9.zIU4ylJOIl5y87IZVD4iuzGlHzA7sAulkPXptjqIvMg`,
         },
         withCredentials: true,
@@ -125,7 +125,7 @@ export default function Main({ navigation }) {
   return (
     <SSRProvider>
       <MainView style={{ flex: 1 }}>
-        <ImageBackgrounds source={require('../../img/pinkback.gif')} resizemode="cover">
+        <ImageBackgrounds source={require('../../img/background.jpeg')} resizemode="cover">
           <TouchableOpacity onPress={() => setWriting(true)}>
             <Grourds source={require('../../img/gourds.png')} resizemode="contain" style={{ resizeMode: 'contain', width: screenWidth }} />
             {/* 박을 누르면 콩주머니 작성 모달띄워줌*/}

@@ -5,17 +5,44 @@ import ShowContentModal from '../ShowContentModal';
 
 export default function NegThrow() {
   const { width: SCREEN_WIDTH } = Dimensions.get('window');
+  const [isPressed, setIsPressed] = useState(false);
 
-  const showModal = () => {
-    return <ShowContentModal />;
+  const data = {
+    contents: 'ttt',
+    createdAt: '2021-12-08T02:06:29.000Z',
+    emotion_level: 8,
+    emotions: '설렘',
+    gourdKinds: true,
+    id: 67,
+    updatedAt: '2021-12-08T02:06:29.000Z',
+    users_id: 26,
   };
 
+  const showModal = () => {
+    setIsPressed(true);
+    // console.log(isPressed);
+    // console.log(111111);
+  };
   return (
-    <TouchableOpacity onPress={showModal}>
+    <>
       <Container style={{ width: SCREEN_WIDTH }}>
-        <ImageBackgrounds source={require('../../../img/throwtonegative.gif')} resizemode="cover"></ImageBackgrounds>
+        <ImageBackgrounds source={require('../../../img/background.jpeg')} resizemode="cover">
+          <ImageBackgrounds source={require('../../../img/negativeThrow.gif')} resizemode="contain">
+            <TouchableOpacity
+              style={{ position: 'absolute', height: 100, top: 580, left: 120 }}
+              hitSlop={{ top: 32, bottom: 32, left: 32, right: 32 }}
+              onPress={showModal}
+            >
+              <View>
+                <Text style={{ padding: 20, fontSize: 17 }}>여기를 터치해주세요</Text>
+              </View>
+            </TouchableOpacity>
+          </ImageBackgrounds>
+        </ImageBackgrounds>
+
+        {isPressed ? <ShowContentModal data={data} /> : null}
       </Container>
-    </TouchableOpacity>
+    </>
   );
 }
 const Container = styled.View`
@@ -26,12 +53,19 @@ const Container = styled.View`
 `;
 
 const ImageBackgrounds = styled.ImageBackground`
-  /* flex: 1; */
-  position: relative;
-  margin-top: 100px;
-  height: 300px;
-  width: 120%;
-  /* right: 20%; */
-  /* margin-right: auto; */
-  margin-left: -100px;
+  height: 100%;
+  width: 100%;
 `;
+
+// const Texts = styled.View`
+//   top: 0;
+//   bottom: 0;
+//   justify-content: 'center';
+//   align-items: 'center';
+// `;
+
+// const ImageBackgrounds = styled.ImageBackground`
+//   /* flex: 1; */
+//   height: 100%;
+//   width: 100%;
+// `;
