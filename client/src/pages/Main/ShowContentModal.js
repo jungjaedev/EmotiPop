@@ -31,6 +31,9 @@ import Btn from '../User/Button';
 
 export default function ShowContentModal({ data }) {
   const [isClose, setIsClose] = useState(true);
+  const emotionpro = ['기쁨', '행복', '만족', '뿌듯', '설렘'];
+  const emotionneg = ['슬픔', '우울', '걱정', '분노', '실망'];
+
   const goMain = () => {
     setIsClose(false);
     // TODO: 모달창꺼지고 메인페이지로 이동
@@ -41,26 +44,30 @@ export default function ShowContentModal({ data }) {
       <Modal isOpen={isClose} onClose={goMain}>
         <Modal.Content maxWidth="400px">
           <Modal.CloseButton />
-          <Modal.Header>
-            <HeaderText>콩주머니 내용</HeaderText>
-          </Modal.Header>
+          <Modal.Header>콩주머니 내용</Modal.Header>
           <Modal.Body>
             <FormControl>
-              <FormControl.Label>
-                <Title>감정</Title>
-              </FormControl.Label>
-              <Content>{data.emotions}</Content>
+              <FormControl.Label>감정</FormControl.Label>
+              {emotionpro.includes(data.emotions) ? (
+                <Bean source={require('../../img/redNo.png')}>
+                  <View style={{ alignItems: 'center', marginTop: 'auto', marginBottom: 'auto' }}>
+                    <Text>{data.emotions}</Text>
+                  </View>
+                </Bean>
+              ) : (
+                <Bean source={require('../../img/blueNo.png')}>
+                  <View style={{ alignItems: 'center', marginTop: 'auto', marginBottom: 'auto' }}>
+                    <Text>{data.emotions}</Text>
+                  </View>
+                </Bean>
+              )}
             </FormControl>
-            <FormControl>
-              <FormControl.Label>
-                <Title>레벨</Title>
-              </FormControl.Label>
-              <Content>{data.emotion_level}</Content>
+            <FormControl style={{ marginTop: 20 }}>
+              <FormControl.Label>레벨</FormControl.Label>
+              <Text style={{ fontSize: 18 }}>{data.emotion_level}</Text>
             </FormControl>
-            <FormControl>
-              <FormControl.Label>
-                <Title>상황설명</Title>
-              </FormControl.Label>
+            <FormControl style={{ marginTop: 20 }}>
+              <FormControl.Label>상황설명</FormControl.Label>
               <Content>{data.contents}</Content>
             </FormControl>
           </Modal.Body>
@@ -71,14 +78,9 @@ export default function ShowContentModal({ data }) {
   );
 }
 
-const Title = styled.Text`
-  font-size: 30px;
-  font-weight: bold;
-`;
-
 const Content = styled.Text`
   font-size: 18px;
-  border: 1px solid grey;
+  border: 1px solid #dce3e8;
   border-radius: 5px;
   padding: 3px;
 `;
