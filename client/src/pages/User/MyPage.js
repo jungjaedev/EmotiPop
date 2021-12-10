@@ -19,7 +19,7 @@ import axios from 'axios';
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 
-export default function MyPage() {
+export default function MyPage({navigation}) {
   const [editInfoForm, setEditInfoForm] = useState({
     username: '',
     email: '',
@@ -29,7 +29,7 @@ export default function MyPage() {
   const {username, email, password, repassword} = editInfoForm;
   const token = useSelector(state => state.user.accessToken);
   function changeDetector(e) {
-    const { name, value } = e;
+    const { name, value } = e.target;
     setEditInfoForm({
       ...editInfoForm,
       [name]: value
@@ -39,7 +39,7 @@ export default function MyPage() {
   function submitForm(e) {
     e.preventDefault()
 
-    axios.patch('http://localhost:80/mypage/me', {
+    axios.patch('http://localhost:80/mypage', {
       username, email, password
     }, { headers: {
       'ContentType': 'application/json',
@@ -51,7 +51,7 @@ export default function MyPage() {
     console.log(editInfoForm)
   }
 
-
+  const dispatch = useDispatch();
   const logOutHandler = async () => {
     // console.log('ads')
     const token = await AsyncStorage.getItem('AccessToken')
@@ -81,24 +81,31 @@ export default function MyPage() {
       height: SCREEN_HEIGHT - 60
     }}>
       <Text style={{flex: 1}}>MyPage</Text>
-      <TouchableOpacity style={{flex: 4}} onPress={logOutHandler()}>
+      <TouchableOpacity style={{flex: 1}} onPress={logOutHandler()}>
         <Text>SignOut</Text>
       </TouchableOpacity>
-      <UserInfomation>
-        <TextInput onPress={changeDetector()}>이름 : {username}</TextInput>
-        <TextInput>이메일 : {email}</TextInput>
-        <TextInput>비밀번호 : {password}</TextInput>
-        <TextInput>비밀번호 확인 : {repassword}</TextInput>
-        <TouchableOpacity onPress={() => submitForm()} />
+      <UserInfomation style={{flex: 8, flexDirection: 'column', justifyContent: 'space-around'}}>
+      <Text>이름 : {username}</Text><TextInput style={{width: '90%' ,backgroundColor: 'white'}} onChange={(e) => changeDetector(e)} />
+      <Text>이메일 : {email}</Text><TextInput style={{width: '90%' ,backgroundColor: 'white'}} onChange={(e) => changeDetector(e)} />
+      <Text>비밀번호 : {password}</Text><TextInput style={{width: '90%' ,backgroundColor: 'white'}} onChange={(e) => changeDetector(e)} />
+      <Text>비밀번호 확인 : {repassword}</Text><TextInput style={{width: '90%' ,backgroundColor: 'white'}} onChange={(e) => changeDetector(e)} />
+            {
+              password && repassword && password !== repassword ? '비밀번호가 일치하지 않습니다' : null
+            }
+        <Button title='Edit' onPress={(e) => submitForm(e)} />
       </UserInfomation>
-      <Nav />
+      <Button style={{flex: 1}} title='회원탈퇴' onPress={() => navigation.navigate('Resign')} />
     </View>
   );
 }
 
 const UserInfomation = styled.View`
   flex: auto;
-  background-color: ivory;
-  height: 200px;
-  width: 200px;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 20px;
+  background-color: violet;
+  align-items: center;
+  height: 80px;
+  width: 300px;
 `

@@ -84,6 +84,9 @@ export default function MainStack() {
         component={ShowContentModal}
         options={{
           headerShown: false
+        }}
+      />
+      <Stack.Screen
         name="NegPop"
         component={NegPop}
         options={{

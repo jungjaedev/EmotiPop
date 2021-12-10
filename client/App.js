@@ -16,16 +16,14 @@ import { WebView } from 'react-native-webview';
 import CalendarContainer from './src/pages/Calendar/CalendarContainer';
 import MyPage from './src/pages/User/MyPage';
 
-
-import ChangeStack from './src/pages/Tutorial/ChangeStack';
-
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
 
 export default function App() {
   return (
     <Provider store={store}>
       <StatusBar style='dark' />
-        <ChangeStack />
+        {/* <ChangeStack /> */}
+        <MyPage />
     </Provider>
   );
 }
