@@ -24,11 +24,12 @@
     "chart.js": "^3.6.2",
     "dependencies": "^0.0.1",
     "expo": "~43.0.2",
+    "expo-font": "^10.0.3",
     "expo-google-app-auth": "~9.0.0",
     "expo-linear-gradient": "~10.0.3",
     "expo-location": "~13.0.4",
     "expo-status-bar": "~1.1.0",
-    "expo-updates": "^0.10.15",
+    "expo-updates": "~0.10.15",
     "install": "^0.13.0",
     "lottie-ios": "^3.1.8",
     "lottie-react-native": "^5.0.1",
@@ -41,7 +42,8 @@
     "react-cookies": "^0.1.1",
     "react-dom": "17.0.1",
     "react-lottie": "^1.2.3",
-    "react-native": "0.66.3",
+    "react-native": "^0.66.3",
+    "react-native-app-intro-slider": "^4.0.4",
     "react-native-calendars": "^1.1270.0",
     "react-native-chart-kit": "^6.11.0",
     "react-native-gesture-handler": "~1.10.2",
@@ -76,5 +78,10 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6"
   },
-  "private": true
+  "private": true,
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
+  }
 }

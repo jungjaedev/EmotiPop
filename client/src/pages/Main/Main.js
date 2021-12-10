@@ -11,7 +11,7 @@ import {
   FlatList,
   Pressable,
   Alert,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import styled from 'styled-components/native';
 // import WriteBeans from './WriteBeans';
@@ -33,12 +33,13 @@ import Btn from '../User/Button';
 import axios from 'axios';
 import NegThrow from './Components/NegThrow';
 import PosThrow from './Components/PosThrow';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
-const { width: screenWidth } = Dimensions.get('window')
+const { width: screenWidth } = Dimensions.get('window');
 
 export default function Main({ navigation }) {
   const [writing, setWriting] = useState(false);
@@ -78,6 +79,23 @@ export default function Main({ navigation }) {
     }
   };
 
+  const weeklyPop = async () => {
+    const token = await AsyncStorage.getItem('AccessToken');
+    const weeklydata = await axios.get('http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/pop', {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+    if (weeklydata.data.message === 'Negative Gourd Win') {
+      navigation.navigate('NegPop');
+    } else if (weeklydata.data.message === 'Postive Gourd Win') {
+      navigation.navigate('PosPop');
+    } else {
+      navigation.navigate('BothPop');
+    }
+  };
+
   const onChangeText = payload => {
     setText(payload);
   };
@@ -93,40 +111,22 @@ export default function Main({ navigation }) {
       {
         headers: {
           authorization: `Bearer ${token}`,
-          // authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjYsImVtYWlsIjoidGVzdDExMUB0ZXN0LmNvbSIsInBhc3N3b3JkIjoiJDJiJDEyJFBaUUthOWUxbXZPS1pQbnh2UTE2Vk9LUGFZVmUvUWxFV3BwZUV3cE42TlRXeGh1V0JkTkhPIiwidXNlcm5hbWUiOiJ0ZXN0MTExIiwiY3JlYXRlZEF0IjoiMjAyMS0xMi0wMlQwNjoxNzowMC4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMS0xMi0wMlQwNjoxNzowMC4wMDBaIiwiaWF0IjoxNjM4ODc3NTYyLCJleHAiOjE2NDE0Njk1NjJ9.zIU4ylJOIl5y87IZVD4iuzGlHzA7sAulkPXptjqIvMg`,
         },
         withCredentials: true,
       }
     );
-    console.log(newData.data.message);
 
     if (newData.data.message === 'ok') {
       deleteAll();
-      if(gourdkinds === 1) {
-        navigation.navigate('PosThrow')
+      if (gourdkinds === 1) {
+        navigation.navigate('PosThrow', { data: newData.data.data });
       } else {
-        navigation.navigate('NegThrow')
+        navigation.navigate('NegThrow', { data: newData.data.data });
       }
-      console.log('Here!!')
+      console.log('Here!!');
     }
 
-    // .then(() => {
-    //   return (
-    //     <NavigationContainer>
-    //       <Stack.Navigator>
-    //         {gourdkinds === 1 ? <Stack.Screen name="Pos" component={PosThrow} /> : <Stack.Screen name="Neg" component={NegThrow} />}
-    //       </Stack.Navigator>
-    //     </NavigationContainer>
-    //   );
-    // })
-    // .then(() => {
-    //   return (
-
-    //   );
-    // })
   };
-
-  // console.log(emotion, selectedLevel, text);
 
   return (
     <SSRProvider>
@@ -247,7 +247,20 @@ export default function Main({ navigation }) {
               </NativeBaseProvider>
             ) : null}
           </TouchableOpacity>
-          <Girl source={require('../../img/girl.png')} resizemode="contain" style={{ resizeMode: 'contain' }} />
+          {new Date().getDay() === 0 ? (
+            <Bubble style={{ margin: 20, padding: 20, position: 'absolute', left: 100, bottom: 120 }}>
+              <Text style={{ marginTop: 'auto', marginBottom: 'auto', padding: 10 }}>지금 저를 누르면 박이 터져요!!!</Text>
+            </Bubble>
+          ) : null}
+          {new Date().getDay() === 0 ? (
+            <TouchableOpacity onPress={weeklyPop}>
+              <Girl source={require('../../img/girl.png')} resizemode="contain" style={{ resizeMode: 'contain' }} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity>
+              <Girl source={require('../../img/girl.png')} resizemode="contain" style={{ resizeMode: 'contain' }} />
+            </TouchableOpacity>
+          )}
         </ImageBackgrounds>
       </MainView>
     </SSRProvider>
@@ -267,6 +280,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
 });
+
+const Bubble = styled.View`
+  font-size: 18px;
+  line-height: 24px;
+  width: 260px;
+  background: #fff;
+  border-radius: 40px;
+  padding: 24px;
+  text-align: center;
+  color: #000;
+`;
 
 const Bean = styled.ImageBackground`
   /* flex: 1; */
@@ -293,7 +317,7 @@ const Grourds = styled.Image`
 `;
 
 const Girl = styled.Image`
-  margin-top: 20px;
-  height: 30%;
+  margin-top: 30px;
+  height: 50%;
   /* width: 30%; */
 `;

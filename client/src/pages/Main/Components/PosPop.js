@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, TouchableOpacity, Text, TextInput, StyleSheet, Image, View, ImageBackground, Button } from 'react-native';
 import styled from 'styled-components/native';
-import LottieView from 'lottie-react-native';
 import MessageModal from './MessageModal';
 
 export default function PosPop() {
@@ -18,7 +17,7 @@ export default function PosPop() {
     <Container>
       <ImageBackgrounds source={require('../../../img/background.jpeg')} resizemode="cover">
         <ImageBackgrounds source={require('../../../img/positivePop111.gif')} resizemode="cover"></ImageBackgrounds>
-        {time ? <MessageModal /> : null}
+        {time ? <MessageModal navigation={navigation} /> : null}
       </ImageBackgrounds>
     </Container>
   );

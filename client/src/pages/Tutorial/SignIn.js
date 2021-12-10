@@ -8,7 +8,8 @@ import {
   TouchableOpacity, 
   Alert,
   ActivityIndicator,
-  Dimensions
+  Dimensions,
+  ImageBackground
   } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
@@ -78,7 +79,7 @@ export default function SignIn({navigation}) {
   
   
   return (
-    <Container style={{width: SCREEN_WIDTH}}>
+    <Container style={{width: SCREEN_WIDTH}} source={require('../../img/background.jpeg')}>
         {
           user.signIn.loading ? <Loading color='black' size='large'/> 
           : (
@@ -121,7 +122,7 @@ export default function SignIn({navigation}) {
   );
 }
 
-const Container = styled.View`
+const Container = styled.ImageBackground`
   /* justify-content: center; */
   align-items: center;
   height: 100%; 
