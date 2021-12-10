@@ -40,7 +40,7 @@ export default function NegThrow({navigation}) {
           </ImageBackgrounds>
         </ImageBackgrounds>
 
-        {isPressed ? <ShowContentModal data={data} /> : null}
+        {isPressed ? <ShowContentModal data={data} navigation={navigation}/> : null}
       </Container>
     </>
   );

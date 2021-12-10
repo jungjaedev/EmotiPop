@@ -29,7 +29,7 @@ import {
 import { SSRProvider } from '@react-aria/ssr';
 import Btn from '../User/Button';
 
-export default function ShowContentModal({ data }) {
+export default function ShowContentModal({ data, navigation }) {
   const [isClose, setIsClose] = useState(true);
   const emotionpro = ['기쁨', '행복', '만족', '뿌듯', '설렘'];
   const emotionneg = ['슬픔', '우울', '걱정', '분노', '실망'];
@@ -37,6 +37,7 @@ export default function ShowContentModal({ data }) {
   const goMain = () => {
     setIsClose(false);
     // TODO: 모달창꺼지고 메인페이지로 이동
+    navigation.navigate('MainHome')
   };
 
   return (

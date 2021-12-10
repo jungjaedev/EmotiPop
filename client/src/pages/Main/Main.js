@@ -93,37 +93,21 @@ export default function Main({ navigation }) {
       {
         headers: {
           authorization: `Bearer ${token}`,
-          // authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjYsImVtYWlsIjoidGVzdDExMUB0ZXN0LmNvbSIsInBhc3N3b3JkIjoiJDJiJDEyJFBaUUthOWUxbXZPS1pQbnh2UTE2Vk9LUGFZVmUvUWxFV3BwZUV3cE42TlRXeGh1V0JkTkhPIiwidXNlcm5hbWUiOiJ0ZXN0MTExIiwiY3JlYXRlZEF0IjoiMjAyMS0xMi0wMlQwNjoxNzowMC4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMS0xMi0wMlQwNjoxNzowMC4wMDBaIiwiaWF0IjoxNjM4ODc3NTYyLCJleHAiOjE2NDE0Njk1NjJ9.zIU4ylJOIl5y87IZVD4iuzGlHzA7sAulkPXptjqIvMg`,
         },
         withCredentials: true,
       }
     );
-    console.log(newData.data.message);
-
+    console.log(newData.data.data);
     if (newData.data.message === 'ok') {
       deleteAll();
-      if(gourdkinds === 1) {
-        navigation.navigate('PosThrow')
+      if (gourdkinds === 1) {
+        navigation.navigate('PosThrow', { data: newData.data.data });
       } else {
-        navigation.navigate('NegThrow')
+        navigation.navigate('NegThrow', { data: newData.data.data });
       }
-      console.log('Here!!')
+      console.log('Here!!');
     }
 
-    // .then(() => {
-    //   return (
-    //     <NavigationContainer>
-    //       <Stack.Navigator>
-    //         {gourdkinds === 1 ? <Stack.Screen name="Pos" component={PosThrow} /> : <Stack.Screen name="Neg" component={NegThrow} />}
-    //       </Stack.Navigator>
-    //     </NavigationContainer>
-    //   );
-    // })
-    // .then(() => {
-    //   return (
-
-    //   );
-    // })
   };
 
   // console.log(emotion, selectedLevel, text);

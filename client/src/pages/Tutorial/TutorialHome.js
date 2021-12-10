@@ -56,7 +56,6 @@ export default function TutorialHome({navigation}) {
         <TutorialPage4 />
         <TutorialPage5 />
         <SignIn navigation={navigation} />
-        {/* <NavContainer /> */}
       </Scroll>
     </Container>
   )

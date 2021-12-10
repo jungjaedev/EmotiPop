@@ -23,10 +23,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <StatusBar style='dark' />
-      {/* <FlowHome /> */}
-      {/* <NavContainer /> */}
       <ChangeStack />
-      {/* <CalendarContainer /> */}
     </Provider>
   );
 }

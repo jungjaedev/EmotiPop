@@ -24,13 +24,14 @@
     "chart.js": "^3.6.2",
     "dependencies": "^0.0.1",
     "expo": "~43.0.2",
+    "expo-font": "^10.0.3",
     "expo-google-app-auth": "~9.0.0",
     "expo-linear-gradient": "~10.0.3",
     "expo-location": "~13.0.4",
     "expo-status-bar": "~1.1.0",
-    "lottie-ios": "^3.1.8",
     "expo-updates": "~0.10.15",
     "install": "^0.13.0",
+    "lottie-ios": "^3.1.8",
     "lottie-react-native": "^5.0.1",
     "moment": "^2.29.1",
     "native-base": "^3.2.2",
@@ -68,13 +69,18 @@
     "sequelize": "^6.12.0-alpha.1",
     "styled-component": "^2.8.0",
     "styled-components": "^5.3.3",
-    "victory-native": "^36.2.0",
-    "styled-reset": "^4.3.4"
+    "styled-reset": "^4.3.4",
+    "victory-native": "^36.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6"
   },
-  "private": true
+  "private": true,
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
+  }
 }

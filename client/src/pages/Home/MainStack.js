@@ -8,6 +8,7 @@ import Nav from './Nav'
 import ChartTest from '../chart/ChartTest'
 import NegThrow from '../Main/Components/NegThrow';
 import PosThrow from '../Main/Components/PosThrow';
+import ShowContentModal from '../Main/ShowContentModal'
 
 
 export default function MainStack() {
@@ -71,6 +72,13 @@ export default function MainStack() {
         component={PosThrow}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name='ShowContentModal'
+        component={ShowContentModal}
+        options={{
+          headerShown: false
         }}
       />
     </Stack.Navigator>
