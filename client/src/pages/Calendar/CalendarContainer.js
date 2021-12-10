@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { 
-    Button, 
-    View, 
-    Text,
-    TouchableOpacity,
-    Dimensions,
-  } from 'react-native';
-import * as Update from "expo-updates";
+import { Button, View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import * as Update from 'expo-updates';
 import styled from 'styled-components/native';
 import Nav from '../Home/Nav';
 
-
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
-
 export default function CalenderContainer({ navigation }) {
-  const [getMoment, setMoment]=useState(moment());     
+  const [getMoment, setMoment] = useState(moment());
   const today = getMoment;
 
   const firstWeek = today.clone().startOf('month').week();
@@ -34,7 +26,16 @@ export default function CalenderContainer({ navigation }) {
   //   console.log(obj);
   //   setMarkedDates(obj);
 
-    const calendarArr = () => {
+  const calendarArr = () => {
+    let result = [];
+    let week = firstWeek;
+    for (week; week <= lastWeek; week++) {
+      result = result.concat(
+        <Cal key={week} style={{ flexDirection: 'row' }}>
+          {Array(7)
+            .fill(0)
+            .map((data, index) => {
+              let days = today.clone().startOf('year').week(week).startOf('week').add(index, 'day'); //d로해도되지만 직관성
 
       let result = [];
       let week = firstWeek;
@@ -64,29 +65,52 @@ export default function CalenderContainer({ navigation }) {
         );
       }
       return result;
+              if (days.format('MM') !== today.format('MM')) {
+                return (
+                  <View key={index} style={{ backgroundColor: 'lightgray', opacity: 0.3 }}>
+                    <Text>{days.format('D')}</Text>
+                  </View>
+                );
+              } else {
+                return (
+                  <TouchableOpacity key={index} onPress={() => console.log(days.format('D'))}>
+                    <Text>{days.format('D')}</Text>
+                  </TouchableOpacity>
+                );
+              }
+            })}
+        </Cal>
+      );
     }
+    return result;
+  };
 
   return (
-    <View style={{ 
-      alignItems: 'center', 
-      justifyContent: 'space-between',
-      width: SCREEN_WIDTH,
-      height: SCREEN_HEIGHT - 60
-//       height: SCREEN_HEIGHT - 40
-    }}>
+    <View
+      style={{
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: SCREEN_WIDTH,
+        height: SCREEN_HEIGHT - 60,
+        //       height: SCREEN_HEIGHT - 40
+      }}
+    >
       <CalContainer className="App" style={{ marginVertical: 20, width: SCREEN_WIDTH }}>
-
-        <CalMenu >
-          <TouchableOpacity onPress={() => { setMoment(getMoment.clone().subtract(1, 'month')) }}>
-            <Text>
-              이전달
-            </Text>
-            </TouchableOpacity>
-          <Text>{today.format('YYYY 년 MM 월')}</Text> 
-          <TouchableOpacity onPress={() => { setMoment(getMoment.clone().add(1, 'month')) }}>
-            <Text>
-              다음달
-            </Text>
+        <CalMenu>
+          <TouchableOpacity
+            onPress={() => {
+              setMoment(getMoment.clone().subtract(1, 'month'));
+            }}
+          >
+            <Text>이전달</Text>
+          </TouchableOpacity>
+          <Text>{today.format('YYYY 년 MM 월')}</Text>
+          <TouchableOpacity
+            onPress={() => {
+              setMoment(getMoment.clone().add(1, 'month'));
+            }}
+          >
+            <Text>다음달</Text>
           </TouchableOpacity>
         </CalMenu>
         <Yoil>
@@ -99,9 +123,7 @@ export default function CalenderContainer({ navigation }) {
           <Text>토</Text>
         </Yoil>
         <Days>
-          <View>
-            {calendarArr()}
-          </View>
+          <View>{calendarArr()}</View>
         </Days>
       </CalContainer>
     </View>
@@ -111,6 +133,7 @@ export default function CalenderContainer({ navigation }) {
 const CalContainer = styled.View`
 `
 
+
 const CalMenu = styled.View`
   flex: auto;
   flex-direction: row;
@@ -119,7 +142,7 @@ const CalMenu = styled.View`
   width: 100%;
   top: 5%;
   background-color: slateblue;
-`
+`;
 const Yoil = styled.View`
   flex: auto;
   text-align: center;
@@ -127,7 +150,7 @@ const Yoil = styled.View`
   justify-content: space-around;
   width: 100%;
   background-color: slateblue;
-`
+`;
 
 const Days = styled.View`
   flex: auto;
@@ -135,7 +158,7 @@ const Days = styled.View`
   justify-content: space-around;
   width: 100%;
   height: 40%;
-`
+`;
 
 const Cal = styled.View`
   flex: auto;
@@ -146,4 +169,4 @@ const Cal = styled.View`
   right: 140%;
   padding: 15%;
   align-items: center;
-`
+`;

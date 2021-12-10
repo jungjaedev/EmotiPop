@@ -11,7 +11,7 @@ import {
   FlatList,
   Pressable,
   Alert,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import styled from 'styled-components/native';
 // import WriteBeans from './WriteBeans';
@@ -33,12 +33,13 @@ import Btn from '../User/Button';
 import axios from 'axios';
 import NegThrow from './Components/NegThrow';
 import PosThrow from './Components/PosThrow';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
-const { width: screenWidth } = Dimensions.get('window')
+const { width: screenWidth } = Dimensions.get('window');
 
 export default function Main({ navigation }) {
   const [writing, setWriting] = useState(false);
@@ -78,6 +79,23 @@ export default function Main({ navigation }) {
     }
   };
 
+  const weeklyPop = async () => {
+    const token = await AsyncStorage.getItem('AccessToken');
+    const weeklydata = await axios.get('http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/pop', {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+    if (weeklydata.data.message === 'Negative Gourd Win') {
+      navigation.navigate('NegPop');
+    } else if (weeklydata.data.message === 'Postive Gourd Win') {
+      navigation.navigate('PosPop');
+    } else {
+      navigation.navigate('BothPop');
+    }
+  };
+
   const onChangeText = payload => {
     setText(payload);
   };
@@ -97,7 +115,7 @@ export default function Main({ navigation }) {
         withCredentials: true,
       }
     );
-    console.log(newData.data.data);
+
     if (newData.data.message === 'ok') {
       deleteAll();
       if (gourdkinds === 1) {
@@ -109,8 +127,6 @@ export default function Main({ navigation }) {
     }
 
   };
-
-  // console.log(emotion, selectedLevel, text);
 
   return (
     <SSRProvider>
@@ -231,7 +247,20 @@ export default function Main({ navigation }) {
               </NativeBaseProvider>
             ) : null}
           </TouchableOpacity>
-          <Girl source={require('../../img/girl.png')} resizemode="contain" style={{ resizeMode: 'contain' }} />
+          {new Date().getDay() === 0 ? (
+            <Bubble style={{ margin: 20, padding: 20, position: 'absolute', left: 100, bottom: 120 }}>
+              <Text style={{ marginTop: 'auto', marginBottom: 'auto', padding: 10 }}>지금 저를 누르면 박이 터져요!!!</Text>
+            </Bubble>
+          ) : null}
+          {new Date().getDay() === 0 ? (
+            <TouchableOpacity onPress={weeklyPop}>
+              <Girl source={require('../../img/girl.png')} resizemode="contain" style={{ resizeMode: 'contain' }} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity>
+              <Girl source={require('../../img/girl.png')} resizemode="contain" style={{ resizeMode: 'contain' }} />
+            </TouchableOpacity>
+          )}
         </ImageBackgrounds>
       </MainView>
     </SSRProvider>
@@ -251,6 +280,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
 });
+
+const Bubble = styled.View`
+  font-size: 18px;
+  line-height: 24px;
+  width: 260px;
+  background: #fff;
+  border-radius: 40px;
+  padding: 24px;
+  text-align: center;
+  color: #000;
+`;
 
 const Bean = styled.ImageBackground`
   /* flex: 1; */
@@ -277,7 +317,7 @@ const Grourds = styled.Image`
 `;
 
 const Girl = styled.Image`
-  margin-top: 20px;
-  height: 30%;
+  margin-top: 30px;
+  height: 50%;
   /* width: 30%; */
 `;

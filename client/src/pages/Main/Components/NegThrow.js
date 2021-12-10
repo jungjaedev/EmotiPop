@@ -3,20 +3,9 @@ import { Dimensions, TouchableOpacity, Text, TextInput, StyleSheet, Image, View,
 import styled from 'styled-components/native';
 import ShowContentModal from '../ShowContentModal';
 
-export default function NegThrow({navigation}) {
+export default function NegThrow({ navigation, route }) {
   const { width: SCREEN_WIDTH } = Dimensions.get('window');
   const [isPressed, setIsPressed] = useState(false);
-
-  const data = {
-    contents: 'ttt',
-    createdAt: '2021-12-08T02:06:29.000Z',
-    emotion_level: 8,
-    emotions: '설렘',
-    gourdKinds: true,
-    id: 67,
-    updatedAt: '2021-12-08T02:06:29.000Z',
-    users_id: 26,
-  };
 
   const showModal = () => {
     setIsPressed(true);
@@ -40,7 +29,8 @@ export default function NegThrow({navigation}) {
           </ImageBackgrounds>
         </ImageBackgrounds>
 
-        {isPressed ? <ShowContentModal data={data} navigation={navigation}/> : null}
+        {isPressed ? <ShowContentModal data={route.params.data} navigation={navigation}/> : null}
+
       </Container>
     </>
   );
