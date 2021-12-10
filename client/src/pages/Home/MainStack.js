@@ -8,6 +8,8 @@ import Nav from './Nav';
 import ChartTest from '../chart/ChartTest';
 import NegThrow from '../Main/Components/NegThrow';
 import PosThrow from '../Main/Components/PosThrow';
+import ShowContentModal from '../Main/ShowContentModal'
+
 import NegPop from '../Main/Components/NegPop';
 import BothPop from '../Main/Components/BothPop';
 import PosPop from '../Main/Components/PosPop';
@@ -78,6 +80,10 @@ export default function MainStack() {
         }}
       />
       <Stack.Screen
+        name='ShowContentModal'
+        component={ShowContentModal}
+        options={{
+          headerShown: false
         name="NegPop"
         component={NegPop}
         options={{

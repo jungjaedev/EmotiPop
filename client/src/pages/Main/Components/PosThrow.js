@@ -29,7 +29,8 @@ export default function PosThrow({ navigation, route }) {
           </ImageBackgrounds>
         </ImageBackgrounds>
 
-        {isPressed ? <ShowContentModal data={route.params.data} /> : null}
+        {isPressed ? <ShowContentModal data={route.params.data} navigation={navigation}/> : null}
+
       </Container>
     </>
   );

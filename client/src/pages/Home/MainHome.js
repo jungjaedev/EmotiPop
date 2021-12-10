@@ -5,6 +5,7 @@ import {
     Text,
     TouchableOpacity,
     Dimensions,
+    ImageBackground,
   } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 import { useSelector, useDispatch } from 'react-redux';
@@ -35,19 +36,24 @@ export default function MainHome({ navigation }) {
   
   // console.log(page)
   return (
-    <View style={{ 
+    <BackGround style={{ 
       alignItems: 'center', 
       justifyContent: 'space-between',
       width: SCREEN_WIDTH,
       height: SCREEN_HEIGHT
-    }}>
+    }}
+    source={require('../../img/background.jpeg')}
+    >
       <StatusBar style='dark'/>
       { pageState.pages.home ? <Main navigation={navigation}/> : null }
       { pageState.pages.cal ? <CalendarContiner/> : null }
-      {/* { pageState.pages.chart ? <ChartContainer />: null } */}
       { pageState.pages.chart ? <ChartContainer />: null }
-      { pageState.pages.mypage ? <MyPage />: null}
+      { pageState.pages.mypage ? <MyPage navigation={navigation}/>: null}
       <Nav navigation={navigation}/>
-    </View>
+    </BackGround>
   );
 }
+
+const BackGround = styled.ImageBackground`
+
+`

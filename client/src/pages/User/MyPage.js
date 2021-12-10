@@ -8,6 +8,7 @@ import {
   } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 import * as Update from "expo-updates";
+import {reqSignOut, reSignIn} from '../../modules/user';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
 import Nav from '../Home/Nav'
@@ -17,14 +18,28 @@ const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 
 export default function MyPage({navigation}) {
+  const dispatch = useDispatch();
+
   const logOutHandler = async () => {
     // console.log('ads')
-    AsyncStorage.clear()
-    const res = await AsyncStorage.getAllKeys()
+    const token = await AsyncStorage.getItem('AccessToken')
+    dispatch(reqSignOut(token))
+    // AsyncStorage.clear()
+    // const res = await AsyncStorage.getAllKeys()
     // location.reload()
     Update.reloadAsync()
     // console.log(res)
   }
+  
+  //! Token owner Test
+  // const logg = async() => {
+  //   try {
+  //     const token = await AsyncStorage.getItem('AccessToken')
+  //     dispatch(reSignIn(token))
+  //   } catch(err) {
+  //   throw new Error(err)
+  //   }
+  // }
 
   return (
     <View style={{ 

@@ -16,11 +16,8 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 export default function App() {
   return (
     <Provider store={store}>
-      <StatusBar style="dark" />
-      {/* <FlowHome /> */}
+      <StatusBar style='dark' />
       <ChangeStack />
-      {/* <TutorialHome /> */}
-      {/* <CalendarContainer /> */}
     </Provider>
   );
 }

@@ -7,7 +7,8 @@ import {
   Button, 
   TouchableOpacity, 
   Alert,
-  Dimensions
+  Dimensions,
+  ImageBackground
   } from 'react-native';
 import styled from 'styled-components/native';
 import Btn from '../User/Button';
@@ -127,7 +128,7 @@ export default function SignUp({navigation}) {
   }
   
   return (
-    <Container style={{width: SCREEN_WIDTH}}>
+    <Container style={{width: SCREEN_WIDTH}} source={require('../../img/background.jpeg')}>
       <SignUpForm>
         <Header>회원가입</Header>
         <Input 
@@ -175,7 +176,7 @@ export default function SignUp({navigation}) {
   );
 }
 
-const Container = styled.View`
+const Container = styled.ImageBackground`
   /* justify-content: center; */
   align-items: center;
   height: 100%;
