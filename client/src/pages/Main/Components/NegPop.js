@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, TouchableOpacity, Text, TextInput, StyleSheet, Image, View, ImageBackground, Button } from 'react-native';
 import styled from 'styled-components/native';
-import LottieView from 'lottie-react-native';
 import MessageModal from './MessageModal';
 
-export default function NegPop() {
+export default function NegPop({ navigation }) {
   const [time, setTime] = useState(false);
   const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -18,7 +17,7 @@ export default function NegPop() {
     <Container>
       <ImageBackgrounds source={require('../../../img/background.jpeg')} resizemode="cover">
         <ImageBackgrounds source={require('../../../img/negativePop111.gif')} resizemode="cover"></ImageBackgrounds>
-        {time ? <MessageModal /> : null}
+        {time ? <MessageModal navigation={navigation} /> : null}
       </ImageBackgrounds>
     </Container>
   );
