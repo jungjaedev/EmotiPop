@@ -10,7 +10,6 @@ const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 export default function CalenderContainer({ navigation }) {
   const [getMoment, setMoment] = useState(moment());
   const today = getMoment;
-
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek = today.clone().endOf('month').week() === 1 ? 53 : today.clone().endOf('month').week();
 
@@ -54,7 +53,7 @@ export default function CalenderContainer({ navigation }) {
                   );
                 }else{
                   return(
-                      <TouchableOpacity key={index} onPress={() => console.log(days.format('D'))}>
+                      <TouchableOpacity key={index} onPress={() => console.log(days.format('YYYY-MM-DD'))}>
                         <Text>{days.format('D')}</Text>
                       </TouchableOpacity>
                   );
@@ -142,7 +141,9 @@ const CalMenu = styled.View`
   width: 100%;
   top: 5%;
   background-color: slateblue;
-`;
+  border-radius: 10px;
+`
+
 const Yoil = styled.View`
   flex: auto;
   text-align: center;
@@ -150,22 +151,28 @@ const Yoil = styled.View`
   justify-content: space-around;
   width: 100%;
   background-color: slateblue;
-`;
+  border-radius: 10px;
+`
+
 
 const Days = styled.View`
   flex: auto;
   flex-direction: row;
   justify-content: space-around;
+  top: 10%;
   width: 100%;
-  height: 40%;
-`;
+  height: 50%;
+  border-radius: 10px;
+  background-color: skyblue;
+`
+
 
 const Cal = styled.View`
   flex: auto;
   flex-direction: row;
   justify-content: space-around;
   width: 375%;
-  height: 100%;
+  height: 30%;
   right: 140%;
   padding: 15%;
   align-items: center;
