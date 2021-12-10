@@ -13,6 +13,7 @@ import 'react-native-gesture-handler';
 import ChangeStack from './src/pages/Tutorial/ChangeStack'
 import { WebView } from 'react-native-webview';
 import CalendarContainer from './src/pages/Calendar/CalendarContainer';
+import MyPage from './src/pages/User/MyPage';
 
 
 
@@ -26,6 +27,7 @@ export default function App() {
       {/* <FlowHome /> */}
       {/* <NavContainer /> */}
       <CalendarContainer />
+      {/* <MyPage /> */}
     </Provider>
   );
 }

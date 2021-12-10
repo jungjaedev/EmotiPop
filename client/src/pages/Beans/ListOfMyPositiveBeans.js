@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, DynamicColorIOS } from 'react-native';
 import Styled from 'styled-components/native';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
