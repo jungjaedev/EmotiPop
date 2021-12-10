@@ -3,9 +3,13 @@ import { TouchableOpacity, Text, TextInput, StyleSheet, Image, View, ImageBackgr
 import styled from 'styled-components/native';
 import { Button, Modal, FormControl, NativeBaseProvider } from 'native-base';
 import { SSRProvider } from '@react-aria/ssr';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function ShowContentModal({ data }) {
+const Stack = createStackNavigator();
+export default function ShowContentModal({ navigation }) {
   const [isClose, setIsClose] = useState(true);
+  const [home, setHome] = useState('');
   const emotionpro = ['기쁨', '행복', '만족', '뿌듯', '설렘'];
   const emotionneg = ['슬픔', '우울', '걱정', '분노', '실망'];
   const texts = [
@@ -17,7 +21,7 @@ export default function ShowContentModal({ data }) {
 
   const goMain = () => {
     setIsClose(false);
-    // TODO: 모달창꺼지고 메인페이지로 이동
+    navigation.navigate('MainHome');
   };
 
   return (
