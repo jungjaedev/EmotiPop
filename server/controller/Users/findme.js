@@ -3,8 +3,7 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
 const config = require('../../config/config.js');
-const sequelize = require('sequelize');
-const { Op } = require('sequelize');
+const { sendEmailUser, sendEmailPass } = process.env;
 
 module.exports = {
     post: async (req, res) => {
@@ -43,16 +42,16 @@ module.exports = {
             port: 535,
             secure: true,
             auth: {
-                user: '----',
-                pass: '----',
+                user: sendEmailUser,
+                pass: sendEmailPass,
             },
         });
 
         // console.log(transporter, 'transporter!!!!!');
 
         const emailOptions = {
-            from: 'si1029308@gmail.com',
-            to: 'dltmddus1998@naver.com',
+            from: sendEmailUser,
+            to: email,
             subject: '비밀번호 초기화 이메일입니다',
             html: '비밀번호 초기화를 위해서는 아래의 URL을 클릭하세요' + '<br />' +`http://localhost:8080/reset/${token}`
         };
@@ -67,9 +66,6 @@ module.exports = {
         const auth = await Auths.findOne({
             where: {
                 token: req.params.token,
-                created: {
-                    [Op.gt]: new Date() - ttl,
-                }
             }
         });
 
