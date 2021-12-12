@@ -83,16 +83,19 @@ export default function MainStack() {
         name='ShowContentModal'
         component={ShowContentModal}
         options={{
-          headerShown: false
-        name="NegPop"
-        component={NegPop}
-        options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
         name="PosPop"
         component={PosPop}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="NegPop"
+        component={NegPop}
         options={{
           headerShown: false,
         }}

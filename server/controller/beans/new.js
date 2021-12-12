@@ -24,6 +24,12 @@ module.exports = {
       });
     }
     // console.log(req.body);
+    const findUser = await Users.findOne({
+      attributes: { exclude: ['password'] },
+      where: {
+        email: accessTokenData.email,
+      },
+    });
     const { emotions, emotion_level, contents, gourdkinds } = req.body;
     // console.log(data);
     const data = {
@@ -31,15 +37,15 @@ module.exports = {
       emotion_level,
       contents,
       gourdKinds: gourdkinds,
-      users_id: accessTokenData.id,
+      users_id: findUser.dataValues.id,
     };
 
     await Beans.create({ ...data });
 
     const newContent = await Beans.findOne({
-      where: { emotions, emotion_level, contents, gourdKinds: gourdkinds, users_id: accessTokenData.id },
+      where: { emotions, emotion_level, contents, gourdKinds: gourdkinds, users_id: findUser.dataValues.id },
     });
-
+    // console.log(newContent);
     res.send({ data: newContent.dataValues, message: 'ok' });
   },
 };

@@ -26,16 +26,6 @@ export default function CalenderContainer({ navigation }) {
   //   setMarkedDates(obj);
 
   const calendarArr = () => {
-    let result = [];
-    let week = firstWeek;
-    for (week; week <= lastWeek; week++) {
-      result = result.concat(
-        <Cal key={week} style={{ flexDirection: 'row' }}>
-          {Array(7)
-            .fill(0)
-            .map((data, index) => {
-              let days = today.clone().startOf('year').week(week).startOf('week').add(index, 'day'); //d로해도되지만 직관성
-
       let result = [];
       let week = firstWeek;
       for ( week; week <= lastWeek; week++) {
@@ -64,24 +54,6 @@ export default function CalenderContainer({ navigation }) {
         );
       }
       return result;
-              if (days.format('MM') !== today.format('MM')) {
-                return (
-                  <View key={index} style={{ backgroundColor: 'lightgray', opacity: 0.3 }}>
-                    <Text>{days.format('D')}</Text>
-                  </View>
-                );
-              } else {
-                return (
-                  <TouchableOpacity key={index} onPress={() => console.log(days.format('D'))}>
-                    <Text>{days.format('D')}</Text>
-                  </TouchableOpacity>
-                );
-              }
-            })}
-        </Cal>
-      );
-    }
-    return result;
   };
 
   return (
