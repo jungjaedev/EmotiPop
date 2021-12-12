@@ -47,7 +47,16 @@ router.post('/signin', validateCredential, usersController.signin.post);
 // POST /users/signout
 router.post('/signout', usersController.signout.post);
 
+// POST /users/:user_id
+router.delete('/:user_id', usersController.delete.remove);
+
 // GET /users/me
 router.get('/me', usersController.me.get);
+
+// POST /users/findme
+router.post('/findme', usersController.findme.post);
+
+// POST /users/reset
+router.post('/reset/:token', usersController.findme.reset);
 
 module.exports = router;
