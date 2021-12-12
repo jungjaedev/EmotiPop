@@ -13,16 +13,19 @@ const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 function Resign ({navigation}) {
   const DeleteUser = async (e) => {
     await axios.delete('http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage',
-      {data: {
-          email,
-          username,
-          password
+      {params: {
+        id: id,
+        email: email,
+        username: username,
+        password: password
       },
     withCredentials: true,}
     )
     .then(() => {
+      console.log('회원탈퇴가 완료되었습니다.')
       navigation.navigate('Mypage')
     })
+    .catch(err => console.log(error))
   }
 
   return (

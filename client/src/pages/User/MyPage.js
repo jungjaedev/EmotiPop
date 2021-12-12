@@ -58,31 +58,31 @@ export default function MyPage({ navigation }) {
     // console.log(editInfoForm);
     };
 
-    const [ userInfomation, setUserInfomation ] = useState({ userName, Email });
-    const { userName, Email } = userInfomation;
-    const getUserInfo = async () => {
+    // const [ userInfomation, setUserInfomation ] = useState({ userName, Email });
+    // const { userName, Email } = userInfomation;
+    // const getUserInfo = async () => {
       
-      const token = await AsyncStorage.getItem('AccessToken');
-      await axios.get(
-        'http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage',
-        {
-          headers: {
-            ContentType: 'application/json',
-            authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        }
-      )
-      .then(userInfo => {
-        setUserInfomation({
-          userName: userInfo.data.username,
-          Email: userInfo.data.email
-        })
-      });
-    }
-    useEffect(() => {
-      getUserInfo();
-    }, []);
+    //   const token = await AsyncStorage.getItem('AccessToken');
+    //   await axios.get(
+    //     'http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage',
+    //     {
+    //       headers: {
+    //         ContentType: 'application/json',
+    //         authorization: `Bearer ${token}`,
+    //       },
+    //       withCredentials: true,
+    //     }
+    //   )
+    //   .then(userInfo => {
+    //     setUserInfomation({
+    //       userName: userInfo.data.username,
+    //       Email: userInfo.data.email
+    //     })
+    //   });
+    // }
+    // useEffect(() => {
+    //   getUserInfo();
+    // }, []);
   
     
   const dispatch = useDispatch();
@@ -119,12 +119,21 @@ export default function MyPage({ navigation }) {
       }}
     >
       <Text style={{ flex: 1, fontSize: '30px' }}>MyPage</Text>
-      <User>
+      {/* <User>
         <Text style={{ width: '90%', borderBottomColor: 'black', borderBottomWidth: '2px' }}>{userInfomation.userName}</Text>
         <Text style={{ width: '90%', borderBottomColor: 'black', borderBottomWidth: '2px' }}>{userInfomation.Email}</Text>
-      </User>
-      <TouchableOpacity style={{ flex: 1 }} onPress={logOutHandler()}>
-        <Text>SignOut</Text>
+      </User> */}
+      <TouchableOpacity 
+      style={{ 
+        justifyContent: 'space-around', 
+        backgroundColor: 'white', 
+        width: '70px', 
+        height: '40px', 
+        textAlign: 'center', 
+        fontSize: '20px', 
+        borderRadius: '10px'}} 
+        onPress={logOutHandler()}>
+        <Text>Log Out</Text>
       </TouchableOpacity>
       <UserInfomation style={{ flex: 8, flexDirection: 'column', justifyContent: 'space-around' }}>
         <Text>이름</Text>
@@ -140,14 +149,13 @@ export default function MyPage({ navigation }) {
       style={{ 
         justifyContent: 'space-around', 
         backgroundColor: 'white', 
-        width: '70px', 
-        height: '40px', 
+        width: '200px', 
+        height: '50px', 
         textAlign: 'center', 
         fontSize: '20px', 
-        borderRadius: '10px', 
-        marginRight: '15px'}} 
+        borderRadius: '10px'}} 
         onPress={e => submitForm(e)}>
-          <Text>EDIT</Text>
+          <Text>회원정보 수정</Text>
           </TouchableOpacity>
       </UserInfomation>
       <TouchableOpacity 
@@ -160,7 +168,7 @@ export default function MyPage({ navigation }) {
         textAlign: 'center', 
         fontSize: '20px', 
         borderRadius: '10px', 
-        marginRight: '15px'}} 
+        marginBottom: '10px'}} 
         onPress={() => navigation.navigate('Resign')}>
           <Text>회원탈퇴</Text>
           </TouchableOpacity>
