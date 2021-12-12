@@ -43,8 +43,8 @@ module.exports = {
             port: 535,
             secure: true,
             auth: {
-                user: 'si1029308@gmail.com',
-                pass: 'ueieabjorkgbzhls',
+                user: '----',
+                pass: '----',
             },
         });
 
