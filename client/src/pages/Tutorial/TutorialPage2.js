@@ -23,7 +23,8 @@ export default function TutorialPage2() {
           <Text style={{ color: '#035c50' }}>감정 박</Text>에 <Text style={{ color: '#a1028e' }}>감정 콩주머니</Text>를 던져서 당신의 감정을
           기록해보세요!
         </Content>
-        <InnerBackground source={require('../../img/iphone.png')} resizemode="contain"></InnerBackground>
+        <InnerBackground source={require('../../img/tutorialthrow.png')} resizemode="contain"></InnerBackground>
+        <Text style={{ top: 350, color: 'navy', fontWeight: 'bold' }}>박을 터치하면 감정을 기록할 수 있어요</Text>
       </ImageBackgrounds>
     </Page>
   );

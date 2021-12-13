@@ -32,12 +32,12 @@ function ListOfMyPositiveBeans({ navigation, route }) {
           onPress={goBack}
         >
           <Text>
-            <Feather name="arrow-left-circle" size={35} color="black" />
+            <Feather name="arrow-left" size={35} color="black" />
           </Text>
         </TouchableOpacity>
         <Header style={{ borderBottomWidth: 3, borderBottomColor: '#a9caf5', borderRadius: 20 }}>
           <View style={{ width: 200, marginTop: 25 }}>
-            {route.params.data[0].gourdKinds === true ? <Roomname>긍정이방</Roomname> : <Roomname>부정이방</Roomname>}
+            <Roomname>긍정이방</Roomname>
           </View>
           <View style={{ width: 130, marginTop: 35 }}>
             <Date>{route.params.data[0].createdAt.toString().split('T')[0]}</Date>

@@ -18,11 +18,10 @@ export default function TutorialPage5() {
 
       <ImageBackgrounds source={require('../../img/background.jpeg')} resizemode="cover">
         <Title>
-          달력 or 차트 <BlueBean source={require('../../img/redBean.png')} resizemode="cover"></BlueBean>
+          차트 <BlueBean source={require('../../img/redBean.png')} resizemode="cover"></BlueBean>
         </Title>
         <Content>
-          <Text style={{ color: '#035c50' }}>감정 박</Text>에 <Text style={{ color: '#a1028e' }}>감정 콩주머니</Text>를 던져서 당신의 감정을
-          기록해보세요!
+          그동안 누적된 당신의 <Text style={{ color: '#035c50' }}>감정</Text>들의 수치를 확인할 수 있어요!
         </Content>
 
         <InnerBackground source={require('../../img/iphone.png')} resizemode="contain"></InnerBackground>

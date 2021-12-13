@@ -16,6 +16,7 @@ import { WebView } from 'react-native-webview';
 import CalendarContainer from './src/pages/Calendar/CalendarContainer';
 import MyPage from './src/pages/User/MyPage';
 import Resign from './src/pages/User/Resign';
+import TutorialPage1 from './src/pages/Tutorial/TutorialPage1';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
 
