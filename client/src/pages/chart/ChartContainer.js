@@ -40,6 +40,10 @@ export default function ChartContainer() {
 
   //   return token;
   // }
+  const getToken = async () => {
+    const token = await AsyncStorage.getItem('AccessToken');
+    dispatch(getChartData(token))
+  }
   useEffect(() => {
     getToken();
   }, []);
