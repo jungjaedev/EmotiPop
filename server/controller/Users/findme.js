@@ -1,5 +1,4 @@
-const { Users, Auths } = require('../../models');
-const crypto = require('crypto');
+const { Users } = require('../../models');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
 const config = require('../../config/config.js');
@@ -7,11 +6,6 @@ const { sendEmailUser, sendEmailPass } = process.env;
 
 module.exports = {
     post: async (req, res) => {
-        // 1. 비밀번호 초기화 요청  -> 인증키 발급 & 인증키 이메일 전송 
-
-        // 2. 이메일 확인 -> 새로운 비밀번호 입력 -> 인증키 확인
-
-        // 3. 비밀번호 초기화 -> 초기화 완료
         // email 입력 확인
         if (req.body.email === '') { 
             return res.status(400).json({ message: 'Please type your email' });
@@ -22,20 +16,9 @@ module.exports = {
             where: { email: req.body.email }
         });
 
-        // console.log(existUser);
-
-        const { id, email, password, username } = existUser.dataValues;
-
-        // 인증토큰 생성
-        // email을 입력받게 되면 서버에서는 인증키 역할을 한 token 생성함
-        // crypto 이용 
-        const token = crypto.randomBytes(20).toString('hex'); 
-        const data = {
-            token,
-            users_id: id,
-            ttl: 300 // ttl값 설정 5분 (token 유효시간 설정)
-        };
-        await Auths.create(data); // Auth테이블에 입력
+        if (!existUser) {
+            return res.status(401).json({ message: "this email doesn't exist" });
+        }
 
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
@@ -48,46 +31,24 @@ module.exports = {
         });
 
         // console.log(transporter, 'transporter!!!!!');
+        const tempPass = Math.random().toString(36).slice(2);
+        // console.log(tempPass);
 
-        const emailOptions = {
-            from: sendEmailUser,
-            to: email,
-            subject: '비밀번호 초기화 이메일입니다',
-            html: '비밀번호 초기화를 위해서는 아래의 URL을 클릭하세요' + '<br />' +`http://localhost:8080/reset/${token}`
-        };
-
-        transporter.sendMail(emailOptions, res); //전송
-        
-        return res.json({ message: 'ok', data: { token } })
-    },
-
-    reset: async (req, res) => {
-        const ttl = 300;
-        const auth = await Auths.findOne({
-            where: {
-                token: req.params.token,
-            }
-        });
-
-        const hashed = await bcrypt.hash(req.body.password, config.bcrypt.saltRounds);
+        // 임시비밀번호로 사용자 비밀번호 변경하기
+        const hashed = await bcrypt.hash(tempPass, config.bcrypt.saltRounds);
 
         await Users.update({
             password: hashed
-        }, 
-            { where: { id: auth.dataValues.users_id } 
-        });
+        }, { where: { email: req.body.email } });
 
-        const user = await Users.findOne
-        ({
-            where: { id: auth.dataValues.users_id }
-        });
-        // console.log(user);
-
-        return res.status(201).json({
-            message: 'reset your password completed',
-            data: {
-                ...user.dataValues
-            }
-        })
-    }
+        const emailOptions = {
+            from: sendEmailUser,
+            to: req.body.email,
+            subject: '임시 비밀번호 발급 이메일입니다',
+            html: '임시 비밀번호입니다.<br /> 로그인 후 반드시 비밀번호 변경을 하셔야 합니다.' + '<br />' + tempPass
+        };
+        transporter.sendMail(emailOptions, res); //전송
+        
+        return res.json({ message: 'sending temporary password completed!!' });
+    },
 }
