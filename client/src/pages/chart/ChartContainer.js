@@ -1,16 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Text,
-  TextInput,
-  View,
-  SafeAreaView,
-  ScrollView,
-  Dimensions,
-  TouchableOpacity,
-  StyleSheet,
-  ImageBackground,
-} from 'react-native';
 import { Text, TextInput, View, SafeAreaView, ScrollView, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import Plotly from 'react-native-plotly';
@@ -36,15 +25,6 @@ export default function ChartContainer() {
   //   }
   // }, [])
 
-  const getToken = async () => {
-    const token = await AsyncStorage.getItem('AccessToken');
-    dispatch(getChartData(token))
-  }
-
-  useEffect(() => {
-    getToken()
-  }, [])
-
   // const getToken = async () => {
   //   const token = await AsyncStorage.getItem('AccessToken');
 
@@ -61,17 +41,11 @@ export default function ChartContainer() {
 
   // 조회 된 감정을 가공함. 배열 안의 객체에 밸류값을 추출해 평탄화
   const avr = emotions ? emotions.map(el => Object.values(el)).flat() : null;
-  console.log(avr, ' - - - - - - - - - - - -- - ')
+  // console.log(avr, ' - - - - - - - - - - - -- - ')
 
   // chart data
   const data = [
     {
-    type: 'scatterpolar', // chart type
-    r: avr ? avr : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ,
-    theta: ['기쁨','행복','만족', '뿌듯', '설렘', '슬픔', '우울', '걱정', '분노', '실망', '기쁨'], // data category
-    fill: 'toself', // fill option
-    name: 'ToTal', // data group name
-    opacity: .5,
       type: 'scatterpolar', // chart type
       r: avr, // data
       theta: ['기쁨', '행복', '만족', '뿌듯', '설렘', '슬픔', '우울', '걱정', '분노', '실망', '기쁨'], // data category
@@ -116,16 +90,10 @@ export default function ChartContainer() {
     // displayModeBar: false,
     images: [
       {
-        source: 'https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v960-ning-30.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&auto=format&ixlib=js-2.2.1&s=e43a2f27ef68a4e782d43c48640e7155',
-        xref: "paper",
-        yref: "paper",
         x: 2,
         y: -1,
         sizex: 10,
         sizey: 10,
-        sizing: "stretch",
-        opacity: 0.4,
-        // layer: "below",
         source:
           'https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v960-ning-30.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&auto=format&ixlib=js-2.2.1&s=e43a2f27ef68a4e782d43c48640e7155',
         xanchor: 'right',
@@ -148,60 +116,6 @@ export default function ChartContainer() {
   };
 
   return (
-    <Container style={{width: screenWidth}}>
-      
-      {/* {
-        avr ? (
-          <Plotly 
-            data={data} 
-            layout={layout} 
-            debug 
-            enableFullPlotly
-            style={{
-              width: screenWidth,
-              height: screenHeight,
-              flex: 9,
-              displayModeBar: false
-            }}
-            config={config}
-          />
-        ) : <Text style={{fontSize: 30}}>No Data</Text>
-      } */}
-      {/* {
-        data.r 
-        ? (
-          <Plotly 
-            data={data} 
-            layout={layout} 
-            debug 
-            enableFullPlotly
-            style={{
-              width: screenWidth,
-              height: screenHeight,
-              flex: 9,
-              displayModeBar: false
-            }}
-            config={config}
-          />
-        ) 
-        : <Text>No Data</Text>
-      } */}
-        <Plotly 
-            data={data} 
-            layout={layout} 
-            debug 
-            enableFullPlotly
-            style={{
-              width: screenWidth,
-              height: screenHeight,
-              flex: 9,
-              displayModeBar: false,
-              position: 'absolute',
-              left: 0,
-              bottom: 0,
-            }}
-            config={config}
-          />
     <Container style={{ width: screenWidth }}>
       {avr ? (
         <Plotly
