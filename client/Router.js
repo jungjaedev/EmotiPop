@@ -12,6 +12,7 @@ import UserContainer from './pages/User/UserContainer';
 import Resign from './pages/User/Resign';
 import CalendarContainer from './pages/Calendar/CalendarContainer';
 import axios from 'axios'
+import MyPage from './src/pages/User/MyPage';
 
 
 function Router() {
@@ -39,6 +40,7 @@ function Router() {
         <Route path='/beanscontainer' element={<BeansContainer />}/> 
         <Route path='/beanscontent' element={<BeansContent/>}/> 
         <Route path='/chooseroom' element={<ChooseRoom />}/> 
+        <Route path='/mypage' element={<MyPage />}/>
         <Route path='/usercontainer/:userid' element={<UserContainer />}/> 
         <Route path='/listofmynegativebeans' element={<ListOfNegativeBeans />}/>
         <Route path='/listofmypositivebeans' element={<ListOfPositiveBeans />}/> 
