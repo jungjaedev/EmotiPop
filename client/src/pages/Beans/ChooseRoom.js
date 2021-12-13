@@ -2,7 +2,7 @@ import React from 'react';
 import Styled from 'styled-components/native';
 // import { Link } from 'react-router-dom';
 import Btn from '../User/Button';
-import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity, ImageBackground } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Feather } from '@expo/vector-icons';
@@ -36,17 +36,17 @@ export default function ChooseRoom({ navigation, route }) {
   return (
     <Container>
       <ImageBackgrounds source={require('../../img/background.jpeg')} resizemode="cover">
-        <TouchableOpacity activeOpacity={0.8} style={{ position: 'absolute', width: 35, height: 35 }} onPress={goBack}>
+        <TouchableOpacity activeOpacity={0.8} style={{ marginRight: 300, width: 35, height: 35 }} onPress={goBack}>
           <Text>
-            <Feather name="arrow-left-circle" size={35} color="black" />
+            <Feather name="arrow-left" size={35} color="black" />
           </Text>
         </TouchableOpacity>
-        <Blue>
-          <Btn name="Positive" onPress={() => reqList(1)} />
-        </Blue>
-        <Red>
-          <Btn name="Negative" onPress={() => reqList(0)} />
-        </Red>
+        <ImageBackground source={require('../../img/red.png')} resizemode="cover" style={{ resizeMode: 'cover', width: 200, height: 200}}>
+          <TouchableOpacity style={{ alignItems: 'center', marginTop: 80 }} onPress={() => reqList(1)}><Text style={{ color: 'white', fontSize: 30}}>긍정이</Text></TouchableOpacity>
+        </ImageBackground>
+        <ImageBackground source={require('../../img/yellow.png')} resizemode="cover" style={{ resizeMode: 'cover', width: 200, height: 200}}>
+          <TouchableOpacity style={{ alignItems: 'center', marginTop: 80 }} onPress={() => reqList(0)}><Text style={{ color: 'white', fontSize: 30}}>부정이</Text></TouchableOpacity>
+        </ImageBackground>
       </ImageBackgrounds>
     </Container>
   );
@@ -56,19 +56,19 @@ const Container = Styled.View`
   flex: 1;
 `;
 
-const Blue = Styled.View`
-  width: 150px;
-  height: 150px;
-  background-color: skyblue;
-`;
-const Red = Styled.View`
-  width: 150px;
-  height: 150px;
-  background-color: pink;
-`;
+// const Blue = Styled.View`
+//   width: 150px;
+//   height: 150px;
+//   background-color: skyblue;
+// `;
+// const Red = Styled.View`
+//   width: 150px;
+//   height: 150px;
+//   background-color: pink;
+// `;
 
 const ImageBackgrounds = Styled.ImageBackground`
-  /* flex-direction: row; */
+  // flex-direction: row;
   justify-content: space-around;
   align-items: center;
   height: 100%;

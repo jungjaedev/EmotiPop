@@ -23,8 +23,8 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 export default function App() {
   return (
     <Provider store={store}>
-      <StatusBar style="dark" />
-      <ChangeStack />
+      <StatusBar style='dark' />
+        <ChangeStack />
     </Provider>
   );
 }

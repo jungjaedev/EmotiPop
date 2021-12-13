@@ -116,7 +116,7 @@ export default function SignUp({navigation}) {
       setForm(false)
       return
     }
-    // console.log('Clicked')
+    console.log('Clicked')
     try {
       const req = await axios.post(`${URL}users/signup`, 
       { email, password, username }, {
@@ -161,7 +161,7 @@ export default function SignUp({navigation}) {
         <Input 
         placeholder="RETYPE YOUR PASSWORD"
         secureTextEntry
-        onChange={() => rePassInput(e, 'password')}
+        onChange={(e) => rePassInput(e, 'password')}
         value={rePassword}
         ref={inputRef}
         />

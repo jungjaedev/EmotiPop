@@ -18,6 +18,7 @@ import ListOfMyNegativeBeans from '../Beans/ListOfMyNegativeBeans';
 import ListOfMyPositiveBeans from '../Beans/ListOfMyPositiveBeans';
 import BeansContent from '../Beans/BeansContent';
 import ChooseRoom from '../Beans/ChooseRoom';
+import Resign from '../User/Resign'
 
 export default function MainStack() {
   const Stack = createStackNavigator();
@@ -146,6 +147,13 @@ export default function MainStack() {
       <Stack.Screen
         name="BeansContent"
         component={BeansContent}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Resign"
+        component={Resign}
         options={{
           headerShown: false,
         }}

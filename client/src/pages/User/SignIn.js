@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState } from 'react';
 import { 
   StyleSheet, 
   Text, 
@@ -33,13 +33,12 @@ export default function SignIn({navigation}) {
   // 이메일 인풋값 추출
   const changeEmail = (e) => {
     const email = e.nativeEvent.text;
+    console.log(email)
     setUserInfo({
       ...userInfo,
       email
     })
-    // console.log(userInfo)
   }
-
   // 패스워드 인풋값 추출
   const changePass = (e) => {
     const password = e.nativeEvent.text;
@@ -48,7 +47,7 @@ export default function SignIn({navigation}) {
       password
     })
   }
-
+  console.log(userInfo)
   // 유효성 검사 후 오류 메시지 초기화 
   const del = () => {
     // setMail(emailVal.test(email))
@@ -85,8 +84,8 @@ export default function SignIn({navigation}) {
                 placeholder="email" 
                 value={email}
                 name='email'
-                // keyboardType=''
-                onChange={changeEmail}
+                onChange={() => console.log('hio?')}
+                onBlur={() => console.log('asdas')}
                 onFocus={del}
               />
               {/* { mail ? null : <Text>이메일 형식이 유효하지 않습니다.</Text> } */}

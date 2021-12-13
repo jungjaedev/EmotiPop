@@ -16,7 +16,7 @@ export const getChartData = (token) => async dispatch => {
       authorization: `Bearer ${token}`},
       withCredentials: true
     },)    
-    // console.log(res.data, 'testtesttesttesttesttesttest')
+    console.log(res.data, 'testtesttesttesttesttesttest')
     if(res.data.message === 'ok') {
       const { 기쁨, 행복, 만족, 뿌듯, 설렘, 슬픔, 우울, 걱정, 분노, 실망 } = res.data.emotion;
       const emotions = {
@@ -33,6 +33,7 @@ export const getChartData = (token) => async dispatch => {
       }
       const bean = makeAvg(emotions)
       const firstBean = bean[0];
+      console.log(bean, '+++++++++++++++++++')
       bean.push(firstBean)
       dispatch({ type: GET_CHART_DATA_SUCCESS, bean })
     }
