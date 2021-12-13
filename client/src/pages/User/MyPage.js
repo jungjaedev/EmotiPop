@@ -85,51 +85,6 @@ export default function MyPage({ navigation }) {
         alignItems: 'center',
         justifyContent: 'space-between',
         width: SCREEN_WIDTH,
-<<<<<<< HEAD
-        height: SCREEN_HEIGHT - 80,
-        marginTop: '20px',
-      }}
-    >
-      <Text style={{ flex: 1, fontSize: '30px' }}>MyPage</Text>
-      {/* <User>
-        <Text style={{ width: '90%', borderBottomColor: 'black', borderBottomWidth: '2px' }}>{userInfomation.userName}</Text>
-        <Text style={{ width: '90%', borderBottomColor: 'black', borderBottomWidth: '2px' }}>{userInfomation.Email}</Text>
-      </User> */}
-      <TouchableOpacity 
-      style={{ 
-        justifyContent: 'space-around', 
-        backgroundColor: 'white', 
-        width: '70px', 
-        height: '40px', 
-        textAlign: 'center', 
-        fontSize: '20px', 
-        borderRadius: '10px'}} 
-        onPress={logOutHandler()}>
-        <Text>Log Out</Text>
-      </TouchableOpacity>
-      <UserInfomation style={{ flex: 8, flexDirection: 'column', justifyContent: 'space-around' }}>
-        <Text>이름</Text>
-        <TextInput style={{ width: '90%', borderBottomColor: 'black', borderBottomWidth: '2px' }} placeholder='Name' onChange={e => changeDetector(e, 'username')} />
-        <Text>이메일</Text>
-        <TextInput style={{ width: '90%', borderBottomColor: 'black', borderBottomWidth: '2px' }} placeholder='Email' onChange={e => changeDetector(e, 'email')} />
-        <Text>비밀번호</Text>
-        <TextInput style={{ width: '90%', borderBottomColor: 'black', borderBottomWidth: '2px' }} placeholder='Password' onChange={e => changeDetector(e, 'password')} />
-        <Text>비밀번호 확인</Text>
-        <TextInput style={{ width: '90%', borderBottomColor: 'black', borderBottomWidth: '2px' }} placeholder='Repassword' onChange={e => changeDetector(e, 'repassword')} />
-        {password && repassword !== repassword ? <Text> '비밀번호가 일치하지 않습니다'</Text> : null}
-        <TouchableOpacity 
-      style={{ 
-        justifyContent: 'space-around', 
-        backgroundColor: 'white', 
-        width: '200px', 
-        height: '50px', 
-        textAlign: 'center', 
-        fontSize: '20px', 
-        borderRadius: '10px'}} 
-        onPress={e => submitForm(e)}>
-          <Text>회원정보 수정</Text>
-          </TouchableOpacity>
-=======
         height: SCREEN_HEIGHT - 60,
       }}
     >
@@ -148,7 +103,6 @@ export default function MyPage({ navigation }) {
         <TextInput style={{ width: '90%', backgroundColor: 'white' }} onChange={e => changeDetector(e, 'repassword')} />
         {password && repassword && password !== repassword ? <Text> '비밀번호가 일치하지 않습니다'</Text> : null}
         <Button title="Edit" onPress={e => submitForm(e)} />
->>>>>>> e52b8dd72a8ebd767c4fd4f10ad15d6782889cbd
       </UserInfomation>
       <Button style={{ flex: 1 }} title="회원탈퇴" onPress={() => navigation.navigate('Resign')} />
     </View>
@@ -160,20 +114,8 @@ const UserInfomation = styled.View`
   flex-direction: column;
   justify-content: space-around;
   border-radius: 20px;
+  background-color: violet;
   align-items: center;
   height: 150px;
   width: 300px;
 `;
-<<<<<<< HEAD
-
-const User = styled.View`
-  flex: auto;
-  flex-direction: column;
-  justify-content: space-around;
-  border-radius: 20px;
-  align-items: center;
-  height: 50px;
-  width: 300px;
-`
-=======
->>>>>>> e52b8dd72a8ebd767c4fd4f10ad15d6782889cbd
