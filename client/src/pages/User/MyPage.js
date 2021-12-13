@@ -65,7 +65,7 @@ export default function MyPage({ navigation }) {
     // AsyncStorage.clear()
     // const res = await AsyncStorage.getAllKeys()
     // location.reload()
-    // Update.reloadAsync()
+    Update.reloadAsync()
     // console.log(res)
   };
 
@@ -89,7 +89,7 @@ export default function MyPage({ navigation }) {
       }}
     >
       <Text style={{ flex: 1 }}>MyPage</Text>
-      <TouchableOpacity style={{ flex: 1 }} onPress={logOutHandler()}>
+      <TouchableOpacity style={{ flex: 1 }} onPress={logOutHandler}>
         <Text>SignOut</Text>
       </TouchableOpacity>
       <UserInfomation style={{ flex: 8, flexDirection: 'column', justifyContent: 'space-around' }}>
