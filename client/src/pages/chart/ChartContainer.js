@@ -11,7 +11,6 @@ import {
   StyleSheet,
   ImageBackground,
 } from 'react-native';
-import { Text, TextInput, View, SafeAreaView, ScrollView, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import Plotly from 'react-native-plotly';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -53,12 +52,6 @@ export default function ChartContainer() {
   useEffect(() => {
     getToken();
   }, []);
-
-  const getToken = async () => {
-    const token = await AsyncStorage.getItem('AccessToken');
-    dispatch(getChartData(token));
-  };
-
   // 조회 된 감정을 가공함. 배열 안의 객체에 밸류값을 추출해 평탄화
   const avr = emotions ? emotions.map(el => Object.values(el)).flat() : null;
   console.log(avr, ' - - - - - - - - - - - -- - ')
@@ -186,23 +179,7 @@ export default function ChartContainer() {
         ) 
         : <Text>No Data</Text>
       } */}
-        <Plotly 
-            data={data} 
-            layout={layout} 
-            debug 
-            enableFullPlotly
-            style={{
-              width: screenWidth,
-              height: screenHeight,
-              flex: 9,
-              displayModeBar: false,
-              position: 'absolute',
-              left: 0,
-              bottom: 0,
-            }}
-            config={config}
-          />
-    <Container style={{ width: screenWidth }}>
+        
       {avr ? (
         <Plotly
           data={data}
