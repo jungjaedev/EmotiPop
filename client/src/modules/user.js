@@ -82,8 +82,8 @@ export const googleSignIn = () => async dispatch => {
     await AsyncStorage.setItem('AccessToken', accessToken)
     const userData = { email, username }
     dispatch( {type: SIGN_IN_SUCCESS, userData })
-  } catch(err) {
-    dispatch({ type: SIGN_IN_ERROR })
+  } catch(error) {
+    dispatch({ type: SIGN_IN_ERROR, error })
   }
 }
 
@@ -128,7 +128,7 @@ export default function signIn(state = initialState, action) {
         signIn: {
           loading: false,
           user: null,
-          error: action.err,
+          error: action.error,
           isLogin: false
         }
       }

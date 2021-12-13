@@ -9,7 +9,7 @@ import styled from 'styled-components/native';
 
 export default function Button({name, onPress}) {
   return (
-    <Btn onPress={onPress}>
+    <Btn onPress={onPress} >
       <BtnText >{name}</BtnText>
     </Btn>
   )
@@ -18,7 +18,7 @@ export default function Button({name, onPress}) {
 const Btn = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
-  background-color: violet;
+  background-color: #fff;
   margin-top: 20;
   padding-top: 10;
   padding-bottom: 10;
@@ -27,7 +27,7 @@ const Btn = styled.TouchableOpacity`
 const BtnText = styled.Text`
   font-size: 15;
   font-weight: bold;
-  color: #fff
+  color: black;
 `
 /* const styles = StyleSheet.create({
   button: {

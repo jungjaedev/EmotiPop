@@ -20,12 +20,6 @@ import Nodata from './Nodata';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
 
-// const emotions = { 
-//   emotion: { 
-//     '행복': 5, '슬픔': 11, '걱정': 18, '화남': 10, '우울': 15, '설렘': 7, '만족': 17, '편안': 10, '뿌듯': 7, '신남': 10
-//   } 
-// }
-
 
 
 

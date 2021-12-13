@@ -33,6 +33,15 @@ export default function SignUp({navigation}) {
 
   const emailVal = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g
 
+  // Form 추출
+  const signUpHandler = (e, name) => {
+    const value = e.nativeEvent.text;
+    setUserInfo({
+      ...userInfo,
+      [name]: value
+    })
+  }
+
   // email 값 추출
   const emailInput = (e) => {
     const email = e.nativeEvent.text;
@@ -130,18 +139,18 @@ export default function SignUp({navigation}) {
   return (
     <Container style={{width: SCREEN_WIDTH}} source={require('../../img/background.jpeg')}>
       <SignUpForm>
-        <Header>회원가입</Header>
+        <Header>SIGN UP</Header>
         <Input 
-          placeholder="email" 
+          placeholder="EMAIL" 
           value={email}
           // keyboardType='email-adress'
-          onChange={emailInput}
+          onChange={(e) => signUpHandler(e, 'email')}
           onSelectionChange={chkEmail}
         />
         <Input 
-        placeholder="password"
+        placeholder="TYPE YOUR PASSWORD"
         secureTextEntry
-        onChange={passInput}
+        onChange={(e) => signUpHandler(e, 'password')}
         onEndEditing={() => firstPassChk}
         value={password}
         ref={passRef}
@@ -150,9 +159,9 @@ export default function SignUp({navigation}) {
           !pass ? <Text>비밀번호는 6자 이상입니다</Text> : null
         }
         <Input 
-        placeholder="password"
+        placeholder="RETYPE YOUR PASSWORD"
         secureTextEntry
-        onChange={rePassInput}
+        onChange={() => rePassInput(e, 'password')}
         value={rePassword}
         ref={inputRef}
         />
@@ -160,16 +169,16 @@ export default function SignUp({navigation}) {
           notSame ? <NotSame>비밀번호가 일치하지 않습니다.</NotSame> : null
         }
         <Input 
-        placeholder="name"
+        placeholder="USERNAME"
         onFocus={passChk}
         onChange={nameInput}
         value={username}
-        keyboardType='phone-pad'
+        // keyboardType='phone-pad'
         />
         {
           !form ? <Warn>모든 입력은 필수 입니다.</Warn> : null
         }
-        <Btn name='가입하기' onPress={onSubmit}/>
+        <Btn name='가입하기' color='violet' onPress={onSubmit}/>
         <Btn name='Go Back' onPress={() => navigation.goBack()}/>
       </SignUpForm>
     </Container>
@@ -185,20 +194,23 @@ const Container = styled.ImageBackground`
   background-color: #ddd
 `
 const Header = styled.Text`
-  font-size: 40px;
+  font-size: 50px;
   font-weight: bold;
   margin: auto;
   margin-top: 100px;
-  margin-bottom: 100px
+  margin-bottom: 100px;
   `
 const Input = styled.TextInput`
-  background-color: #fff;
+  background-color: transparent;
   padding-top: 5px;
   padding-bottom: 5px;
   border-radius: 8px;
   font-size: 18px;
   padding-left: 10px;
   margin-top: 10px;
+  border-bottom-width: 2px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   /* box-sizing: border-box; */
   /* border: none; */
   `
