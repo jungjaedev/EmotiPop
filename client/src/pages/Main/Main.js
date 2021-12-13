@@ -1,18 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  TouchableOpacity,
-  Text,
-  TextInput,
-  StyleSheet,
-  Image,
-  View,
-  ImageBackground,
-  Touchable,
-  FlatList,
-  Pressable,
-  Alert,
-  Dimensions,
-} from 'react-native';
+import { TouchableOpacity, Text, TextInput, StyleSheet, Image, View, Alert, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 // import WriteBeans from './WriteBeans';
 import {
@@ -29,7 +16,6 @@ import {
   HamburgerIcon,
 } from 'native-base';
 import { SSRProvider } from '@react-aria/ssr';
-import Btn from '../User/Button';
 import axios from 'axios';
 import NegThrow from './Components/NegThrow';
 import PosThrow from './Components/PosThrow';
@@ -157,7 +143,7 @@ export default function Main({ navigation }) {
                                     {
                                       /* {em */
                                       emotion === em ? (
-                                        <Text value={emotion} style={{ fontSize: 13, fontWeight: 'bold', color: 'white' }}>x
+                                        <Text value={emotion} style={{ fontSize: 13, fontWeight: 'bold', color: 'white' }}>
                                           {em}
                                         </Text>
                                       ) : (
@@ -238,7 +224,9 @@ export default function Main({ navigation }) {
                     </Modal.Body>
                     <Modal.Footer>
                       <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-                        <Btn onPress={getToken} name="콩주머니 던지기"></Btn>
+                        <Btn onPress={getToken}>
+                          <BtnText>콩주머니 던지기</BtnText>
+                        </Btn>
                       </View>
                     </Modal.Footer>
                   </Modal.Content>
@@ -246,12 +234,12 @@ export default function Main({ navigation }) {
               </NativeBaseProvider>
             ) : null}
           </TouchableOpacity>
-          {new Date().getDay() === 0 ? (
+          {new Date().getDay() === 1 ? (
             <Bubble style={{ margin: 20, padding: 20, position: 'absolute', left: 100, bottom: 120 }}>
               <Text style={{ marginTop: 'auto', marginBottom: 'auto', padding: 10 }}>지금 저를 누르면 박이 터져요!!!</Text>
             </Bubble>
           ) : null}
-          {new Date().getDay() === 0 ? (
+          {new Date().getDay() === 1 ? (
             <TouchableOpacity onPress={weeklyPop}>
               <Girl source={require('../../img/girl.png')} resizemode="contain" style={{ resizeMode: 'contain' }} />
             </TouchableOpacity>
@@ -319,4 +307,22 @@ const Girl = styled.Image`
   margin-top: 30px;
   height: 50%;
   /* width: 30%; */
+`;
+
+const Btn = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  margin-top: 20px;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+`;
+const BtnText = styled.Text`
+  font-size: 13;
+  font-weight: bold;
+  color: black;
+  padding-left: 15px;
+  padding-right: 15px;
 `;

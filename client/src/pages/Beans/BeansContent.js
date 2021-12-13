@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, View, Text, Button, StyleSheet, TextInput, ImageBackground } from 'react-native';
+import { TouchableOpacity, View, Text, Button, StyleSheet, TextInput, ImageBackground, Alert } from 'react-native';
 import styled from 'styled-components/native';
 // import { signOutUser, signinUser, registUser, actionUser } from '../../modules/user';
 // import { useNavigate } from 'react-router';
@@ -9,15 +9,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Feather } from '@expo/vector-icons';
 
 function BeansContent({ navigation, route }) {
-  // axios.get('http://localhost:80/beans', {
-  //   data: {
-  //     beans: data.beansInfo,
-  //   },
-  //   withCredentials: true,
-  // });
-  // console.log(route.params.data);
-
   const [datas, setDatas] = useState({});
+  const [edit, setEdit] = useState(false);
+  const [value, setValue] = useState(datas.contents);
 
   const getData = async () => {
     const token = await AsyncStorage.getItem('AccessToken');
@@ -37,30 +31,100 @@ function BeansContent({ navigation, route }) {
   }, []);
 
   const goBack = () => {
-    // console.log('BACK!!!');
     navigation.goBack();
   };
 
   // Todo : 게시글 수정 기능 구현
   const editContent = () => {
     console.log('edit!!');
+    setEdit(!edit);
   };
 
-  console.log(datas);
+  const editContentaxios = async () => {
+    const token = await AsyncStorage.getItem('AccessToken');
+    // console.log('editContentaxios!!');
+    const data = await axios.patch(
+      `http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/beans/${datas.id}`,
+      {
+        contents: value,
+        emotions: datas.emotions,
+        emotion_level: datas.emotion_level,
+        gourdkinds: datas.gourdkinds,
+      },
+      {
+        headers: {
+          ContentType: 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
+
+    setDatas(data.data.data);
+    // console.log('------data: ', data.data.data);
+    setEdit(!edit);
+  };
+
+  const onChangeText = text => {
+    // console.log('edit');
+    setValue(text);
+  };
+
+  const deleteContent = () => {
+    const deleteaxios = async () => {
+      // console.log('del');
+      const token = await AsyncStorage.getItem('AccessToken');
+      await axios.delete(`http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/beans/${datas.id}`, {
+        headers: {
+          ContentType: 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+      setValue('');
+      setEdit(false);
+      setDatas('');
+      navigation.navigate('MainHome');
+    };
+
+    Alert.alert(
+      '콩주머니 삭제',
+      '삭제하시겠습니까?',
+      [
+        { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        { text: 'OK', onPress: deleteaxios },
+      ],
+      { cancelable: false }
+    );
+  };
+
+  // console.log('----', datas);
   return (
     <Container>
       <ImageBackgrounds source={require('../../img/background.jpeg')} resizemode="cover">
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 30, height: 0, marginHorizontal: 10 }}>
-          <TouchableOpacity activeOpacity={0.8} style={{ width: 35, height: 35 }} onPress={goBack}>
-            <Text>
-              <Feather name="arrow-left-circle" size={35} color="black" />
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.2} style={{ width: 35, height: 35 }} onPress={editContent}>
-            <Text>
-              <Feather name="edit" size={35} color="black" />
-            </Text>
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity activeOpacity={0.8} style={{ width: 35, height: 35 }} onPress={goBack}>
+              <Text>
+                <Feather name="arrow-left" size={35} color="black" />
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            {edit ? (
+              <TouchableOpacity activeOpacity={0.2} style={{ width: 35, height: 35 }} onPress={editContentaxios}>
+                <Text>완료</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity activeOpacity={0.2} style={{ width: 35, height: 35 }} onPress={editContent}>
+                <Text>수정</Text>
+              </TouchableOpacity>
+            )}
+
+            <TouchableOpacity activeOpacity={0.8} style={{ width: 35, height: 35 }} onPress={deleteContent}>
+              <Text>삭제</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         {datas !== {} ? (
@@ -74,8 +138,8 @@ function BeansContent({ navigation, route }) {
             </View>
             <Header>
               {datas.hasOwnProperty('createdAt') ? (
-                <View style={{ alignItems: 'center' }}>
-                  <Text>{datas.emotions}</Text>
+                <View>
+                  <Text>Emotion : {datas.emotions}</Text>
                   <Date>{datas.createdAt.slice(0, 10)}</Date>
                   <Time>{datas.createdAt.slice(11, 16)}</Time>
                 </View>
@@ -83,8 +147,8 @@ function BeansContent({ navigation, route }) {
             </Header>
             <View style={{ borderBottomWidth: 3, borderBottomColor: '#a9caf5', borderRadius: 20, marginVertical: 15 }}></View>
             <Emotions>{/* <Text>Level : {datas.emotion_level}</Text> */}</Emotions>
-            <Content>
-              <Text style={{ paddingHorizontal: 20 }}>{datas.contents}</Text>
+            <Content style={{ paddingHorizontal: 20 }}>
+              <TextInput onChangeText={onChangeText}>{datas.contents}</TextInput>
             </Content>
           </View>
         ) : null}
@@ -114,7 +178,8 @@ const Beans = styled.ImageBackground`
 
 const Header = styled.View`
   margin-top: 30px;
-  align-items: center;
+  margin-left: 20px;
+  /* align-items: center; */
 `;
 
 const Emotions = styled.View`

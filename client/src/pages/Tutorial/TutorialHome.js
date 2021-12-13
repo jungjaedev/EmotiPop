@@ -38,7 +38,7 @@ export default function TutorialHome({ navigation }) {
 
   return (
     <Container width={SCREEN_WIDTH}>
-      <Scroll pagingEnabled horizontal showsHorizontalScrollIndicator={false}>
+      <Scroll pagingEnabled horizontal showsHorizontalScrollIndicator={true}>
         <TutorialPage1 />
         <TutorialPage2 />
         <TutorialPage3 />

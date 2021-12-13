@@ -17,13 +17,12 @@ export default function TutorialPage4() {
       </Dots>
       <ImageBackgrounds source={require('../../img/background.jpeg')} resizemode="cover">
         <Title>
-          박터지는 페이지 <BlueBean source={require('../../img/blueBean.png')} resizemode="cover"></BlueBean>
+          일주일에 한번 터지는 감정박 <BlueBean source={require('../../img/blueBean.png')} resizemode="cover"></BlueBean>
         </Title>
         <Content>
-          <Text style={{ color: '#035c50' }}>감정 박</Text>에 <Text style={{ color: '#a1028e' }}>감정 콩주머니</Text>를 던져서 당신의 감정을
-          기록해보세요!
+          <Text style={{ color: '#035c50' }}>일요일</Text>에 일주일동안 쌓인 당신의 감정이 터져요!
         </Content>
-        <InnerBackground source={require('../../img/iphone.png')} resizemode="contain"></InnerBackground>
+        <InnerBackground source={require('../../img/tutorialpop.png')} resizemode="contain"></InnerBackground>
       </ImageBackgrounds>
     </Page>
   );
