@@ -9,17 +9,16 @@ import {
   Alert,
   ActivityIndicator,
   Dimensions,
-  ImageBackground
+  ImageBackground,
+  Pressable
   } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
 import Btn from '../User/Button';
 import { reqSignIn, googleSignIn } from '../../modules/user'
+import PassModal from './PassModal';
 // import Expo from "expo"
-import * as Google from 'expo-google-app-auth';
-import axios from 'axios'
 
-// import { test } from '../../../../server/config/config';
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 
@@ -30,27 +29,30 @@ export default function SignIn({navigation}) {
     email: '',
     password: ''
   })
+  const [modal, setModal] = useState(false);
   const { email, password } = userInfo;
-  // 400 에러 핸들링
+
+// 이메일 유효성 검사
+  const [emailVal, setEmailVal] = useState(true);
+  const emailValid = () => {
+    const emailChk = /[0-9a-zA-Z.-_]+@[0-9a-zA-Z-]+\.[a-zA-Z0-9.]+/im;
+    if(emailChk.test(email)) {
+      setEmailVal(true);
+    } else {
+      setEmailVal(false);
+    }
+  }
+  
   const [wrongInfo, setWrongInfo] = useState(true)
 
-  // 이메일 인풋값 추출
-  const changeEmail = (e) => {
-    const email = e.nativeEvent.text;
+  // 인풋값 추출
+  const signInHandler = (e, name) => {
+    const value = e.nativeEvent.text;
     setUserInfo({
       ...userInfo,
-      email
+      [name]: value
     })
     // console.log(userInfo)
-  }
-
-  // 패스워드 인풋값 추출
-  const changePass = (e) => {
-    const password = e.nativeEvent.text;
-    setUserInfo({
-      ...userInfo,
-      password
-    })
   }
 
   // 유효성 검사 후 오류 메시지 초기화 
@@ -65,6 +67,10 @@ export default function SignIn({navigation}) {
       setWrongInfo(false)
       return
     }
+    // 400 Error 처리
+    if(user.signIn.error) {
+      Alert.alert('이메일과 비밀번호를 확인해 주세요')
+    }
     dispatch(reqSignIn(userInfo))
     setTimeout(() => {
       navigation.navigate('TutorialHome')
@@ -77,6 +83,10 @@ export default function SignIn({navigation}) {
     dispatch(googleSignIn())  
   }
   
+  // Modal Handler
+  const modalHandler = () => {
+    setModal(modal => !modal);
+  }
   
   return (
     <Container style={{width: SCREEN_WIDTH}} source={require('../../img/background.jpeg')}>
@@ -84,21 +94,23 @@ export default function SignIn({navigation}) {
           user.signIn.loading ? <Loading color='black' size='large'/> 
           : (
             <LoginForm> 
-              <Header>로그인</Header>
+                <Header>LOGIN</Header>
+                <SubHead >TO CONTINUE</SubHead>
               <Input 
-                placeholder="email" 
+                placeholder="EMAIL" 
                 value={email}
                 name='email'
                 // keyboardType=''
-                onChange={changeEmail}
+                onChange={(e) => signInHandler(e, 'email')}
                 onFocus={del}
+                onBlur={emailValid}
               />
-              {/* { mail ? null : <Text>이메일 형식이 유효하지 않습니다.</Text> } */}
+              { !emailVal ? <Text style={{color: 'red', marginTop: 10}}>이메일 형식이 유효하지 않습니다.</Text> : null }
               <Input 
-              placeholder="password"
+              placeholder="PASSWORD"
               secureTextEntry
               name='password'
-              onChange={changePass}
+              onChange={(e) => signInHandler(e, 'password')}
               value={password}
               onFocus={del}
               />
@@ -106,14 +118,21 @@ export default function SignIn({navigation}) {
                 <TouchableOpacity>
                   <MiddleText onPress={() => navigation.navigate('SignUp')}>계정이 없으신가요?</MiddleText>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                  <MiddleText onPress={googleOauth}>GOOGLE로 로그인 하기</MiddleText>
+                <TouchableOpacity onPress={modalHandler}>
+                  <MiddleText>비밀번호를 잊으셨나요??</MiddleText>
                 </TouchableOpacity>
               </MiddleContainer>
+              <TouchableOpacity>
+                  <MiddleText onPress={googleOauth}>GOOGLE로 로그인 하기</MiddleText>
+                </TouchableOpacity>
               {
                 !wrongInfo ? <Warn>이메일 혹은 비밀번호를 정확히 입력했는지 확인해 주세요</Warn> : null 
               }
               <Btn name='Log In' onPress={onSubmit}/>
+              <ImageBackground source={require('../../img/girl.png')}/>
+              {
+                modal ? <PassModal modlal={modal} setModal={setModal}/>: null
+              }
             </LoginForm>
           )
         }
@@ -131,22 +150,27 @@ const Container = styled.ImageBackground`
   background-color: #ddd;
 `
 const Header = styled.Text`
-  font-size: 40px;
+  font-size: 50px;
   font-weight: bold;
   margin: auto;
   margin-top: 100px;
-  margin-bottom: 150px;
   `
+const SubHead = styled.Text`
+  text-align: center;
+  margin-bottom: 150px;
+`
 const Input = styled.TextInput`
-  background-color: #fff;
+  background-color: transparent;
   padding-top: 5px;
   padding-bottom: 5px;
   border-radius: 8px;
   font-size: 18px;
   padding-left: 10px;
   margin-top: 10px;
-  /* box-sizing: border-box; */
-  /* border: none; */
+  margin-bottom: 5px;
+  border-bottom-width: 2px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   `
 const LoginForm = styled.View`
   width: 70%;
@@ -181,40 +205,3 @@ const Loading = styled.ActivityIndicator`
 
 
 
-
-
-
-// 제출 
-  // const onSubmit = async () => {
-  //   // console.log('Clicked')
-  //   try {
-  //     const req = await axios.post('http://localhost:80/users/signin', 
-  //     { email, password }, {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       }, withCredentials: true
-  //     })
-  //     if(!req.data.message === 'Login Completed') {
-  //       Alert.alert('Email or password is not correct!')
-  //       throw new Error('Something went wrong')
-  //     }
-  //     try {
-  //       console.log(req)
-  //       const stringify = JSON.stringify(req.accessToken)
-  //       await AsyncStorage.setItem('Token', stringify)
-  //     } catch(err) {
-  //       throw new Error(err)
-  //       // console.log('Warn!')
-  //     }
-  //     const userr = req.data.userinfo;
-  //     console.log(userr)
-  //     dispatch(logIn(userr))
-  //     setUserInfo({
-  //       email: '',
-  //       password: ''
-  //     })
-  //   } catch(err) {
-  //     // throw new Error(err)
-  //     setWrongInfo(false)
-  //   }
-  // }
