@@ -11,7 +11,7 @@ import 'react-native-gesture-handler';
 
 // import NavContainer from './src/pages/Home/NavContainer'
 // import TutorialHome from './src/pages/Tutorial/TutorialHome';
-import ChangeStack from './src/pages/Tutorial/ChangeStack'
+import ChangeStack from './src/pages/Tutorial/ChangeStack';
 import { WebView } from 'react-native-webview';
 import CalendarContainer from './src/pages/Calendar/CalendarContainer';
 import MyPage from './src/pages/User/MyPage';
@@ -22,10 +22,8 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 export default function App() {
   return (
     <Provider store={store}>
-      <StatusBar style='dark' />
-        {/* <ChangeStack /> */}
-        <MyPage />
-        {/* <Resign /> */}
+      <StatusBar style="dark" />
+      <ChangeStack />
     </Provider>
   );
 }

@@ -18,20 +18,6 @@ export default function CalenderContainer({ navigation }) {
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek = today.clone().endOf('month').week() === 1 ? 53 : today.clone().endOf('month').week();
 
-  // const [dates, setDates] = React.useState([]);
-  // const [markedDates, setMarkedDates] = React.useState(null);
-  // let obj = dates.reduce(
-  //   (c, v) =>
-  //   Object.assign(c, {
-  //   [v]: { marked: true, dotColor: 'red' },
-  //   }),
-  //   {},
-  //   );
-  //   console.log(obj);
-  //   setMarkedDates(obj);
-  // Todo: Get요청... 글쓴날짜 표시!!
-
-  // Todo: 날짜 누르면 -> ChooseRoom 이동(날짜정보 같이 넘겨줘야함)
   const getCalendarData = async () => {
     const token = await AsyncStorage.getItem('AccessToken');
     const data = await axios.get('http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/calendar', {
@@ -76,9 +62,6 @@ export default function CalenderContainer({ navigation }) {
                 );
               } else {
                 return (
-                  <TouchableOpacity key={index} onPress={() => console.log(days.format('YYYY-MM-DD'))}>
-                    <View style={{ width: 20, height: 20 }}>
-                      <Text>{days.format('D')}</Text>
                   <TouchableOpacity key={index} onPress={() => haveBean(days)}>
                     <View style={{ width: 20, height: 20 }}>
                       {checkDays.includes(days.format('Y-M-D')) ? (
@@ -128,7 +111,6 @@ export default function CalenderContainer({ navigation }) {
             <SimpleLineIcons name="arrow-right" size={24} color="black" style={{ marginVertical: 3 }} />
           </TouchableOpacity>
         </CalMenu>
-//         <Yoil style={{ borderBottomWidth: 3, marginVertical: 5 }}>
         {/* <Yoil style={{ borderBottomWidth: 3, borderBottomColor: '#a9caf5', borderRadius: 20 }}> */}
         <Yoil style={{ borderBottomWidth: 2, marginVertical: 5, borderBottomColor: '#12244a' }}>
           <Week>일</Week>
@@ -158,7 +140,7 @@ const CalMenu = styled.View`
   flex-direction: row;
   text-align: center;
   justify-content: space-around;
-  /* width: 100%; */
+  width: 100%;
   top: 5%;
   margin-top: 15px;
   /* background-color: slateblue; */
@@ -167,7 +149,7 @@ const CalMenu = styled.View`
 
 const Yoil = styled.View`
   flex: auto;
-  /* text-align: center; */
+  text-align: center;
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
@@ -180,9 +162,6 @@ const Days = styled.View`
   flex-direction: row;
   justify-content: space-around;
   /* top: 10%; */
-  /* width: 100%; */
-  height: 70%;
-  /* border-radius: 10px; */
   width: 100%;
   height: 70%;
   border-radius: 10px;
@@ -193,10 +172,9 @@ const Days = styled.View`
 
 const Cal = styled.View`
   flex: auto;
-  /* flex-direction: row; */
+  flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  /* height: 30%; */
   height: 30%;
   /* right: 140%; */
   /* padding: 15%; */
