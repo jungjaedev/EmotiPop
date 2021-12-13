@@ -95,7 +95,7 @@ export default function SignIn({navigation}) {
           : (
             <LoginForm> 
                 <Header>LOGIN</Header>
-                <SubHead >TO CONTINUE</SubHead>
+                <SubHead>TO CONTINUE</SubHead>
               <Input 
                 placeholder="EMAIL" 
                 value={email}

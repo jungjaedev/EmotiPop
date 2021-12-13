@@ -55,7 +55,7 @@ export default function ChartContainer() {
 
   // 조회 된 감정을 가공함. 배열 안의 객체에 밸류값을 추출해 평탄화 
   const avr = emotions ? emotions.map(el => Object.values(el)).flat() : null;
-  // console.log(avr, ' - - - - - - - - - - - -- - ')
+  console.log(avr, ' - - - - - - - - - - - -- - ')
 
   
   // chart data

@@ -33,6 +33,7 @@ export const getChartData = (token) => async dispatch => {
       }
       const bean = makeAvg(emotions)
       const firstBean = bean[0];
+      console.log(bean, '+++++++++++++++++++')
       bean.push(firstBean)
       dispatch({ type: GET_CHART_DATA_SUCCESS, bean })
     }
