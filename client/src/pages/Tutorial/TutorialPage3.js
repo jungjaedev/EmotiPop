@@ -17,13 +17,12 @@ export default function TutorialPage3() {
       </Dots>
       <ImageBackgrounds source={require('../../img/background.jpeg')} resizemode="cover">
         <Title>
-          달력 or 차트 <BlueBean source={require('../../img/redBean.png')} resizemode="cover"></BlueBean>
+          마이캘린더 <BlueBean source={require('../../img/redBean.png')} resizemode="cover"></BlueBean>
         </Title>
         <Content>
-          <Text style={{ color: '#035c50' }}>감정 박</Text>에 <Text style={{ color: '#a1028e' }}>감정 콩주머니</Text>를 던져서 당신의 감정을
-          기록해보세요!
+          <Text style={{ color: '#91008f' }}>마이캘린더</Text>를 통해 그동안의 기록들을 볼 수 있어요!
         </Content>
-        <InnerBackground source={require('../../img/iphone.png')} resizemode="contain"></InnerBackground>
+        <InnerBackground source={require('../../img/tutorialCalendar111.png')} resizemode="contain"></InnerBackground>
       </ImageBackgrounds>
     </Page>
   );
@@ -46,7 +45,7 @@ const InnerBackground = styled.ImageBackground`
   height: 90%;
   width: 90%;
   top: 200px;
-  left: 50px;
+  left: 30px;
 `;
 
 const Page = styled.View`

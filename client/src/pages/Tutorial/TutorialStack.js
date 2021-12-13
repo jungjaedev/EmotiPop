@@ -7,49 +7,48 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import TutorialPage5 from './TutorialPage5';
 
-
 export default function TutorialStack() {
-  const Stack = createStackNavigator(); 
+  const Stack = createStackNavigator();
 
   return (
     <Stack.Navigator
       screenOptions={{
-      //   headerStyle: { backgroundColor: '#f4511e' },
-      //   headerTintColor: 'black',
-      //   headerTitleStyle: {
-      //       fontWeight: 'bold',
-      //   },
+        //   headerStyle: { backgroundColor: '#f4511e' },
+        //   headerTintColor: 'black',
+        //   headerTitleStyle: {
+        //       fontWeight: 'bold',
+        //   },
         headerShown: false,
       }}
     >
-      <Stack.Screen 
-        name='TutorialHome' 
+      <Stack.Screen
+        name="TutorialHome"
         component={TutorialHome}
         // options={{
         //   headerShown: false,
         // }}
       />
-      <Stack.Screen 
-        name='TutorialPage5' 
+      <Stack.Screen
+        name="TutorialPage5"
         component={TutorialPage5}
         options={{
           headerShown: false,
         }}
       />
-      <Stack.Screen 
-        name='SignIn' 
+      <Stack.Screen
+        name="SignIn"
         component={SignIn}
         options={{
           headerShown: false,
         }}
       />
-      <Stack.Screen 
-        name='SignUp' 
+      <Stack.Screen
+        name="SignUp"
         component={SignUp}
         options={{
           headerShown: false,
         }}
       />
     </Stack.Navigator>
-  )
+  );
 }
