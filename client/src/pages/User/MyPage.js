@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, View, Text, TouchableOpacity, Dimensions, ImageBackground } from 'react-native';
+import { Button, View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Update from 'expo-updates';
 import { reqSignOut, reSignIn } from '../../modules/user';
@@ -8,7 +8,6 @@ import styled from 'styled-components/native';
 import Nav from '../Home/Nav';
 import { TextInput } from 'react-native-gesture-handler';
 import axios from 'axios';
-import { Center } from 'native-base';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -56,35 +55,8 @@ export default function MyPage({ navigation }) {
         console.log(111111111155555555, data.data);
       });
     // console.log(editInfoForm);
-    };
+  };
 
-    // const [ userInfomation, setUserInfomation ] = useState({ userName, Email });
-    // const { userName, Email } = userInfomation;
-    // const getUserInfo = async () => {
-      
-    //   const token = await AsyncStorage.getItem('AccessToken');
-    //   await axios.get(
-    //     'http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage',
-    //     {
-    //       headers: {
-    //         ContentType: 'application/json',
-    //         authorization: `Bearer ${token}`,
-    //       },
-    //       withCredentials: true,
-    //     }
-    //   )
-    //   .then(userInfo => {
-    //     setUserInfomation({
-    //       userName: userInfo.data.username,
-    //       Email: userInfo.data.email
-    //     })
-    //   });
-    // }
-    // useEffect(() => {
-    //   getUserInfo();
-    // }, []);
-  
-    
   const dispatch = useDispatch();
   const logOutHandler = async () => {
     // console.log('ads')
@@ -108,12 +80,12 @@ export default function MyPage({ navigation }) {
   // }
 
   return (
-    <ImageBackground source={require('../../img/background.jpeg')} resizemode="cover">
     <View
       style={{
         alignItems: 'center',
         justifyContent: 'space-between',
         width: SCREEN_WIDTH,
+<<<<<<< HEAD
         height: SCREEN_HEIGHT - 80,
         marginTop: '20px',
       }}
@@ -157,23 +129,29 @@ export default function MyPage({ navigation }) {
         onPress={e => submitForm(e)}>
           <Text>회원정보 수정</Text>
           </TouchableOpacity>
+=======
+        height: SCREEN_HEIGHT - 60,
+      }}
+    >
+      <Text style={{ flex: 1 }}>MyPage</Text>
+      <TouchableOpacity style={{ flex: 1 }} onPress={logOutHandler()}>
+        <Text>SignOut</Text>
+      </TouchableOpacity>
+      <UserInfomation style={{ flex: 8, flexDirection: 'column', justifyContent: 'space-around' }}>
+        <Text>이름</Text>
+        <TextInput style={{ width: '90%', backgroundColor: 'white' }} onChange={e => changeDetector(e, 'username')} />
+        <Text>이메일</Text>
+        <TextInput style={{ width: '90%', backgroundColor: 'white' }} onChange={e => changeDetector(e, 'email')} />
+        <Text>비밀번호</Text>
+        <TextInput style={{ width: '90%', backgroundColor: 'white' }} onChange={e => changeDetector(e, 'password')} />
+        <Text>비밀번호 확인</Text>
+        <TextInput style={{ width: '90%', backgroundColor: 'white' }} onChange={e => changeDetector(e, 'repassword')} />
+        {password && repassword && password !== repassword ? <Text> '비밀번호가 일치하지 않습니다'</Text> : null}
+        <Button title="Edit" onPress={e => submitForm(e)} />
+>>>>>>> e52b8dd72a8ebd767c4fd4f10ad15d6782889cbd
       </UserInfomation>
-      <TouchableOpacity 
-      style={{ 
-        justifyContent: 'space-around', 
-        flexDirection: 'column', 
-        backgroundColor: 'white', 
-        width: '70px', 
-        height: '40px', 
-        textAlign: 'center', 
-        fontSize: '20px', 
-        borderRadius: '10px', 
-        marginBottom: '10px'}} 
-        onPress={() => navigation.navigate('Resign')}>
-          <Text>회원탈퇴</Text>
-          </TouchableOpacity>
+      <Button style={{ flex: 1 }} title="회원탈퇴" onPress={() => navigation.navigate('Resign')} />
     </View>
-    </ImageBackground>
   );
 }
 
@@ -186,6 +164,7 @@ const UserInfomation = styled.View`
   height: 150px;
   width: 300px;
 `;
+<<<<<<< HEAD
 
 const User = styled.View`
   flex: auto;
@@ -196,3 +175,5 @@ const User = styled.View`
   height: 50px;
   width: 300px;
 `
+=======
+>>>>>>> e52b8dd72a8ebd767c4fd4f10ad15d6782889cbd

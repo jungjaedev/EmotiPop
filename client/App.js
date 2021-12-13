@@ -11,7 +11,7 @@ import 'react-native-gesture-handler';
 
 // import NavContainer from './src/pages/Home/NavContainer'
 // import TutorialHome from './src/pages/Tutorial/TutorialHome';
-import ChangeStack from './src/pages/Tutorial/ChangeStack'
+import ChangeStack from './src/pages/Tutorial/ChangeStack';
 import { WebView } from 'react-native-webview';
 import CalendarContainer from './src/pages/Calendar/CalendarContainer';
 import MyPage from './src/pages/User/MyPage';

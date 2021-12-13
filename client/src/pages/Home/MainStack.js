@@ -33,7 +33,6 @@ export default function MainStack() {
         headerShown: false,
       }}
     >
-
       <Stack.Screen
         name="MainHome"
         component={MainHome}
@@ -41,6 +40,7 @@ export default function MainStack() {
           headerShown: false,
         }}
       />
+
       <Stack.Screen
         name="ChartContainer"
         component={ChartContainer}
@@ -87,16 +87,18 @@ export default function MainStack() {
         name="ShowContentModal"
         component={ShowContentModal}
         options={{
-         headerShown: false,
+          headerShown: false,
         }}
       />
+
       <Stack.Screen
         name="NegPop"
         component={NegPop}
         options={{
           headerShown: false,
-          }}
+        }}
       />
+
       <Stack.Screen
         name="PosPop"
         component={PosPop}
@@ -104,6 +106,7 @@ export default function MainStack() {
           headerShown: false,
         }}
       />
+
       <Stack.Screen
         name="BothPop"
         component={BothPop}
@@ -111,6 +114,7 @@ export default function MainStack() {
           headerShown: false,
         }}
       />
+
       <Stack.Screen
         name="CalendarContainer"
         component={CalendarContainer}
