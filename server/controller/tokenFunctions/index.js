@@ -18,6 +18,7 @@ module.exports = {
     },
     isAuthorized: req => {
         const authorization = req.headers['authorization'];
+        // console.log(req);
         // console.log(authorization)
         if (!authorization) {
             return null;

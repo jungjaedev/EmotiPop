@@ -158,7 +158,7 @@ export default function Main({ navigation }) {
                                     {
                                       /* {em */
                                       emotion === em ? (
-                                        <Text value={emotion} style={{ fontSize: 13, fontWeight: 'bold', color: 'white' }}>
+                                        <Text value={emotion} style={{ fontSize: 13, fontWeight: 'bold', color: 'white' }}>x
                                           {em}
                                         </Text>
                                       ) : (

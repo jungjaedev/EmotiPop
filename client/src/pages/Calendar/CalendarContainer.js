@@ -30,36 +30,34 @@ export default function CalenderContainer({ navigation }) {
   // Todo: 날짜 누르면 -> ChooseRoom 이동(날짜정보 같이 넘겨줘야함)
 
   const calendarArr = () => {
-    let result = [];
-    let week = firstWeek;
-    for (week; week <= lastWeek; week++) {
-      result = result.concat(
-        <Cal key={week} style={{ flexDirection: 'row' }}>
-          {Array(7)
-            .fill(0)
-            .map((data, index) => {
-              let days = today.clone().startOf('year').week(week).startOf('week').add(index, 'day'); //d로해도되지만 직관성
+      let result = [];
+      let week = firstWeek;
+      for ( week; week <= lastWeek; week++) {
+        result = result.concat(
+          <Cal key={week} style={{ flexDirection: 'row' }}>
+            {
+              Array(7).fill(0).map((data, index) => {
+                let days = today.clone().startOf('year').week(week).startOf('week').add(index, 'day'); //d로해도되지만 직관성
 
-              if (days.format('MM') !== today.format('MM')) {
-                return (
-                  <View key={index} style={{ opacity: 0.3 }}>
-                    <Text>{days.format('D')}</Text>
-                  </View>
-                );
-              } else {
-                return (
-                  <TouchableOpacity key={index} onPress={() => console.log(days.format('YYYY-MM-DD'))}>
-                    <View style={{ width: 20, height: 20 }}>
-                      <Text>{days.format('D')}</Text>
-                    </View>
-                  </TouchableOpacity>
-                );
-              }
-            })}
-        </Cal>
-      );
-    }
-    return result;
+                if(days.format('MM') !== today.format('MM')){
+                  return(
+                      <View key={index} style={{backgroundColor:'lightgray', opacity: .3}} >
+                        <Text>{days.format('D')}</Text>
+                      </View>
+                  );
+                }else{
+                  return(
+                      <TouchableOpacity key={index} onPress={() => console.log(days.format('YYYY-MM-DD'))}>
+                        <Text>{days.format('D')}</Text>
+                      </TouchableOpacity>
+                  );
+                }
+              })
+            }
+          </Cal>
+        );
+      }
+      return result;
   };
 
   return (

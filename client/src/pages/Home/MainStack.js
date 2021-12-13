@@ -101,6 +101,13 @@ export default function MainStack() {
         }}
       />
       <Stack.Screen
+        name="NegPop"
+        component={NegPop}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
         name="BothPop"
         component={BothPop}
         options={{
