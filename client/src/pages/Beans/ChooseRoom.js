@@ -2,7 +2,7 @@ import React from 'react';
 import Styled from 'styled-components/native';
 // import { Link } from 'react-router-dom';
 import Btn from '../User/Button';
-import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity, Image } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Feather } from '@expo/vector-icons';
@@ -41,10 +41,10 @@ export default function ChooseRoom({ navigation, route }) {
             <Feather name="arrow-left-circle" size={35} color="black" />
           </Text>
         </TouchableOpacity>
-        <Blue>
+        <Blue source={require('../../img/red.png')}>
           <Btn name="Positive" onPress={() => reqList(1)} />
         </Blue>
-        <Red>
+        <Red source={require('../../img/yellow.png')}>
           <Btn name="Negative" onPress={() => reqList(0)} />
         </Red>
       </ImageBackgrounds>
@@ -56,16 +56,16 @@ const Container = Styled.View`
   flex: 1;
 `;
 
-const Blue = Styled.View`
-  width: 150px;
-  height: 150px;
-  background-color: skyblue;
-`;
-const Red = Styled.View`
-  width: 150px;
-  height: 150px;
-  background-color: pink;
-`;
+// const Blue = Styled.View`
+//   width: 150px;
+//   height: 150px;
+//   background-color: skyblue;
+// `;
+// const Red = Styled.View`
+//   width: 150px;
+//   height: 150px;
+//   background-color: pink;
+// `;
 
 const ImageBackgrounds = Styled.ImageBackground`
   /* flex-direction: row; */

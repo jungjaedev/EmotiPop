@@ -38,19 +38,14 @@ export default function ChartContainer() {
   //   }
   // }, [])
 
-  // const getToken = async () => {
-  //   const token = await AsyncStorage.getItem('AccessToken');
-
-  //   return token;
-  // }
-  useEffect(() => {
-    getToken()
-  }, [])
-
   const getToken = async () => {
     const token = await AsyncStorage.getItem('AccessToken');
     dispatch(getChartData(token))
   }
+
+  useEffect(() => {
+    getToken()
+  }, [])
 
 
   // 조회 된 감정을 가공함. 배열 안의 객체에 밸류값을 추출해 평탄화 
@@ -62,7 +57,7 @@ export default function ChartContainer() {
   const data = [
     {
     type: 'scatterpolar', // chart type
-    r: avr, // data
+    r: avr ,
     theta: ['기쁨','행복','만족', '뿌듯', '설렘', '슬픔', '우울', '걱정', '분노', '실망', '기쁨'], // data category
     fill: 'toself', // fill option
     name: 'ToTal', // data group name
@@ -137,7 +132,7 @@ export default function ChartContainer() {
   return (
     <Container style={{width: screenWidth}}>
       
-      {
+      {/* {
         avr ? (
           <Plotly 
             data={data} 
@@ -152,7 +147,26 @@ export default function ChartContainer() {
             }}
             config={config}
           />
-        ) : <Nodata/>
+        ) : <Text style={{fontSize: 30}}>No Data</Text>
+      } */}
+      {
+        data.r 
+        ? (
+          <Plotly 
+            data={data} 
+            layout={layout} 
+            debug 
+            enableFullPlotly
+            style={{
+              width: screenWidth,
+              height: screenHeight,
+              flex: 9,
+              displayModeBar: false
+            }}
+            config={config}
+          />
+        ) 
+        : <Text>No Data</Text>
       }
     </Container>
   )

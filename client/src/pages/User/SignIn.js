@@ -39,7 +39,6 @@ export default function SignIn({navigation}) {
     })
     // console.log(userInfo)
   }
-
   // 패스워드 인풋값 추출
   const changePass = (e) => {
     const password = e.nativeEvent.text;
@@ -48,7 +47,7 @@ export default function SignIn({navigation}) {
       password
     })
   }
-
+  console.log(email, password)
   // 유효성 검사 후 오류 메시지 초기화 
   const del = () => {
     // setMail(emailVal.test(email))
