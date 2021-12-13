@@ -5,8 +5,9 @@ import * as Update from 'expo-updates';
 import { reqSignOut, reSignIn } from '../../modules/user';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
-import Nav from '../Home/Nav';
 import axios from 'axios';
+import { URL } from '../../modules/user';
+import { InfoIcon } from 'native-base';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -18,7 +19,6 @@ export default function MyPage({ navigation }) {
     repassword: '',
   });
   const { username, email, password, repassword } = editInfoForm;
-  // useSelector(state => state.user.accessToken);
   function changeDetector(e, name) {
     const value = e.nativeEvent.text;
     setEditInfoForm({
@@ -26,6 +26,27 @@ export default function MyPage({ navigation }) {
       [name]: value,
     });
   }
+  const [user, setUser] = useState({})
+
+  const getUserInfo = async() => {
+    const token = await AsyncStorage.getItem('AccessToken');
+    console.log(token)
+    const res = await axios(`${URL}users/me`, {
+      headers: {
+        'ContentType': 'application/json',
+        authorization: `Bearer ${token}`
+      },
+      withCredentials: true
+    })
+    console.log(res.data.userinfo)
+    const { email: emailInfo, username: userName } = res.data.userinfo;
+    setUser({...user, emailInfo, userName})
+  }
+
+  useEffect(() => {
+    getUserInfo()
+  }, [])
+  const {emailInfo, userName} = user;
 
   const submitForm = async e => {
     // async function submitForm(e) {
@@ -78,69 +99,69 @@ export default function MyPage({ navigation }) {
       height: SCREEN_HEIGHT - 60,
       // marginTop: 20
       }}>
-        <Text style={{ flex: .6, fontSize: 30, marginVertical: 40 }}>MyPage</Text>
       <TouchableOpacity style={{ 
-        justifyContent: 'space-around', 
+        // justifyContent: 'space-around', 
         backgroundColor: 'white', 
         width: 70, 
-        height: 40, 
-        textAlign: 'center', 
-        fontSize: 20, 
-        borderRadius: 10}} 
+        borderRadius: 6,
+        marginVertical: 60, 
+        marginLeft: '50%',
+        // flex: .3
+        }} 
         onPress={logOutHandler}>
-        <Text>Log out</Text>
+        <Text style={{textAlign: 'center', fontWeight: 'bold', paddingVertical: 10, paddingHorizontal: 10,}}>Log out</Text>
       </TouchableOpacity>
-      <UserInfomation style={{ flex: 8, flexDirection: 'column', justifyContent: 'space-around' }}>
-        <Text>이름</Text>
+      <UserInfomation style={{ justifyContent: 'space-around', marginVertical: 20, marginBottom: 20 }}>
         <TextInput style={{ 
           width: '90%', 
           borderBottomColor: 'black', 
           borderBottomWidth: 2 }} 
-          placeholder='Name' onChange={e => changeDetector(e, 'username')} />
-        <Text>이메일</Text>
+          placeholder={`${userName}님 여기를 눌러주세요!!!`}
+          placeholderTextColor={'black'}
+          onChange={e => changeDetector(e, 'username')} />
         <TextInput style={{ 
           width: '90%', 
           borderBottomColor: 'black', 
           borderBottomWidth: 2 }} 
-          placeholder='Email' onChange={e => changeDetector(e, 'email')} />
-        <Text>비밀번호</Text>
+          placeholder={emailInfo}
+          placeholderTextColor={'black'} 
+          onChange={e => changeDetector(e, 'email')} />
         <TextInput style={{ 
           width: '90%', 
           borderBottomColor: 'black', 
           borderBottomWidth: 2 }} 
           placeholder='Password' onChange={e => changeDetector(e, 'password')} />
-        <Text>비밀번호 확인</Text>
         <TextInput style={{ 
           width: '90%', 
           borderBottomColor: 'black', 
-          borderBottomWidth: 2 }} 
+          borderBottomWidth: 2,
+          }} 
           placeholder='Repassword' onChange={e => changeDetector(e, 'repassword')} />
           {/* {password && repassword !== repassword ? <Text> '비밀번호가 일치하지 않습니다'</Text> : null} */}
         <TouchableOpacity style={{ 
-          justifyContent: 'space-around', 
+          // justifyContent: 'space-around', 
           backgroundColor: 'white', 
-          width: 200, 
-          height: 50, 
-          textAlign: 'center', 
-          fontSize: 20, 
-          borderRadius: 10}} 
+          width: '80%', 
+          // height: 50, 
+          borderRadius: 6,
+          marginVertical: 20,
+          }} 
           onPress={e => submitForm(e)}>
-          <Text>회원정보 수정</Text>
+          <Text style={{textAlign: 'center', paddingVertical: 10, fontWeight: 'bold'}}>회원정보 수정</Text>
         </TouchableOpacity>
       </UserInfomation>
       <TouchableOpacity style={{ 
         justifyContent: 'space-around', 
-        flexDirection: 'column', 
+        // flexDirection: 'column', 
         backgroundColor: 'white', 
-        width: 70, 
-        height: 40, 
-        textAlign: 'center', 
-        fontSize: 20, 
-        borderRadius: 10, 
-        marginBottom: 10}} 
+        borderRadius: 6, 
+        marginBottom: 10,
+        marginLeft: '45%',
+        }} 
         onPress={() => navigation.navigate('Resign')}>
-        <Text>회원탈퇴</Text>
+        <Text style={{textAlign: 'center', paddingVertical: 5, fontWeight: 'bold', paddingHorizontal: 10}}>회원탈퇴</Text>
       </TouchableOpacity>
+      <View style={{flex: .2}}></View>
     </View>
   )
 }
@@ -154,3 +175,6 @@ const UserInfomation = styled.View`
   height: 150px;
   width: 300px;
 `;
+const Btns = styled.View`
+  
+` 

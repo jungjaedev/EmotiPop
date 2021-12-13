@@ -9,6 +9,7 @@ import {
   Dimensions,
   TouchableOpacity,
   StyleSheet,
+  ImageBackground,
 } from 'react-native';
 import styled from 'styled-components/native';
 import Plotly from 'react-native-plotly';
@@ -57,7 +58,7 @@ export default function ChartContainer() {
   const data = [
     {
     type: 'scatterpolar', // chart type
-    r: avr ,
+    r: avr ? avr : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ,
     theta: ['기쁨','행복','만족', '뿌듯', '설렘', '슬픔', '우울', '걱정', '분노', '실망', '기쁨'], // data category
     fill: 'toself', // fill option
     name: 'ToTal', // data group name
@@ -102,13 +103,13 @@ export default function ChartContainer() {
     // displayModeBar: false,
     images: [
       {
-        source: require('../../img/background.jpeg'),
+        source: 'https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v960-ning-30.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&auto=format&ixlib=js-2.2.1&s=e43a2f27ef68a4e782d43c48640e7155',
         xref: "paper",
         yref: "paper",
-        x: 0,
-        y: 1.05,
-        sizex: 1,
-        sizey: 0.2,
+        x: 2,
+        y: -1,
+        sizex: 10,
+        sizey: 10,
         sizing: "stretch",
         opacity: 0.4,
         // layer: "below",
@@ -149,7 +150,7 @@ export default function ChartContainer() {
           />
         ) : <Text style={{fontSize: 30}}>No Data</Text>
       } */}
-      {
+      {/* {
         data.r 
         ? (
           <Plotly 
@@ -167,7 +168,23 @@ export default function ChartContainer() {
           />
         ) 
         : <Text>No Data</Text>
-      }
+      } */}
+        <Plotly 
+            data={data} 
+            layout={layout} 
+            debug 
+            enableFullPlotly
+            style={{
+              width: screenWidth,
+              height: screenHeight,
+              flex: 9,
+              displayModeBar: false,
+              position: 'absolute',
+              left: 0,
+              bottom: 0,
+            }}
+            config={config}
+          />
     </Container>
   )
 }
