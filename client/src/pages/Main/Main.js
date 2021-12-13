@@ -125,7 +125,6 @@ export default function Main({ navigation }) {
       }
       console.log('Here!!');
     }
-
   };
 
   return (
@@ -158,7 +157,7 @@ export default function Main({ navigation }) {
                                     {
                                       /* {em */
                                       emotion === em ? (
-                                        <Text value={emotion} style={{ fontSize: 13, fontWeight: 'bold', color: 'white' }}>
+                                        <Text value={emotion} style={{ fontSize: 13, fontWeight: 'bold', color: 'white' }}>x
                                           {em}
                                         </Text>
                                       ) : (
@@ -303,7 +302,7 @@ const ImageBackgrounds = styled.ImageBackground`
   flex: 1;
   height: 100%;
   width: 100%;
-  opacity: 0.8;
+  opacity: 1;
 `;
 
 const MainView = styled.View`

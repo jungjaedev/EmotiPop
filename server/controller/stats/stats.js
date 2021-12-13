@@ -61,9 +61,11 @@ module.exports = {
     date = new Date();
     const month = await Beans.findAll({
       where: {
-        [Op.and]: [sequelize.where(sequelize.fn('month', sequelize.col('createdAt')), date.getMonth() + 1)],
-        [Op.and]: [sequelize.where(sequelize.fn('year', sequelize.col('createdAt')), date.getFullYear())],
-        [Op.and]: { users_id },
+        [Op.and]: [
+          sequelize.where(sequelize.fn('month', sequelize.col('createdAt')), date.getMonth() + 1),
+          sequelize.where(sequelize.fn('year', sequelize.col('createdAt')), date.getFullYear()),
+          { users_id },
+        ],
       },
     });
     const monthEmotions = [];
@@ -85,6 +87,7 @@ module.exports = {
     */
     // console.log(emotionArr);
     // console.log(Object.entries(emotion));
+
     res.send({
       message: 'ok',
       emotion,

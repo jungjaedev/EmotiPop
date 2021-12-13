@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { Button, View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { Button, View, Text, TouchableOpacity, Dimensions, ImageBackground } from 'react-native';
 import * as Update from 'expo-updates';
 import styled from 'styled-components/native';
 import Nav from '../Home/Nav';
 import { SimpleLineIcons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export default function CalenderContainer({ navigation }) {
   const [getMoment, setMoment] = useState(moment());
   const today = getMoment;
+
+  const [checkDays, setCheckDays] = useState([]);
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek = today.clone().endOf('month').week() === 1 ? 53 : today.clone().endOf('month').week();
 
@@ -28,6 +32,30 @@ export default function CalenderContainer({ navigation }) {
   // Todo: Get요청... 글쓴날짜 표시!!
 
   // Todo: 날짜 누르면 -> ChooseRoom 이동(날짜정보 같이 넘겨줘야함)
+  const getCalendarData = async () => {
+    const token = await AsyncStorage.getItem('AccessToken');
+    const data = await axios.get('http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/calendar', {
+      headers: {
+        ContentType: 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+
+    setCheckDays(data.data.data);
+    // console.log('------data.data.data : ', data.data.data);
+  };
+  useEffect(() => {
+    getCalendarData();
+  }, []);
+  //  글작성안된날짜 누르면 작동 X
+  const haveBean = days => {
+    if (checkDays.includes(days.format('Y-M-D'))) {
+      return navigation.navigate('ChooseRoom', { data: days.format('Y-M-D') });
+    } else {
+      return console.log('no BEAN!');
+    }
+  };
 
   const calendarArr = () => {
     let result = [];
@@ -51,6 +79,16 @@ export default function CalenderContainer({ navigation }) {
                   <TouchableOpacity key={index} onPress={() => console.log(days.format('YYYY-MM-DD'))}>
                     <View style={{ width: 20, height: 20 }}>
                       <Text>{days.format('D')}</Text>
+                  <TouchableOpacity key={index} onPress={() => haveBean(days)}>
+                    <View style={{ width: 20, height: 20 }}>
+                      {checkDays.includes(days.format('Y-M-D')) ? (
+                        <View>
+                          <EveryDay>{days.format('D')}</EveryDay>
+                          <Bean source={require('../../img/blueBean.png')}></Bean>
+                        </View>
+                      ) : (
+                        <EveryDay>{days.format('D')}</EveryDay>
+                      )}
                     </View>
                   </TouchableOpacity>
                 );
@@ -90,7 +128,9 @@ export default function CalenderContainer({ navigation }) {
             <SimpleLineIcons name="arrow-right" size={24} color="black" style={{ marginVertical: 3 }} />
           </TouchableOpacity>
         </CalMenu>
-        <Yoil style={{ borderBottomWidth: 3, marginVertical: 5 }}>
+//         <Yoil style={{ borderBottomWidth: 3, marginVertical: 5 }}>
+        {/* <Yoil style={{ borderBottomWidth: 3, borderBottomColor: '#a9caf5', borderRadius: 20 }}> */}
+        <Yoil style={{ borderBottomWidth: 2, marginVertical: 5, borderBottomColor: '#12244a' }}>
           <Week>일</Week>
           <Week>월</Week>
           <Week>화</Week>
@@ -108,6 +148,10 @@ export default function CalenderContainer({ navigation }) {
 }
 
 const CalContainer = styled.View``;
+
+const EveryDay = styled.Text`
+  font-weight: 700;
+`;
 
 const CalMenu = styled.View`
   flex: auto;
@@ -139,6 +183,9 @@ const Days = styled.View`
   /* width: 100%; */
   height: 70%;
   /* border-radius: 10px; */
+  width: 100%;
+  height: 70%;
+  border-radius: 10px;
   /* background-color: skyblue; */
   padding-right: 10px;
   padding-left: 10px;
@@ -150,6 +197,7 @@ const Cal = styled.View`
   justify-content: space-around;
   width: 100%;
   /* height: 30%; */
+  height: 30%;
   /* right: 140%; */
   /* padding: 15%; */
   align-items: center;
@@ -157,4 +205,11 @@ const Cal = styled.View`
 
 const Week = styled.Text`
   font-size: 17px;
+`;
+
+const Bean = styled.ImageBackground`
+  /* flex: 1; */
+  height: 30px;
+  width: 30px;
+  opacity: 0.8;
 `;
