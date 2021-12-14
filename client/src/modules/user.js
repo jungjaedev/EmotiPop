@@ -41,7 +41,7 @@ export const reqSignOut = (token) => async dispatch => {
     const req = await axios.post(`${URL}users/signout`,
     { headers: { authorization: `Bearer ${token}` }, withCredentials: true })
     if(req.data.message === 'successfully signed out!') {
-      AsyncStorage.clear()
+      await AsyncStorage.removeItem('AccessToken')
       dispatch({ type: SIGN_OUT_SUCCESS })
     }
   } catch(err) {

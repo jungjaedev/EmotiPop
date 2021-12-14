@@ -13,6 +13,8 @@ import { reSignIn } from '../../modules/user';
 
 export default function TutorialHome({ navigation }) {
   const { width: SCREEN_WIDTH } = Dimensions.get('window');
+  const user = useSelector(state => state.user.signIn)
+
 
   const dispatch = useDispatch();
   // const state = useSelector(state => state)
@@ -39,7 +41,7 @@ export default function TutorialHome({ navigation }) {
   return (
     <Container width={SCREEN_WIDTH}>
       <Scroll pagingEnabled horizontal showsHorizontalScrollIndicator={true}>
-        <TutorialPage1 />
+        {/* <TutorialPage1 /> */}
         <TutorialPage2 />
         <TutorialPage3 />
         <TutorialPage4 />

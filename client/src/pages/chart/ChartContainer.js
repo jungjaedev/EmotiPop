@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Text, TextInput, View, SafeAreaView, ScrollView, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  Text,
+  TextInput,
+  View,
+  SafeAreaView,
+  ScrollView,
+  Dimensions,
+  TouchableOpacity,
+  StyleSheet,
+  ImageBackground,
+} from 'react-native';
 import styled from 'styled-components/native';
 import Plotly from 'react-native-plotly';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -30,15 +40,13 @@ export default function ChartContainer() {
 
   //   return token;
   // }
+  const getToken = async () => {
+    const token = await AsyncStorage.getItem('AccessToken');
+    dispatch(getChartData(token))
+  }
   useEffect(() => {
     getToken();
   }, []);
-
-  const getToken = async () => {
-    const token = await AsyncStorage.getItem('AccessToken');
-    dispatch(getChartData(token));
-  };
-
   // 조회 된 감정을 가공함. 배열 안의 객체에 밸류값을 추출해 평탄화
   const avr = emotions ? emotions.map(el => Object.values(el)).flat() : null;
   // console.log(avr, ' - - - - - - - - - - - -- - ')
@@ -116,7 +124,45 @@ export default function ChartContainer() {
   };
 
   return (
-    <Container style={{ width: screenWidth }}>
+    <Container style={{width: screenWidth}}>
+      
+      {/* {
+        avr ? (
+          <Plotly 
+            data={data} 
+            layout={layout} 
+            debug 
+            enableFullPlotly
+            style={{
+              width: screenWidth,
+              height: screenHeight,
+              flex: 9,
+              displayModeBar: false
+            }}
+            config={config}
+          />
+        ) : <Text style={{fontSize: 30}}>No Data</Text>
+      } */}
+      {/* {
+        data.r 
+        ? (
+          <Plotly 
+            data={data} 
+            layout={layout} 
+            debug 
+            enableFullPlotly
+            style={{
+              width: screenWidth,
+              height: screenHeight,
+              flex: 9,
+              displayModeBar: false
+            }}
+            config={config}
+          />
+        ) 
+        : <Text>No Data</Text>
+      } */}
+        
       {avr ? (
         <Plotly
           data={data}
