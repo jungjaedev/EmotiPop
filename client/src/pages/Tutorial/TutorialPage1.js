@@ -11,9 +11,8 @@ export default function TutorialPage1() {
   return (
     <Page style={{ width: SCREEN_WIDTH }}>
       <ImageBackgrounds source={require('../../img/background.jpeg')} resizemode="cover">
-        {/* <InnerBackground source={require('../../img/positiveThrow.gif')} resizemode="contain"> */}
-        <Title>인트로 페이지</Title>
-        {/* </InnerBackground> */}
+        <InnerBackground source={require('../../img/intro.gif')} resizemode="contain">
+        </InnerBackground>
       </ImageBackgrounds>
     </Page>
   );
@@ -27,8 +26,8 @@ const ImageBackgrounds = styled.ImageBackground`
 `;
 
 const InnerBackground = styled.ImageBackground`
-  height: 80%;
-  width: 80%;
+  height: 100%;
+  width: 100%;
 `;
 
 const Page = styled.View`

@@ -8,7 +8,7 @@ import {
   TouchableOpacity, 
   Alert,
   Dimensions,
-  ImageBackground
+  ImageBackground,
   } from 'react-native';
 import styled from 'styled-components/native';
 import Btn from '../User/Button';
@@ -30,6 +30,7 @@ export default function SignUp({navigation}) {
   const { email, password, rePassword, username, notSame } = userInfo;
   const [form, setForm] = useState(true)
   const [pass, setPass] = useState(true)
+  const [mailVal, setMailVal] = useState(true)
 
   const emailVal = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g
 
@@ -40,21 +41,18 @@ export default function SignUp({navigation}) {
       ...userInfo,
       [name]: value
     })
+    if(name === 'password' && value.length >=6) {
+      setPass(true)
+    }
   }
 
-  // email 값 추출
-  const emailInput = (e) => {
-    const email = e.nativeEvent.text;
-    console.log(e.isPropagationStopped())
-    setUserInfo({
-      ...userInfo,
-      email
-    })
-    // console.log(userInfo)
-  }
   // email vaildation
   const chkEmail = () => {
-    console.log(emailVal.test(userInfo.email))
+    if(emailVal.test(email)) {
+      setMailVal(true)
+    } else {
+      setMailVal(false)
+    }
   }
 
   // pass값 추출
@@ -84,7 +82,8 @@ export default function SignUp({navigation}) {
   }
   // pass 6자 이상
   const firstPassChk = () => {
-    if(password && password.length < 6) {
+    console.log('here ----1')
+    if(password !== '' && password.length < 6) {
       console.log('hi?')
       setPass(false)
       passRef.current.focus()
@@ -145,18 +144,21 @@ export default function SignUp({navigation}) {
           value={email}
           // keyboardType='email-adress'
           onChange={(e) => signUpHandler(e, 'email')}
-          onSelectionChange={chkEmail}
+          onBlur={chkEmail}
         />
+        {
+          mailVal ? null : <Text style={{color: 'red', marginHorizontal: 40, marginVertical: 10}}>이메일 형식에 부합하지 않습니다.</Text>
+        }
         <Input 
         placeholder="TYPE YOUR PASSWORD"
         secureTextEntry
         onChange={(e) => signUpHandler(e, 'password')}
-        onEndEditing={() => firstPassChk}
+        onBlur={firstPassChk}
         value={password}
         ref={passRef}
         />
         {
-          !pass ? <Text>비밀번호는 6자 이상입니다</Text> : null
+          !pass ? <Text style={{color: 'red'}}>비밀번호는 6자 이상입니다</Text> : null
         }
         <Input 
         placeholder="RETYPE YOUR PASSWORD"
