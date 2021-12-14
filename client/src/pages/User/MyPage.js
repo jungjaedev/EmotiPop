@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, View, Text, TouchableOpacity, Dimensions, ImageBackground, TextInput } from 'react-native';
+import { Button, View, Text, TouchableOpacity, Dimensions, ImageBackground, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Update from 'expo-updates';
 import { reqSignOut, reSignIn } from '../../modules/user';
@@ -18,7 +18,9 @@ export default function MyPage({ navigation }) {
     password: '',
     repassword: '',
   });
+
   const { username, email, password, repassword } = editInfoForm;
+
   function changeDetector(e, name) {
     const value = e.nativeEvent.text;
     setEditInfoForm({
@@ -26,6 +28,7 @@ export default function MyPage({ navigation }) {
       [name]: value,
     });
   }
+  
   const [user, setUser] = useState({})
 
   const getUserInfo = async() => {
@@ -38,7 +41,7 @@ export default function MyPage({ navigation }) {
       },
       withCredentials: true
     })
-    console.log(res.data.userinfo)
+    // console.log(res.data.userinfo)
     const { email: emailInfo, username: userName } = res.data.userinfo;
     setUser({...user, emailInfo, userName})
   }
@@ -47,23 +50,34 @@ export default function MyPage({ navigation }) {
     getUserInfo()
   }, [])
   const {emailInfo, userName} = user;
-
+  console.log(email)
   const submitForm = async e => {
-    // async function submitForm(e) {
-    // console.log('-----------------', editInfoForm);
-    // console.log('hi?')
     const token = await AsyncStorage.getItem('AccessToken');
-    // console.log(111111, token);
-    // e.preventDefault();
-    // console.log('-----------------', 'username :', username, email, password);
+
+    if(username === '' && email === '' && password === '' && repassword === '') {
+      return
+    }
+    if(password === '' && repassword === '') {
+      Alert.alert('비밀번호는 필수로 입력하셔야 합니다.')
+    }
+    if(username === '' && email === '' && (password !== '' && repassword !== '')) {
+      console.log(userName, emailInfo)
+      const res = await axios.patch('http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage', { userName, emailInfo, password }, { headers: { 'ContentType': 'application/json', authorization: `Bearer ${token}` }, withCredentials: true }) 
+      if(res.status === 200) {
+        Alert.alert('정보 수정이 완료되었습니다.')
+        return
+      }
+    }
+    const userInfo = {
+      username: username ? username : userName,
+      email: email ? email : emailInfo,
+      password
+    }
+
     await axios
       .patch(
         'http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage',
-        {
-          username,
-          email,
-          password,
-        },
+        userInfo,
         {
           headers: {
             ContentType: 'application/json',
@@ -73,17 +87,19 @@ export default function MyPage({ navigation }) {
         }
       )
       .then(data => {
-        console.log(111111111155555555, data.data);
+        if(data.status === 200) {
+          Alert.alert(`성공적으로 변경되었습니다.`)
+        }
       });
-    // console.log(editInfoForm);
   };
+
 
   const dispatch = useDispatch();
   const getToken = async() => {
     const token = await AsyncStorage.getItem('AccessToken');
     dispatch(reqSignOut(token));
-    Update.reloadAsync()
-
+    AsyncStorage.clear();
+    Update.reloadAsync();
   }
   const logOutHandler = async () => {
     getToken()
@@ -126,18 +142,22 @@ export default function MyPage({ navigation }) {
           placeholder={emailInfo}
           placeholderTextColor={'black'} 
           onChange={e => changeDetector(e, 'email')} />
-        <TextInput style={{ 
-          width: '90%', 
-          borderBottomColor: 'black', 
-          borderBottomWidth: 2 }} 
+        <TextInput 
+          secureTextEntry
+          style={{ 
+            width: '90%', 
+            borderBottomColor: 'black', 
+            borderBottomWidth: 2 }} 
           placeholder='Password' onChange={e => changeDetector(e, 'password')} />
-        <TextInput style={{ 
-          width: '90%', 
-          borderBottomColor: 'black', 
-          borderBottomWidth: 2,
+        <TextInput
+          secureTextEntry 
+          style={{ 
+            width: '90%', 
+            borderBottomColor: 'black', 
+            borderBottomWidth: 2,
           }} 
           placeholder='Repassword' onChange={e => changeDetector(e, 'repassword')} />
-          {/* {password && repassword !== repassword ? <Text> '비밀번호가 일치하지 않습니다'</Text> : null} */}
+          {/* {username === '' || email === '' || password === '' || repassword === '' ? <Text> '모든 정보를 입력해주세요'</Text> : null} */}
         <TouchableOpacity style={{ 
           // justifyContent: 'space-around', 
           backgroundColor: 'white', 

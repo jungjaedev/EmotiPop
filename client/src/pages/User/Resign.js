@@ -33,8 +33,8 @@ function Resign ({navigation}) {
     withCredentials: true,}
     )
     if(res.status === 200) {
-      Update.reloadAsync()
       Alert.alert('다음에 또 만나요...ㅠ')
+      Update.reloadAsync()
     }
     // .then(res => {
     //   console.log(res)

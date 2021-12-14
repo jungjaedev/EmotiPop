@@ -12,6 +12,7 @@ import ChartContainer from '../chart/ChartContainer';
 import MyPage from '../User/MyPage';
 import Home from './Home';
 import Main from '../Main/Main';
+import TutorialPage1 from '../Tutorial/TutorialPage1';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -24,6 +25,13 @@ export default function MainHome({ navigation }) {
     chart: true,
     mypage: false,
   });
+  // const [intro, setIntro] = useState(true);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIntro(false)
+  //   }, 2000)
+  // }, [])
 
   // console.log(page)
   return (
@@ -37,11 +45,25 @@ export default function MainHome({ navigation }) {
       source={require('../../img/background.jpeg')}
     >
       <StatusBar style="dark" />
+      {/* {
+        intro 
+        ? <TutorialPage1 /> 
+        : (
+          <>
+            {pageState.pages.home ? <Main navigation={navigation} /> : null}
+            {pageState.pages.cal ? <CalendarContiner navigation={navigation} /> : null}
+            {pageState.pages.chart ? <ChartContainer /> : null}
+            {pageState.pages.mypage ? <MyPage navigation={navigation} /> : null}
+            <Nav navigation={navigation} />
+          </>
+        ) 
+      } */}
       {pageState.pages.home ? <Main navigation={navigation} /> : null}
       {pageState.pages.cal ? <CalendarContiner navigation={navigation} /> : null}
       {pageState.pages.chart ? <ChartContainer /> : null}
       {pageState.pages.mypage ? <MyPage navigation={navigation} /> : null}
       <Nav navigation={navigation} />
+      
     </BackGround>
   );
 }

@@ -25,12 +25,13 @@ const PassModal = ({modal, setModal}) => {
 
   const textHandler = (e) => {
     const value = e.nativeEvent.text;
-    console.log(value)
+    // console.log(value)
     setEmailForm(value)
   }
 
   const test = async() => {
-    const res = await axios.post(`http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/users/findme`, {
+    try{
+      const res = await axios.post(`http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/users/findme`, {
       email: emailForm
     }, {
       headers: {
@@ -38,7 +39,23 @@ const PassModal = ({modal, setModal}) => {
       },
       withCredentials: true
     })
-    console.log(res)
+      if(res.status === 200) {
+        Alert.alert('임시 비밀번호가 메일로 전송되었습니다.')
+      }
+      setModal(modal => !modal)
+    } catch(err) {
+      console.log(err.name)
+      if(err.name === 'Error') {
+        Alert.alert('이메일 주소를 확인해 주세요!')
+      }
+    }
+    
+    // console.log(res)
+    // if(res.status === 401) {
+    //   Alert.alert('이메일이 존재하지 않습니다.')
+    //   return
+    // }
+    
   }
 
   const alertPage = async() => {
@@ -51,20 +68,7 @@ const PassModal = ({modal, setModal}) => {
     }
 
     test()
-    // Alert.alert('입력하신 메일 주소가 맞다면 제대로 요청이 들어갈 것입니다.')
-    // console.log(emailForm, '-_ - - - -_  - _- - ')
-    // console.log({email: emailForm})
-    // const res = await axios.post(`${URL}users/findme`, { email: emailForm }, {
-    //   headers: {
-    //     'ContentType': 'application/json',
-    //   },
-    //   withCredentials: true
-    // })
-    // console.log(res)
-    // setEmailForm('')
-    // setModal(modal => !modal)
   }
-  // axios.post ec2/users/findme >>> message: 'ok', data : {token}
 
   return (
     <View style={{
