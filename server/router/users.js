@@ -6,35 +6,22 @@ const { body, validationResult } = require('express-validator');
 // 유효성 검사
 // error 표시
 const validate = (req, res, next) => {
-    const errors = validationResult(req);
-    if (errors.isEmpty()) {
-        return next();
-    }
-    return res.status(400).json({ message: errors.array()[0].msg });
-}
-
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    return next();
+  }
+  return res.status(400).json({ message: errors.array()[0].msg });
+};
 
 // email, password
 const validateCredential = [
-    body('email')
-        .isEmail()
-        .normalizeEmail()
-        .withMessage('Invalid type of Email'),
-    body('password')
-        .trim()
-        .isLength({ min: 6 })
-        .withMessage('password should be at least 6 characters'),
-    validate
-]
+  body('email').isEmail().normalizeEmail().withMessage('Invalid type of Email'),
+  body('password').trim().isLength({ min: 6 }).withMessage('password should be at least 6 characters'),
+  validate,
+];
 
 // + username (signup)
-const validateSignup = [
-    ...validateCredential,
-    body('username')
-        .notEmpty()
-        .withMessage('username is missing'),
-    validate
-]
+const validateSignup = [...validateCredential, body('username').notEmpty().withMessage('username is missing'), validate];
 
 // API
 
@@ -56,7 +43,7 @@ router.get('/me', usersController.me.get);
 // POST /users/findme
 router.post('/findme', usersController.findme.post);
 
-// POST /users/reset
-router.post('/reset/:token', usersController.findme.reset);
+// // POST /users/reset
+// router.post('/reset/:token', usersController.findme.reset);
 
 module.exports = router;

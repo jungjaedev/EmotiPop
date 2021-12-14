@@ -24,7 +24,7 @@ export default function TutorialPage5() {
           그동안 누적된 당신의 <Text style={{ color: '#035c50' }}>감정</Text>들의 수치를 확인할 수 있어요!
         </Content>
 
-        <InnerBackground source={require('../../img/iphone.png')} resizemode="contain"></InnerBackground>
+        <InnerBackground source={require('../../img/tutorialchartimg.png')} resizemode="contain"></InnerBackground>
       </ImageBackgrounds>
     </Page>
   );
