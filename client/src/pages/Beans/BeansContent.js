@@ -34,7 +34,6 @@ function BeansContent({ navigation, route }) {
     navigation.goBack();
   };
 
-  // Todo : 게시글 수정 기능 구현
   const editContent = () => {
     console.log('edit!!');
     setEdit(!edit);
@@ -146,10 +145,17 @@ function BeansContent({ navigation, route }) {
               ) : null}
             </Header>
             <View style={{ borderBottomWidth: 3, borderBottomColor: '#a9caf5', borderRadius: 20, marginVertical: 15 }}></View>
-            <Emotions>{/* <Text>Level : {datas.emotion_level}</Text> */}</Emotions>
-            <Content style={{ paddingHorizontal: 20 }}>
-              <TextInput onChangeText={onChangeText}>{datas.contents}</TextInput>
-            </Content>
+            <Emotions></Emotions>
+
+            {!edit ? (
+              <Content style={{ paddingHorizontal: 20 }}>
+                <Text onChangeText={onChangeText}>{datas.contents}</Text>
+              </Content>
+            ) : (
+              <Content style={{ paddingHorizontal: 20 }}>
+                <TextInput onChangeText={onChangeText}>{datas.contents}</TextInput>
+              </Content>
+            )}
           </View>
         ) : null}
       </ImageBackgrounds>
