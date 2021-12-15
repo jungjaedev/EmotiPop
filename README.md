@@ -36,9 +36,9 @@
 
 ![image](https://img.shields.io/badge/FRONT-Redux-%23764ABC?style=for-the-badge&logo=Redux)
 
-![image](https://img.shields.io/badge/FRONT-GreenSock-%2388CE02?style=for-the-badge&logo=GreenSock)
-
 ![image](https://img.shields.io/badge/FRONT-Adobe%20Illustrator-%23FF9A00?style=for-the-badge&logo=Adobe%20Illustrator)
+
+![image](https://img.shields.io/badge/FRONT-FlipaClip-%ffffff?style=for-the-badge)
 
 ## Back
 ![image](https://img.shields.io/badge/BACK-JavaScript-%23F7DF1E?style=for-the-badge&logo=JavaScript)
@@ -62,9 +62,9 @@
 |------|---|
 |이승연|🏁 Full Stack|
 |이현호|🖥 Front End|
-|이홍경|🏁 Full Stack|
-|정재원|⚙️ Back End|
+|이홍경|💻 Back End|
+|정재원|🏁 Full Stack|
 
 
 ## For project details
-
+[checkout WIKI](https://github.com/codestates/EmotiPop/wiki)
