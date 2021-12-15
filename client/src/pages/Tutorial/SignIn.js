@@ -17,6 +17,7 @@ import styled from 'styled-components/native';
 import Btn from '../User/Button';
 import { reqSignIn, googleSignIn } from '../../modules/user'
 import PassModal from './PassModal';
+import axios from 'axios';
 // import Expo from "expo"
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -62,21 +63,35 @@ export default function SignIn({navigation}) {
   }
 
   // 로그인 버튼 클릭과 동시에 유효성 검사 & 로그인 요청
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if( (email === '' && password === '') | (email === '' | password === '')) {
       setWrongInfo(false)
       return
-    }
-    // 400 Error 처리
-    if(user.signIn.error) {
-      Alert.alert('이메일과 비밀번호를 확인해 주세요')
-    }
-    dispatch(reqSignIn(userInfo))
-    setTimeout(() => {
-      navigation.navigate('TutorialHome')
-    }, 1000)
-  }
+    } 
+    try {
+      const { data } = await axios.post(`http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/users/signin`, userInfo, { headers: {'Content-Type': 'application/json'}, withCredentials: true });
+      if(data) {
+        dispatch(reqSignIn(userInfo))
+        navigation.navigate('TutorialHome')
+      }
 
+    } catch(err) {
+      console.log(err.name, 'errrrrrr')
+      if(err.name) {
+        Alert.alert('이메일 혹은 비밀번호를 확인해 주세요.')
+      }
+    }
+
+    // console.log(user.signIn, '-b-v--ae-asd---asd-asd--')
+    // if(user.signIn.error) {
+    //   Alert.alert('이메일과 비밀번호를 확인해 주세요')
+    //   return 
+    // }
+    
+    // setTimeout(() => {
+    //   navigation.navigate('TutorialHome')
+    // }, 1000)
+  }
 
   // 구글 로그인 
   const googleOauth = () => {
