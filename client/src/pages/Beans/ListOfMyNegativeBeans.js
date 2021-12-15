@@ -41,7 +41,7 @@ function ListOfMyNegativeBeans({ navigation, route }) {
             <Roomname>부정이방</Roomname>
           </View>
           <View style={{ width: 130, marginTop: 35 }}>
-            <Date>{route.params.data[0].createdAt.toString().split('T')[0]}</Date>
+            {!route.params.data[0] ? null : <Date>{route.params.data[0].createdAt.toString().split('T')[0]}</Date>}
           </View>
         </Header>
         <ScrollView>

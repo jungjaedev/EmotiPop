@@ -41,11 +41,19 @@ export default function ChooseRoom({ navigation, route }) {
             <Feather name="arrow-left" size={35} color="black" />
           </Text>
         </TouchableOpacity>
-        <ImageBackground source={require('../../img/red.png')} resizemode="cover" style={{ resizeMode: 'cover', width: 200, height: 200}}>
-          <TouchableOpacity style={{ alignItems: 'center', marginTop: 80 }} onPress={() => reqList(1)}><Text style={{ color: 'white', fontSize: 30}}>긍정이</Text></TouchableOpacity>
+        <ImageBackground source={require('../../img/red.png')} resizemode="cover" style={{ resizeMode: 'cover', width: 200, height: 200 }}>
+          <TouchableOpacity style={{ alignItems: 'center', marginTop: 80 }} onPress={() => reqList(1)}>
+            <Text style={{ color: 'white', fontSize: 30 }}>긍정이</Text>
+          </TouchableOpacity>
         </ImageBackground>
-        <ImageBackground source={require('../../img/yellow.png')} resizemode="cover" style={{ resizeMode: 'cover', width: 200, height: 200}}>
-          <TouchableOpacity style={{ alignItems: 'center', marginTop: 80 }} onPress={() => reqList(0)}><Text style={{ color: 'white', fontSize: 30}}>부정이</Text></TouchableOpacity>
+        <ImageBackground
+          source={require('../../img/yellow.png')}
+          resizemode="cover"
+          style={{ resizeMode: 'cover', width: 200, height: 200 }}
+        >
+          <TouchableOpacity style={{ alignItems: 'center', marginTop: 80 }} onPress={() => reqList(0)}>
+            <Text style={{ color: 'white', fontSize: 30 }}>부정이</Text>
+          </TouchableOpacity>
         </ImageBackground>
       </ImageBackgrounds>
     </Container>

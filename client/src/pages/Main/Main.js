@@ -234,12 +234,12 @@ export default function Main({ navigation }) {
               </NativeBaseProvider>
             ) : null}
           </TouchableOpacity>
-          {new Date().getDay() === 1 ? (
-            <Bubble style={{ margin: 20, padding: 20, position: 'absolute', left: 100, bottom: 120 }}>
-              <Text style={{ marginTop: 'auto', marginBottom: 'auto', padding: 10 }}>지금 저를 누르면 박이 터져요!!!</Text>
+          {new Date().getDay() === 3 ? (
+            <Bubble style={{ margin: 20, padding: 20, position: 'absolute', left: 150, bottom: 180 }}>
+              <Text style={{ marginTop: 'auto', marginBottom: 'auto', padding: 5 }}>지금 저를 누르면 박이 터져요!!!</Text>
             </Bubble>
           ) : null}
-          {new Date().getDay() === 1 ? (
+          {new Date().getDay() === 3 ? (
             <TouchableOpacity onPress={weeklyPop}>
               <Girl source={require('../../img/girl.png')} resizemode="contain" style={{ resizeMode: 'contain' }} />
             </TouchableOpacity>
