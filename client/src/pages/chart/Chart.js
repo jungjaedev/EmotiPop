@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
 import Btn from '../User/Button';
 import axios from 'axios';
-import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Chart({ beans }) {
   // console.log(beans)
@@ -19,7 +18,6 @@ export default function Chart({ beans }) {
           </SubTitle>
           <ProgressContainer>
             <ProgressBar style={{ width: `${Object.values(item)}%` }} />
-            {/* <LinearGradient colors={['red', 'gold']} style={{width: `${Object.values(item)}%`}}/> */}
           </ProgressContainer>
         </Item>
       ))}
