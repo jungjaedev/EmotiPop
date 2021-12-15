@@ -17,7 +17,7 @@ module.exports = {
       attributes: { exclude: ['password'] },
       where: {
         email: accessTokenData.email,
-        username: accessTokenData.username,
+        // username: accessTokenData.username,
       },
     });
     // console.log(userInfo);
