@@ -68,7 +68,7 @@ export default function ChartContainer() {
             <Colors>
               {emotionList.map((el, idx) => {
                 return (
-                  <View style={{ flexDirection: 'row', margin: 5, justifyContent: 'center', alignItems: 'center' }}>
+                  <View style={{ flexDirection: 'row', margin: 5, justifyContent: 'center', alignItems: 'center' }} key={idx}>
                     <Text>{el.text}</Text>
                     <View style={{ backgroundColor: el.color, width: 10, height: 10, borderRadius: 30, marginLeft: 5 }}></View>
                   </View>

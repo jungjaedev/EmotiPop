@@ -53,7 +53,7 @@ export default function MyPage({ navigation }) {
   console.log(email)
   const submitForm = async e => {
     const token = await AsyncStorage.getItem('AccessToken');
-
+    // 모두 입력하지 않은경우
     if(username === '' && email === '' && password === '' && repassword === '') {
       return
     }
@@ -73,6 +73,15 @@ export default function MyPage({ navigation }) {
       email: email ? email : emailInfo,
       password
     }
+    if(username === '' && email && password && repassword) {
+      await axios.patch('http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage', {
+        userName, email, password }, { headers: { 'ContentType': 'application/json', authorization: `Bearer ${token}` },
+        withCredentials: true
+      }).then(res =>{
+        console.log(res)
+        Alert.alert('성공적으로 변경되었습니다.')
+      })
+    }
 
     await axios
       .patch(
@@ -87,6 +96,7 @@ export default function MyPage({ navigation }) {
         }
       )
       .then(data => {
+        console.log(data.status)
         if(data.status === 200) {
           Alert.alert(`성공적으로 변경되었습니다.`)
         }
@@ -118,14 +128,21 @@ export default function MyPage({ navigation }) {
       <TouchableOpacity style={{ 
         // justifyContent: 'space-around', 
         backgroundColor: 'white', 
-        width: 70, 
-        borderRadius: 6,
+        width: 100, 
+        borderRadius: 20,
         marginVertical: 60, 
         marginLeft: '50%',
         // flex: .3
         }} 
         onPress={logOutHandler}>
-        <Text style={{textAlign: 'center', fontWeight: 'bold', paddingVertical: 10, paddingHorizontal: 10,}}>Log out</Text>
+        <Text 
+          style={{
+            textAlign: 'center', 
+            fontWeight: 'bold', 
+            paddingVertical: 10, 
+            // paddingHorizontal: 10,
+          }}>Log out
+        </Text>
       </TouchableOpacity>
       <UserInfomation style={{ justifyContent: 'space-around', marginVertical: 20, marginBottom: 20 }}>
         <TextInput style={{ 

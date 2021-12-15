@@ -23,7 +23,7 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 
 export default function App() {
   const [ani, setAni] = useState(true);
-  const timer = () => setTimeout(() => setAni(false), 5500)
+  const timer = () => setTimeout(() => setAni(false), 5100)
 
   useEffect(() => {
     // setTimeout(() => {

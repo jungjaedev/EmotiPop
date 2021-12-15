@@ -35,7 +35,8 @@ export default function MainHome() {
       // alignItems: 'center', 
       // justifyContent: 'space-between',
       width: SCREEN_WIDTH,
-      height: 60
+      height: 60,
+      // marginVertical: 30
     }}>      
       <NavContainer>
         <Btn onPress={() => {
