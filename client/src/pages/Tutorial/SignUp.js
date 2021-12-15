@@ -123,6 +123,7 @@ export default function SignUp({navigation}) {
           'Content-Type': 'application/json',
         }, withCredentials: true
       })
+      console.log(req)
       if(!req.data.message === 'Signup Completed') {
         Alert.alert('Email or password is not correct!')
         throw new Error('Something went wrong')
@@ -131,7 +132,9 @@ export default function SignUp({navigation}) {
         navigation.navigate('SignIn')
       }
     } catch(err) {
-      throw new Error(err)
+      if(err.name) {
+        Alert.alert('이미 가입되어 있는 메일주소 입니다.')
+      }
     } 
   }
   

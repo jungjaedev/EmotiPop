@@ -50,57 +50,97 @@ export default function MyPage({ navigation }) {
     getUserInfo()
   }, [])
   const {emailInfo, userName} = user;
-  console.log(email)
-  const submitForm = async e => {
+
+  // const reqAlert = () => {
+  //   Alert.alert('성공적으로 완료되었습니다.')
+  // }
+  const submitForm = async () => {
     const token = await AsyncStorage.getItem('AccessToken');
     // 모두 입력하지 않은경우
-    if(username === '' && email === '' && password === '' && repassword === '') {
-      return
-    }
+    // if(username === '' && email === '' && password === '' && repassword === '') {
+    //   return
+    // }
+    // if(password === '' && repassword === '') {
+    //   Alert.alert('비밀번호는 필수로 입력하셔야 합니다.')
+    // }
+    // if(username === '' && email === '' && (password !== '' && repassword !== '')) {
+    //   console.log(userName, emailInfo)
+    //   const res = await axios.patch('http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage', { userName, emailInfo, password }, { headers: { 'ContentType': 'application/json', authorization: `Bearer ${token}` }, withCredentials: true }) 
+    //   if(res.status === 200) {
+    //     Alert.alert('정보 수정이 완료되었습니다.')
+    //     return
+    //   }
+    // }
+    
+    // if(username === '' && email && password && repassword) {
+    //   await axios.patch('http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage', {
+    //     userName, email, password }, { headers: { 'ContentType': 'application/json', authorization: `Bearer ${token}` },
+    //     withCredentials: true
+    //   }).then(res =>{
+    //     console.log(res)
+    //     Alert.alert('성공적으로 변경되었습니다.')
+    //   })
+    // }
+
+    // await axios
+    //   .patch(
+    //     'http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage',
+    //     userInfo,
+    //     {
+    //       headers: {
+    //         ContentType: 'application/json',
+    //         authorization: `Bearer ${token}`,
+    //       },
+    //       withCredentials: true,
+    //     }
+    //   )
+    //   .then(data => {
+    //     console.log(data)
+    //     // if(data.status === 200) {
+    //     //   Alert.alert(`성공적으로 변경되었습니다.`)
+    //     // }
+    //   });
+    // const userInfo = {
+    //   username: username ? username : userName,
+    //   email: email ? email : emailInfo,
+    //   password
+    // }
+    // console.log(userInfo)
+
     if(password === '' && repassword === '') {
       Alert.alert('비밀번호는 필수로 입력하셔야 합니다.')
+      return
     }
-    if(username === '' && email === '' && (password !== '' && repassword !== '')) {
-      console.log(userName, emailInfo)
-      const res = await axios.patch('http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage', { userName, emailInfo, password }, { headers: { 'ContentType': 'application/json', authorization: `Bearer ${token}` }, withCredentials: true }) 
-      if(res.status === 200) {
-        Alert.alert('정보 수정이 완료되었습니다.')
-        return
-      }
-    }
+
     const userInfo = {
       username: username ? username : userName,
       email: email ? email : emailInfo,
       password
     }
-    if(username === '' && email && password && repassword) {
-      await axios.patch('http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage', {
-        userName, email, password }, { headers: { 'ContentType': 'application/json', authorization: `Bearer ${token}` },
+    console.log(userInfo)
+    if(password && repassword) {
+      await axios.patch('http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage', userInfo, {
+        headers: {
+          'ContentType': 'application/json',
+          authorization: `Bearer ${token}`
+        },
         withCredentials: true
-      }).then(res =>{
-        console.log(res)
-        Alert.alert('성공적으로 변경되었습니다.')
+      }).then(result => {
+        console.log(result)
+        if(result.status === 200) {
+          Alert.alert('성공적으로 완료되었습니다.')
+        }
       })
     }
 
-    await axios
-      .patch(
-        'http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/mypage',
-        userInfo,
-        {
-          headers: {
-            ContentType: 'application/json',
-            authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        }
-      )
-      .then(data => {
-        console.log(data.status)
-        if(data.status === 200) {
-          Alert.alert(`성공적으로 변경되었습니다.`)
-        }
-      });
+    // try {
+      
+    //   // reqAlert()
+    //   Alert.alert('????????')
+    // } catch(err) {
+    //   console.log(err)
+    //   throw new Error(err)
+    // }
   };
 
 
