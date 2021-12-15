@@ -40,30 +40,17 @@ export default function MainHome({ navigation }) {
         alignItems: 'center',
         justifyContent: 'space-between',
         width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT,
+        height: '100%',
       }}
       source={require('../../img/background.jpeg')}
+      resizemode="cover"
     >
       <StatusBar style="dark" />
-      {/* {
-        intro 
-        ? <TutorialPage1 /> 
-        : (
-          <>
-            {pageState.pages.home ? <Main navigation={navigation} /> : null}
-            {pageState.pages.cal ? <CalendarContiner navigation={navigation} /> : null}
-            {pageState.pages.chart ? <ChartContainer /> : null}
-            {pageState.pages.mypage ? <MyPage navigation={navigation} /> : null}
-            <Nav navigation={navigation} />
-          </>
-        ) 
-      } */}
       {pageState.pages.home ? <Main navigation={navigation} /> : null}
       {pageState.pages.cal ? <CalendarContiner navigation={navigation} /> : null}
       {pageState.pages.chart ? <ChartContainer /> : null}
       {pageState.pages.mypage ? <MyPage navigation={navigation} /> : null}
       <Nav navigation={navigation} />
-      
     </BackGround>
   );
 }
