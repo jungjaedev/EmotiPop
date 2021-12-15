@@ -24,7 +24,7 @@ export default function TutorialPage2() {
           기록해보세요!
         </Content>
         <InnerBackground source={require('../../img/tutorialthrow.png')} resizemode="contain"></InnerBackground>
-        <Text style={{ top: 350, color: 'navy', fontWeight: 'bold' }}>박을 터치하면 감정을 기록할 수 있어요</Text>
+        <Text style={{ top: 400, color: 'navy', fontWeight: 'bold' }}>박을 터치하면 감정을 기록할 수 있어요</Text>
       </ImageBackgrounds>
     </Page>
   );
@@ -44,14 +44,14 @@ const ImageBackgrounds = styled.ImageBackground`
 
 const InnerBackground = styled.ImageBackground`
   position: absolute;
-  height: 90%;
-  width: 90%;
-  top: 200px;
-  left: 50px;
+  height: 87%;
+  width: 100%;
+  top: 250px;
+  left: 35px;
 `;
 
 const Page = styled.View`
-  margin-top: 20px;
+  /* margin-top: 20px; */
   width: 100%;
   height: 100%;
   background: #ddd;
@@ -59,7 +59,7 @@ const Page = styled.View`
   align-items: center;
 `;
 const Title = styled.Text`
-  margin-top: 30px;
+  margin-top: 60px;
   font-weight: bold;
   font-size: 30px;
 `;
@@ -87,5 +87,5 @@ const Dots = styled.View`
   justify-content: space-between;
   flex-direction: row;
   position: absolute;
-  top: 10px;
+  top: 35px;
 `;
