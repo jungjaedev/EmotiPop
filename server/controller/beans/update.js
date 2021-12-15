@@ -41,7 +41,7 @@ module.exports = {
       emotion_level,
       contents,
       gourdKinds: gourdkinds,
-      users_id: accessTokenData.id,
+      users_id: userInfo.dataValues.id,
     };
     const id = req.params.beans_id;
     await Beans.update({ ...data }, { where: { id } });
