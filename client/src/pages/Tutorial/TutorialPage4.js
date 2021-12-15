@@ -17,7 +17,7 @@ export default function TutorialPage4() {
       </Dots>
       <ImageBackgrounds source={require('../../img/background.jpeg')} resizemode="cover">
         <Title>
-          일주일에 한번 터지는 감정박 <BlueBean source={require('../../img/blueBean.png')} resizemode="cover"></BlueBean>
+          일주일에 한번 터지는{'\n'}감정박 <BlueBean source={require('../../img/blueBean.png')} resizemode="contain"></BlueBean>
         </Title>
         <Content>
           <Text style={{ color: '#035c50' }}>일요일</Text>에 일주일동안 쌓인 당신의 감정이 터져요!
@@ -60,6 +60,7 @@ const Title = styled.Text`
   margin-top: 60px;
   font-weight: bold;
   font-size: 30px;
+  text-align: center;
 `;
 
 const Content = styled.Text`
