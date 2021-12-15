@@ -235,17 +235,25 @@ export default function Main({ navigation }) {
             ) : null}
           </TouchableOpacity>
           {new Date().getDay() === 3 ? (
-            <Bubble style={{ margin: 20, padding: 20, position: 'absolute', left: 150, bottom: 180 }}>
-              <Text style={{ marginTop: 'auto', marginBottom: 'auto', padding: 5 }}>지금 저를 누르면 박이 터져요!!!</Text>
+            <Bubble>
+              <Text style={{ marginTop: 'auto', marginBottom: 'auto' }}>지금 저를 누르면 박이 터져요!!!</Text>
             </Bubble>
           ) : null}
           {new Date().getDay() === 3 ? (
             <TouchableOpacity onPress={weeklyPop}>
-              <Girl source={require('../../img/girl.png')} resizemode="contain" style={{ resizeMode: 'contain' }} />
+              <Girl
+                source={require('../../img/girl.png')}
+                resizemode="contain"
+                style={{ resizeMode: 'contain', opacity: writing ? 0 : 1 }}
+              />
             </TouchableOpacity>
           ) : (
             <TouchableOpacity>
-              <Girl source={require('../../img/girl.png')} resizemode="contain" style={{ resizeMode: 'contain' }} />
+              <Girl
+                source={require('../../img/girl.png')}
+                resizemode="contain"
+                style={{ resizeMode: 'contain', opacity: writing ? 0 : 1 }}
+              />
             </TouchableOpacity>
           )}
         </ImageBackgrounds>
@@ -267,16 +275,27 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
 });
+// style={{ margin: 20, padding: 10, position: 'absolute', left: 150, bottom: 180 }}
 
 const Bubble = styled.View`
   font-size: 18px;
   line-height: 24px;
-  width: 260px;
+  margin: 20px;
+  width: 230px;
   background: #fff;
+  /* position: absolute; */
+  left: 125px;
+  top: 80px;
   border-radius: 40px;
-  padding: 24px;
+  padding: 18px;
+
   text-align: center;
   color: #000;
+`;
+const Girl = styled.Image`
+  /* margin-bottomp: 30px; */
+  height: 50%;
+  /* width: 30%; */
 `;
 
 const Bean = styled.ImageBackground`
@@ -301,12 +320,6 @@ const Grourds = styled.Image`
   margin-left: 40px;
   height: 400px;
   /* width: 400px; */
-`;
-
-const Girl = styled.Image`
-  margin-top: 30px;
-  height: 50%;
-  /* width: 30%; */
 `;
 
 const Btn = styled.TouchableOpacity`
