@@ -28,8 +28,9 @@ function ListOfMyPositiveBeans({ navigation, route }) {
       <ImageBackgrounds source={require('../../img/background.jpeg')} resizemode="cover">
         <TouchableOpacity
           activeOpacity={0.8}
-          style={{ position: 'absolute', marginTop: 15, marginLeft: 10, width: 35, height: 35 }}
+          style={{ position: 'absolute', marginTop: 30, marginLeft: 15, width: 35, height: 35 }}
           onPress={goBack}
+          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
         >
           <Text>
             <Feather name="arrow-left" size={35} color="black" />
@@ -91,7 +92,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#DBF4F4',
-    marginTop: 20,
   },
 });
 
@@ -129,15 +129,15 @@ const Roomname = styled.Text`
 
 const Date = styled.Text`
   margin-left: 15px;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: bold;
 `;
 
 const Header = styled.View`
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 30px;
-  margin-bottom: 5px;
+  margin-top: 50px;
+  margin-bottom: 10px;
   height: 90px;
   /* border: 1px solid black; */
 `;

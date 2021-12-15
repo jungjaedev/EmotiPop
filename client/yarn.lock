@@ -10295,11 +10295,6 @@
   dependencies:
     "warn-once" "^0.1.0"
 
-"react-native-scroll-indicator@^0.1.0":
-  "integrity" "sha512-fErMTBZe/aNZgKW1QYKXvQnsnODqBkQ7j/2K89DkimUqUgJAv+mltsj05JUXTu8sJBJznoFXwmW+3h2/Dcfbog=="
-  "resolved" "https://registry.npmjs.org/react-native-scroll-indicator/-/react-native-scroll-indicator-0.1.0.tgz"
-  "version" "0.1.0"
-
 "react-native-scrollable-tab-view@^1.0.0":
   "integrity" "sha512-lpZ9xz+PBdgSzpk93VjCIfxV0zvJDX9iEUP8ImDg3p1QJGHOWbWyfDx+lcx5VCDVrrdZdtuVAAdc0tkYXZyQDw=="
   "resolved" "https://registry.npmjs.org/react-native-scrollable-tab-view/-/react-native-scrollable-tab-view-1.0.0.tgz"
