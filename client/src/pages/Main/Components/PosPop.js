@@ -3,7 +3,7 @@ import { Dimensions, TouchableOpacity, Text, TextInput, StyleSheet, Image, View,
 import styled from 'styled-components/native';
 import MessageModal from './MessageModal';
 
-export default function PosPop() {
+export default function PosPop({ navigation }) {
   const [time, setTime] = useState(false);
   const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -16,7 +16,7 @@ export default function PosPop() {
   return (
     <Container>
       <ImageBackgrounds source={require('../../../img/background.jpeg')} resizemode="cover">
-        <ImageBackgrounds source={require('../../../img/positivePop111.gif')} resizemode="cover"></ImageBackgrounds>
+        <ImageBackgrounds source={require('../../../img/positivePop_4.gif')} resizemode="cover"></ImageBackgrounds>
         {time ? <MessageModal navigation={navigation} /> : null}
       </ImageBackgrounds>
     </Container>

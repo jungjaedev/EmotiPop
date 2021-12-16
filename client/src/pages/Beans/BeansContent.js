@@ -8,14 +8,16 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Feather } from '@expo/vector-icons';
 
-function BeansContent({ navigation, route }) {
+function BeansContent({ navigation, route, bean, setDetail, setBeansData, data }) {
+  // console.log(bean, '@@@@@@@@@@@@@@@@@')
+  console.log(data, '@!@#!@#!@$!@%!@#$!@%$!@');
   const [datas, setDatas] = useState({});
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState(datas.contents);
 
   const getData = async () => {
     const token = await AsyncStorage.getItem('AccessToken');
-    const data = await axios.get(`http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/beans/${route.params.data}`, {
+    const data = await axios.get(`http://ec2-13-209-98-187.ap-northeast-2.compute.amazonaws.com:8080/beans/${bean}`, {
       headers: {
         ContentType: 'application/json',
         authorization: `Bearer ${token}`,
@@ -23,7 +25,7 @@ function BeansContent({ navigation, route }) {
       withCredentials: true,
     });
     setDatas(data.data.data);
-    // console.log('------data: ', data.data.data);
+    console.log('------data: ', data.data.data);
   };
 
   useEffect(() => {
@@ -31,7 +33,8 @@ function BeansContent({ navigation, route }) {
   }, []);
 
   const goBack = () => {
-    navigation.goBack();
+    // navigation.goBack();
+    setDetail(0);
   };
 
   const editContent = () => {
@@ -83,7 +86,11 @@ function BeansContent({ navigation, route }) {
       setValue('');
       setEdit(false);
       setDatas('');
-      navigation.navigate('MainHome');
+      setDetail(0);
+      setBeansData(beansdata => {
+        return beansdata.filter(el => el.id !== bean);
+      });
+      // navigation.navigate('ChooseRoom')
     };
 
     Alert.alert(
@@ -103,13 +110,13 @@ function BeansContent({ navigation, route }) {
       <ImageBackgrounds source={require('../../img/background.jpeg')} resizemode="cover">
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 30, height: 0, marginHorizontal: 10 }}>
           <View>
-            <TouchableOpacity activeOpacity={0.8} style={{ width: 35, height: 35 }} onPress={goBack}>
+            <TouchableOpacity activeOpacity={0.8} style={{ right: -5, bottom: 30, width: 50, height: 50 }} onPress={goBack}>
               <Text>
                 <Feather name="arrow-left" size={35} color="black" />
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row', bottom: 20 }}>
             {edit ? (
               <TouchableOpacity activeOpacity={0.2} style={{ width: 35, height: 35 }} onPress={editContentaxios}>
                 <Text>완료</Text>

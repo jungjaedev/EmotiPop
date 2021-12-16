@@ -15,10 +15,9 @@ module.exports = {
     const findUser = await Users.findOne({
       where: { email: accessTokenData.email },
     });
-
     // 일요일마다 '긍정' '부정' 중에
     // 콩주머니를 더 많이 맞은 박이 터짐
-
+    //console.log('----', accessTokenData)
     const sixDaysAgo = new Date(new Date().setDate(new Date().getDate() - 6));
     // console.log(sevenDaysAgo);
     const beans = await Beans.findAll({
@@ -31,18 +30,19 @@ module.exports = {
       },
     });
 
-    // console.log(beans);
+    // console.log("beans : 00",beans);
     let posCount = 0;
     let negCount = 0;
 
     beans.forEach(bean => {
-      if (bean.gourdKinds === true) {
+      if (bean.dataValues.gourdKinds === true) {
         posCount++;
       } else {
         negCount++;
       }
     });
-
+    console.log('pos : ', posCount);
+    console.log('neg : ', negCount);
     if (posCount > negCount) {
       return res.status(201).json({
         message: 'Positive Gourd Win',
