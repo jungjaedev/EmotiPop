@@ -27,13 +27,11 @@ export default function CalenderContainer({ navigation }) {
       },
       withCredentials: true,
     });
-
     setCheckDays(data.data.data);
-    // console.log('------data.data.data : ', data.data.data);
   };
   useEffect(() => {
     getCalendarData();
-  }, []);
+  });
   //  글작성안된날짜 누르면 작동 X
   const haveBean = days => {
     if (checkDays.includes(days.format('Y-M-D'))) {
@@ -64,6 +62,7 @@ export default function CalenderContainer({ navigation }) {
                 return (
                   <TouchableOpacity key={index} onPress={() => haveBean(days)}>
                     <View style={{ width: 20, height: 20 }}>
+                      {/* !!! !!! !!! */}
                       {checkDays.includes(days.format('Y-M-D')) ? (
                         <View>
                           <EveryDay>{days.format('D')}</EveryDay>

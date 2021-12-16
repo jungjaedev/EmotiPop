@@ -73,9 +73,10 @@ export default function Main({ navigation }) {
       },
       withCredentials: true,
     });
+    // console.log('---', weeklydata.data);
     if (weeklydata.data.message === 'Negative Gourd Win') {
       navigation.navigate('NegPop');
-    } else if (weeklydata.data.message === 'Postive Gourd Win') {
+    } else if (weeklydata.data.message === 'Positive Gourd Win') {
       navigation.navigate('PosPop');
     } else {
       navigation.navigate('BothPop');
@@ -234,12 +235,12 @@ export default function Main({ navigation }) {
               </NativeBaseProvider>
             ) : null}
           </TouchableOpacity>
-          {new Date().getDay() === 3 ? (
+          {new Date().getDay() === 4 ? (
             <Bubble>
               <Text style={{ marginTop: 'auto', marginBottom: 'auto' }}>지금 저를 누르면 박이 터져요!!!</Text>
             </Bubble>
           ) : null}
-          {new Date().getDay() === 3 ? (
+          {new Date().getDay() === 4 ? (
             <TouchableOpacity onPress={weeklyPop}>
               <Girl
                 source={require('../../img/girl.png')}
