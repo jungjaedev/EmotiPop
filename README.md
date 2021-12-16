@@ -1,6 +1,6 @@
 # 🎊 EmotiPop
 ## Logo
-![image](https://user-images.githubusercontent.com/73332608/144788585-58e8447f-a376-4a22-993e-e4b62f63472f.png)
+<img src="https://user-images.githubusercontent.com/73332608/144999214-54e4f52f-d861-41b3-bf65-508dbaf3fa5c.png" width="310" height="250">
 
 ----
 
