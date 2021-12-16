@@ -65,6 +65,9 @@
 |이홍경|💻 Back End|
 |정재원|🏁 Full Stack|
 
+## Worklog
+[✍️ WORKLOG](https://github.com/codestates/EmotiPop/wiki/%E2%9C%8F%EF%B8%8F)
+
 
 ## For project details
-[checkout WIKI](https://github.com/codestates/EmotiPop/wiki)
+[⚙️ checkout WIKI](https://github.com/codestates/EmotiPop/wiki)
