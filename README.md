@@ -56,6 +56,8 @@
 
 # 🔨 Architecture
 
+## 🔔 Service Flow Chart
+![image](https://user-images.githubusercontent.com/73332608/146293110-3bf744b4-7745-41b1-853f-f3feeb2899f2.png)
 
 # 📢 우리를 소개합니다.
 |Name|Position|
