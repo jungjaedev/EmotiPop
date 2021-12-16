@@ -5,6 +5,15 @@
 ----
 
 # 💡 EmotiPop은 어떤 서비스인가요?
+> **"당신의 순간의 감정을 기록하세요"**
+<div>
+ <img src="https://user-images.githubusercontent.com/73332608/146319939-009f6450-db01-4e43-b959-8e3fa01eb8eb.png" width="180" height="320">
+ <img src="https://user-images.githubusercontent.com/73332608/146320266-a461f0a7-47b7-4c0a-88fc-1ccb54389fde.png" width="180" height="320">
+ <img src="https://user-images.githubusercontent.com/73332608/146323074-57bf601a-d504-4b76-aa32-774b386b31f8.png" width="180" height="320">
+ <img src="https://user-images.githubusercontent.com/73332608/146323392-1171c8b9-4342-4bbf-ad68-1b25a44b03f4.png" width="180" height="320">
+</div>
+
+
 
  지금 느끼는 감정을 `콩주머니` <img src="https://user-images.githubusercontent.com/73332608/146294522-471f2c50-d1ae-49a5-b8d2-cf35b6a0334a.png" width="20" height="20"> <img src="https://user-images.githubusercontent.com/73332608/146294895-5d59bcea-32b3-4f1d-87bd-7b293c7acc05.png" width="20" height="20"> 에 담아 `긍정이` <img src="https://user-images.githubusercontent.com/73332608/146294649-47656a44-cd3e-4fba-95fa-b315c6d40aeb.png" width="20" height="20"> 와 `부정이` <img src="https://user-images.githubusercontent.com/73332608/146294814-9555f345-9297-494c-8ac5-c94eaa1950ca.png" width="20" 
 height="20"> 를 향해 던져보세요.
@@ -56,8 +65,12 @@ height="20"> 를 담은 앱, **EmotiPop**입니다.
 
 ![image](https://img.shields.io/badge/BACK-MySQL-%234479A1?style=for-the-badge&logo=MySQL)
 
+![image](https://img.shields.io/badge/BACK-Firebase-%23FFCA28?style=for-the-badge&logo=Firebase)
 
-![image](https://user-images.githubusercontent.com/73332608/143913555-127c09cc-e3bd-4eea-a991-ffe1723b5c33.png)
+![image](https://img.shields.io/badge/BACK-Amazon%20S3-%23569A31?style=for-the-badge&logo=Amazon%20S3)
+
+
+![image](https://user-images.githubusercontent.com/73332608/146317801-a1f5b33b-d46b-49d0-a178-60eabd023e4b.png)
 
 # 🔨 Architecture
 
@@ -74,7 +87,6 @@ height="20"> 를 담은 앱, **EmotiPop**입니다.
 
 ## Worklog
 [✍️ WORKLOG](https://github.com/codestates/EmotiPop/wiki/%E2%9C%8F%EF%B8%8F)
-
 
 ## For project details
 [⚙️ checkout WIKI](https://github.com/codestates/EmotiPop/wiki)
