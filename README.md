@@ -1,6 +1,7 @@
 # 🎊 EmotiPop
 ## Logo
-![image](https://user-images.githubusercontent.com/73332608/144789846-911a9ee8-55cb-490c-bb8a-7a69ac718c81.png)
+<img src="https://user-images.githubusercontent.com/73332608/144999214-54e4f52f-d861-41b3-bf65-508dbaf3fa5c.png" width="310" height="250">
+
 ----
 
 # 💡 EmotiPop은 어떤 서비스인가요?
@@ -35,11 +36,9 @@
 
 ![image](https://img.shields.io/badge/FRONT-Redux-%23764ABC?style=for-the-badge&logo=Redux)
 
-![image](https://img.shields.io/badge/FRONT-GreenSock-%2388CE02?style=for-the-badge&logo=GreenSock)
-
 ![image](https://img.shields.io/badge/FRONT-Adobe%20Illustrator-%23FF9A00?style=for-the-badge&logo=Adobe%20Illustrator)
 
-![image](https://img.shields.io/badge/FRONT-Adobe%20After%20Effects-%239999FF?style=for-the-badge&logo=Adobe%20After%20Effects)
+![image](https://img.shields.io/badge/FRONT-FlipaClip-%ffffff?style=for-the-badge)
 
 ## Back
 ![image](https://img.shields.io/badge/BACK-JavaScript-%23F7DF1E?style=for-the-badge&logo=JavaScript)
@@ -57,15 +56,20 @@
 
 # 🔨 Architecture
 
+## 🔔 Service Flow Chart
+![image](https://user-images.githubusercontent.com/73332608/146293110-3bf744b4-7745-41b1-853f-f3feeb2899f2.png)
 
 # 📢 우리를 소개합니다.
 |Name|Position|
 |------|---|
 |이승연|🏁 Full Stack|
 |이현호|🖥 Front End|
-|이홍경|🏁 Full Stack|
-|정재원|⚙️ Back End|
+|이홍경|💻 Back End|
+|정재원|🏁 Full Stack|
+
+## Worklog
+[✍️ WORKLOG](https://github.com/codestates/EmotiPop/wiki/%E2%9C%8F%EF%B8%8F)
 
 
 ## For project details
-
+[⚙️ checkout WIKI](https://github.com/codestates/EmotiPop/wiki)
