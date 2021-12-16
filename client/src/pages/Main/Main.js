@@ -235,12 +235,12 @@ export default function Main({ navigation }) {
               </NativeBaseProvider>
             ) : null}
           </TouchableOpacity>
-          {new Date().getDay() === 4 ? (
+          {new Date().getDay() === 0 ? (
             <Bubble>
               <Text style={{ marginTop: 'auto', marginBottom: 'auto' }}>지금 저를 누르면 박이 터져요!!!</Text>
             </Bubble>
           ) : null}
-          {new Date().getDay() === 4 ? (
+          {new Date().getDay() === 0 ? (
             <TouchableOpacity onPress={weeklyPop}>
               <Girl
                 source={require('../../img/girl.png')}
