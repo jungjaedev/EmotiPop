@@ -73,13 +73,16 @@ export default function Main({ navigation }) {
       },
       withCredentials: true,
     });
-    // console.log('---', weeklydata.data);
+    console.log('---', weeklydata.data);
     if (weeklydata.data.message === 'Negative Gourd Win') {
       navigation.navigate('NegPop');
     } else if (weeklydata.data.message === 'Positive Gourd Win') {
       navigation.navigate('PosPop');
-    } else {
+    } else if (weeklydata.data.message === 'Positive & Negative Draw') {
       navigation.navigate('BothPop');
+    } else {
+      navigation.navigate('MainHome');
+      Alert.alert('아직 콩주머니가 없습니다!');
     }
   };
 

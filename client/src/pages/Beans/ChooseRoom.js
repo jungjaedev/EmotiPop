@@ -10,6 +10,7 @@ import ListOfMyNegativeBeans from './ListOfMyNegativeBeans';
 import ListOfMyPositiveBeans from './ListOfMyPositiveBeans';
 
 const { width: screenWidth } = Dimensions.get('window');
+const { height: screenHeight } = Dimensions.get('window');
 
 export default function ChooseRoom({ navigation, route }) {
   // const  { gourdKinds } = req.params;
@@ -52,7 +53,11 @@ export default function ChooseRoom({ navigation, route }) {
       <ImageBackgrounds source={require('../../img/background.jpeg')} resizemode="cover">
         {room === 0 ? (
           <>
-            <TouchableOpacity activeOpacity={0.8} style={{ right: 173, bottom: 55, width: 35, height: 35 }} onPress={goBack}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={{ right: screenWidth / 3 + 30, top: screenHeight / 90 - 40, width: 35, height: 35 }}
+              onPress={goBack}
+            >
               <Text>
                 <Feather name="arrow-left" size={35} color="black" />
               </Text>
