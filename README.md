@@ -67,6 +67,8 @@ height="20"> 를 담은 앱, **EmotiPop**입니다.
 
 ![image](https://img.shields.io/badge/BACK-Amazon%20ec2-%23232F3E?style=for-the-badge&logo=Amazon%20AWS)
 
+![image](https://img.shields.io/badge/BACK-Google%20Play-%23414141?style=for-the-badge&logo=Google%20Play)
+
 
 ![image](https://user-images.githubusercontent.com/73332608/146317801-a1f5b33b-d46b-49d0-a178-60eabd023e4b.png)
 
