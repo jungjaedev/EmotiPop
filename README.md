@@ -70,7 +70,7 @@ height="20"> 를 담은 앱, **EmotiPop**입니다.
 ![image](https://img.shields.io/badge/BACK-Google%20Play-%23414141?style=for-the-badge&logo=Google%20Play)
 
 
-![image](https://user-images.githubusercontent.com/73332608/146317801-a1f5b33b-d46b-49d0-a178-60eabd023e4b.png)
+![image](https://user-images.githubusercontent.com/73332608/146695259-f0893856-c164-4769-8cfa-d956e5269290.png)
 
 # 🔨 Architecture
 
