@@ -48,6 +48,8 @@ height="20"> 를 담은 앱, **EmotiPop**입니다.
 
 ![image](https://img.shields.io/badge/FRONT-React_Hooks-%2361DAFB?style=for-the-badge&logo=React)
 
+![image](https://img.shields.io/badge/FRONT-React%20Navigation-%23664FAB?style=for-the-badge&logo=React)
+
 ![image](https://img.shields.io/badge/FRONT-Redux-%23764ABC?style=for-the-badge&logo=Redux)
 
 ![image](https://img.shields.io/badge/FRONT-Adobe%20Illustrator-%23FF9A00?style=for-the-badge&logo=Adobe%20Illustrator)
@@ -70,7 +72,7 @@ height="20"> 를 담은 앱, **EmotiPop**입니다.
 ![image](https://img.shields.io/badge/BACK-Google%20Play-%23414141?style=for-the-badge&logo=Google%20Play)
 
 
-![image](https://user-images.githubusercontent.com/73332608/146695259-f0893856-c164-4769-8cfa-d956e5269290.png)
+![image](https://user-images.githubusercontent.com/73332608/146723346-04e8da96-8f17-41b0-a1b2-1152a76d8e8e.png)
 
 # 🔨 Architecture
 
