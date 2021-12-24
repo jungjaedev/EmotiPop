@@ -3,26 +3,29 @@ const { isAuthorized } = require('../tokenFunctions');
 
 module.exports = {
   delete: async (req, res) => {
-    if (!req.headers['authorization']) {
-      return res.status(401).send({
-        message: 'invalid access token',
-      });
-    }
+    const auth = async (req, res) => {
+      if (!req.headers['authorization']) {
+        return res.status(401).send({
+          message: 'invalid access token',
+        });
+      }
 
-    const accessTokenData = isAuthorized(req);
-    // console.log(accessTokenData);
-    const userInfo = await Users.findOne({
-      attributes: { exclude: ['password'] },
-      where: {
-        email: accessTokenData.email,
-      },
-    });
-    // console.log(userInfo);
-    if (!userInfo) {
-      res.status(403).send({
-        message: 'Forbidden',
+      const accessTokenData = isAuthorized(req);
+      // console.log(accessTokenData);
+      const userInfo = await Users.findOne({
+        attributes: { exclude: ['password'] },
+        where: {
+          email: accessTokenData.email,
+        },
       });
-    }
+      // console.log(userInfo);
+      if (!userInfo) {
+        res.status(403).send({
+          message: 'Forbidden',
+        });
+      }
+    };
+    auth(req, res);
 
     const beansInfo = await Beans.findOne({
       where: {
